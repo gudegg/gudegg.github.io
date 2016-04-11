@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="心情," />
+  <meta name="keywords" content="spring," />
 
 
 
@@ -57,16 +57,19 @@
 
 
 
-<meta name="description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
+<meta name="description" content="druid做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="总结2015">
-<meta property="og:url" content="http://zhangguodong.me/2016/02/09/2015/index.html">
+<meta property="og:title" content="spring用druid做连接池一直出现异常">
+<meta property="og:url" content="http://zhangguodong.me/2016/03/05/spring用druid做连接池一直出现异常/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
-<meta property="og:updated_time" content="2016-03-11T12:50:12.401Z">
+<meta property="og:description" content="druid做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)">
+<meta property="og:image" content="http://zhangguodong.me/images/Properties.png">
+<meta property="og:image" content="http://zhangguodong.me/images/Properties_val.png">
+<meta property="og:updated_time" content="2016-03-26T06:46:24.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="总结2015">
-<meta name="twitter:description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
+<meta name="twitter:title" content="spring用druid做连接池一直出现异常">
+<meta name="twitter:description" content="druid做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)">
+<meta name="twitter:image" content="http://zhangguodong.me/images/Properties.png">
 
 
 
@@ -84,7 +87,7 @@
   };
 </script>
 
-  <title> 总结2015 | Guodong </title>
+  <title> spring用druid做连接池一直出现异常 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +236,7 @@
             
             
               
-                总结2015
+                spring用druid做连接池一直出现异常
               
             
           </h1>
@@ -245,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-09T20:29:05+08:00" content="2016-02-09">
-              2016-02-09
+            <time itemprop="dateCreated" datetime="2016-03-05T10:22:14+08:00" content="2016-03-05">
+              2016-03-05
             </time>
           </span>
 
@@ -260,7 +263,7 @@
 
           
           
-             <span id="/2016/02/09/2015/" class="leancloud_visitors" data-flag-title="总结2015">
+             <span id="/2016/03/05/spring用druid做连接池一直出现异常/" class="leancloud_visitors" data-flag-title="spring用druid做连接池一直出现异常">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -281,11 +284,29 @@
       
 
       
-        <p>过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。<br><a id="more"></a></p>
+        <p><strong><a href="https://github.com/alibaba/druid" target="_blank" rel="external">druid</a></strong>做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)</p>
+<a id="more"></a>
+<p>查了资料(<a href="http://www.oschina.net/question/873438_234580" target="_blank" rel="external">感谢这里的到大神</a>)终于明白</p>
 <blockquote>
-<p>More importantly, the bonus is kidding!what five hundred.</p>
+<p>感觉很奇怪,我明明配置的名称的<em>root</em>竟然会变成<em>Gude</em>(我的电脑名),原来我在properties的数据库名称用了username，spring引进来就为${username},我数据库配置(db.properties) 用的 <context:property-placeholder>而system-properties-mode没有设置用了默认的”environment”，改成”fallback”即可.system-properties-mode,默认是environment,就是先找系统属性,再找location文件里面的属性.这里他优先找到系统的username(ps:我的电脑名称是Gude)这也就解释了为什么连接数据库变成了电脑名</context:property-placeholder></p>
 </blockquote>
-<p><strong>祝愿今年能越来越好，身体健康!</strong></p>
+<h4 id="system-properties-mode属性："><a href="#system-properties-mode属性：" class="headerlink" title="system-properties-mode属性："></a>system-properties-mode属性：</h4><blockquote>
+<ul>
+<li><strong>ENVIRONMENT</strong> -indicates placeholders should be resolved against the current Environment and against any local properties;(优先系统属性和任何本地属性)  </li>
+<li><strong>NEVER</strong> -indicates placeholders should be resolved only against local properties and never against system properties;(只使用本地配置文件)  </li>
+<li><strong>FALLBACK</strong> -indicates placeholders should be resolved against any local properties and then against system properties;(先本地配置文件再系统属性)   </li>
+<li><strong>OVERRIDE</strong> -indicates placeholders should be resolved first against system properties and then against any local properties;(先系统属性再本地配置文件)  </li>
+</ul>
+</blockquote>
+<h4 id="另外的方法导入配置文件"><a href="#另外的方法导入配置文件" class="headerlink" title="另外的方法导入配置文件"></a>另外的方法导入配置文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"propertyConfigurer"</span></span><br><span class="line">		<span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"location"</span> <span class="attr">value</span>=<span class="string">"classpath:jdbc.properties"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这种方法导入配置文件不会有上面的问题  从官方文档可以看出他只有3种模式 <strong>默认是FALLBACK</strong></p>
+</blockquote>
+<p><img src="/images/Properties.png" alt=""></p>
+<ul>
+<li><strong>3种模式对应的值</strong></li>
+</ul>
+<p><img src="/images/Properties_val.png" alt=""></p>
 
       
     </div>
@@ -300,7 +321,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/心情/" rel="tag">#心情</a>
+            <a href="/tags/spring/" rel="tag">#spring</a>
           
         </div>
       
@@ -309,16 +330,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/01/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/03/03/springmvc可支持的返回类型/" rel="next" title="springmvc可支持的返回类型">
+                <i class="fa fa-chevron-left"></i> springmvc可支持的返回类型
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/02/11/netty框架精髓/" rel="prev" title="netty框架精髓">
-                netty框架精髓 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/12/rediserror/" rel="prev" title="could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”">
+                could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}” <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -430,7 +451,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#system-properties-mode属性："><span class="nav-number">1.</span> <span class="nav-text">system-properties-mode属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#另外的方法导入配置文件"><span class="nav-number">2.</span> <span class="nav-text">另外的方法导入配置文件</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="心情," />
+  <meta name="keywords" content="oracle," />
 
 
 
@@ -57,16 +57,22 @@
 
 
 
-<meta name="description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
+<meta name="description" content="oracle中  a!=null 返回的结果永为UNKNOWN
+
+A condition that evaluates to UNKNOWN acts almost like FALSE(可以把UNKNOWN当做false来对待)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="总结2015">
-<meta property="og:url" content="http://zhangguodong.me/2016/02/09/2015/index.html">
+<meta property="og:title" content="oracle中null值">
+<meta property="og:url" content="http://zhangguodong.me/2016/03/31/oracle中null值/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
-<meta property="og:updated_time" content="2016-03-11T12:50:12.401Z">
+<meta property="og:description" content="oracle中  a!=null 返回的结果永为UNKNOWN
+
+A condition that evaluates to UNKNOWN acts almost like FALSE(可以把UNKNOWN当做false来对待)">
+<meta property="og:updated_time" content="2016-03-31T07:47:30.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="总结2015">
-<meta name="twitter:description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
+<meta name="twitter:title" content="oracle中null值">
+<meta name="twitter:description" content="oracle中  a!=null 返回的结果永为UNKNOWN
+
+A condition that evaluates to UNKNOWN acts almost like FALSE(可以把UNKNOWN当做false来对待)">
 
 
 
@@ -84,7 +90,7 @@
   };
 </script>
 
-  <title> 总结2015 | Guodong </title>
+  <title> oracle中null值 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +239,7 @@
             
             
               
-                总结2015
+                oracle中null值
               
             
           </h1>
@@ -245,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-09T20:29:05+08:00" content="2016-02-09">
-              2016-02-09
+            <time itemprop="dateCreated" datetime="2016-03-31T15:31:55+08:00" content="2016-03-31">
+              2016-03-31
             </time>
           </span>
 
@@ -260,7 +266,7 @@
 
           
           
-             <span id="/2016/02/09/2015/" class="leancloud_visitors" data-flag-title="总结2015">
+             <span id="/2016/03/31/oracle中null值/" class="leancloud_visitors" data-flag-title="oracle中null值">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -281,11 +287,17 @@
       
 
       
-        <p>过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。<br><a id="more"></a></p>
+        <p>oracle中  a!=null 返回的结果永为<code>UNKNOWN</code></p>
 <blockquote>
-<p>More importantly, the bonus is kidding!what five hundred.</p>
+<p>A condition that evaluates to UNKNOWN acts almost like FALSE(可以把<strong>UNKNOWN</strong>当做false来对待)</p>
 </blockquote>
-<p><strong>祝愿今年能越来越好，身体健康!</strong></p>
+<a id="more"></a>
+<h4 id="在oracle中where-col-not-in-中不能使用null值"><a href="#在oracle中where-col-not-in-中不能使用null值" class="headerlink" title="在oracle中where col not in() 中不能使用null值"></a>在oracle中where col not in() 中不能使用null值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM table1 t1 WHERE t1.col1 not in ( 20 , NULL );</span><br></pre></td></tr></table></figure>
+<p>等价于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM  table1 t1  WHERE t1.col1 != 20 AND t1.col1 != NULL;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>t1.col1 != NULL这个结果永远为UNKNOWN 返回的结果集也就是空,但是 in ()可以使用null,没有影响</li>
+</ul>
+<p>详情查看<a href="https://docs.oracle.com/cd/B19306_01/server.102/b14200/sql_elements005.htm" target="_blank" rel="external">官方文档</a> (ps：在最后面)</p>
 
       
     </div>
@@ -300,7 +312,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/心情/" rel="tag">#心情</a>
+            <a href="/tags/oracle/" rel="tag">#oracle</a>
           
         </div>
       
@@ -309,17 +321,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/01/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/03/29/sqlplus客户端连接oracle中文乱码/" rel="next" title="sqlplus客户端连接oracle中文乱码">
+                <i class="fa fa-chevron-left"></i> sqlplus客户端连接oracle中文乱码
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/11/netty框架精髓/" rel="prev" title="netty框架精髓">
-                netty框架精髓 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -430,7 +438,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#在oracle中where-col-not-in-中不能使用null值"><span class="nav-number">1.</span> <span class="nav-text">在oracle中where col not in() 中不能使用null值</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
