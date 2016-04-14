@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhangguodong.me/about/index.html</loc>
+    
+    <lastmod>2016-04-14T12:07:41.526Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhangguodong.me/2016/02/27/%E7%9C%8B%E8%BF%9911%E6%9C%AC%E4%B9%A6%E5%B0%B1%E5%A4%9F%E4%BA%86/</loc>
     
     <lastmod>2016-04-11T10:36:01.600Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://zhangguodong.me/2016/03/29/sqlplus%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5oracle%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</loc>
     
     <lastmod>2016-03-29T12:22:44.736Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhangguodong.me/about/index.html</loc>
-    
-    <lastmod>2016-03-29T03:32:59.205Z</lastmod>
     
   </url>
   
