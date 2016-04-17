@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="心情," />
+  <meta name="keywords" content="Json," />
 
 
 
@@ -57,16 +57,27 @@
 
 
 
-<meta name="description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
+<meta name="description" content="常用fastjson解析API
+Person person = JSON.parseObject(json, Person.class);
+List&amp;lt;Person&amp;gt; list = JSON.parseArray(json, Person.class);
+List&amp;lt;Person&amp;gt; list = JSON.parseObject(json, new TypeReference&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="总结2015">
-<meta property="og:url" content="http://zhangguodong.me/2016/02/09/2015/index.html">
+<meta property="og:title" content="FastJson快速将String转为实体对象">
+<meta property="og:url" content="http://zhangguodong.me/2016/04/17/FastJson快速将String转为实体对象/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
-<meta property="og:updated_time" content="2016-03-11T12:50:12.401Z">
+<meta property="og:description" content="常用fastjson解析API
+Person person = JSON.parseObject(json, Person.class);
+List&amp;lt;Person&amp;gt; list = JSON.parseArray(json, Person.class);
+List&amp;lt;Person&amp;gt; list = JSON.parseObject(json, new TypeReference&amp;">
+<meta property="og:image" content="http://zhangguodong.me/images/fastjson.jpg">
+<meta property="og:updated_time" content="2016-04-17T02:13:49.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="总结2015">
-<meta name="twitter:description" content="过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。">
+<meta name="twitter:title" content="FastJson快速将String转为实体对象">
+<meta name="twitter:description" content="常用fastjson解析API
+Person person = JSON.parseObject(json, Person.class);
+List&amp;lt;Person&amp;gt; list = JSON.parseArray(json, Person.class);
+List&amp;lt;Person&amp;gt; list = JSON.parseObject(json, new TypeReference&amp;">
+<meta name="twitter:image" content="http://zhangguodong.me/images/fastjson.jpg">
 
 
 
@@ -84,7 +95,7 @@
   };
 </script>
 
-  <title> 总结2015 | Guodong </title>
+  <title> FastJson快速将String转为实体对象 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +244,7 @@
             
             
               
-                总结2015
+                FastJson快速将String转为实体对象
               
             
           </h1>
@@ -245,8 +256,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-09T20:29:05+08:00" content="2016-02-09">
-              2016-02-09
+            <time itemprop="dateCreated" datetime="2016-04-17T09:51:04+08:00" content="2016-04-17">
+              2016-04-17
             </time>
           </span>
 
@@ -260,7 +271,7 @@
 
           
           
-             <span id="/2016/02/09/2015/" class="leancloud_visitors" data-flag-title="总结2015">
+             <span id="/2016/04/17/FastJson快速将String转为实体对象/" class="leancloud_visitors" data-flag-title="FastJson快速将String转为实体对象">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -281,11 +292,17 @@
       
 
       
-        <p>过去一年并不是很满意，实习工作也不是我想要的那种，外包并不能让一个人的技术有好的成长，现在汲取需要的是一个大牛能带我成长。<br><a id="more"></a></p>
+        <h4 id="常用fastjson解析API"><a href="#常用fastjson解析API" class="headerlink" title="常用fastjson解析API"></a>常用fastjson解析API</h4><ol>
+<li><code>Person person = JSON.parseObject(json, Person.class);</code></li>
+<li><code>List&lt;Person&gt; list = JSON.parseArray(json, Person.class);</code></li>
+<li><code>List&lt;Person&gt; list = JSON.parseObject(json, new TypeReference&lt;List&lt;Person&gt;&gt;() {});</code></li>
+<li><code>List&lt;Map&lt;String,Object&gt;&gt; list = JSON.parseObject(json, new TypeReference&lt;List&lt;Map&lt;String,Object&gt;&gt;&gt;() {});</code></li>
+</ol>
+<a id="more"></a>       
 <blockquote>
-<p>More importantly, the bonus is kidding!what five hundred.</p>
+<p>当字符串与对象参数不一致时,我们可以使用new TypeReference来进行解析,用<code>Map&lt;String,Object&gt;</code>来进行封装,实际上参数不一致使用3也是可以进行解析,只是没有的参数属性会丢失.<br>详细代码:<a href="/code/Person.java">Person</a>,<a href="/code/JsonTest.java">JsonTest</a></p>
 </blockquote>
-<p><strong>祝愿今年能越来越好，身体健康!</strong></p>
+<p><img src="/images/fastjson.jpg" alt=""></p>
 
       
     </div>
@@ -300,7 +317,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/心情/" rel="tag">#心情</a>
+            <a href="/tags/Json/" rel="tag">#Json</a>
           
         </div>
       
@@ -309,17 +326,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/01/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/04/17/全新安装的postgresql无法远程/" rel="next" title="全新安装的postgresql无法远程连接">
+                <i class="fa fa-chevron-left"></i> 全新安装的postgresql无法远程连接
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/11/netty框架精髓/" rel="prev" title="netty框架精髓">
-                netty框架精髓 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -430,7 +443,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用fastjson解析API"><span class="nav-number">1.</span> <span class="nav-text">常用fastjson解析API</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
