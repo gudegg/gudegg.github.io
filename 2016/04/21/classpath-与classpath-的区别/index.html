@@ -65,7 +65,7 @@
 <meta property="og:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
 <meta property="og:image" content="http://zhangguodong.me/images/spring_success.jpg">
 <meta property="og:image" content="http://zhangguodong.me/images/spring_success2.jpg">
-<meta property="og:updated_time" content="2016-04-21T13:44:06.519Z">
+<meta property="og:updated_time" content="2016-04-21T14:00:00.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="classpath:与classpath*:的区别">
 <meta name="twitter:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
@@ -281,7 +281,7 @@
 <a id="more"></a>
 <p>查了<a href="http://blog.csdn.net/kkdelta/article/details/5507799" target="_blank" rel="external">资料</a>终于明白:</p>
 <p>1.<strong>classpath:</strong>  只能加载找到的第一个文件(ps:我测试这里要加载2个配置文件,而他只能加载一个,故无法测试成功)<br>2.<strong>classpath*:</strong>  从所有jar的classpath中加载需要加载的资源</p>
-<h5 id="ContextConfiguration加载多文件的方式"><a href="#ContextConfiguration加载多文件的方式" class="headerlink" title="@ContextConfiguration加载多文件的方式:"></a><code>@ContextConfiguration</code>加载多文件的方式:</h5><p>1.数组方式<br><img src="/images/spring_success.jpg" alt=""><br>2.正则匹配方式<br><img src="/images/spring_success2.jpg" alt=""></p>
+<h4 id="ContextConfiguration加载多文件的方式"><a href="#ContextConfiguration加载多文件的方式" class="headerlink" title="@ContextConfiguration加载多文件的方式:"></a><code>@ContextConfiguration</code>加载多文件的方式:</h4><p>1.数组方式<br><img src="/images/spring_success.jpg" alt=""><br>2.正则匹配方式<br><img src="/images/spring_success2.jpg" alt=""></p>
 
       
     </div>
@@ -422,7 +422,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#ContextConfiguration加载多文件的方式"><span class="nav-number">1.</span> <span class="nav-text">@ContextConfiguration加载多文件的方式:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ContextConfiguration加载多文件的方式"><span class="nav-number">1.</span> <span class="nav-text">@ContextConfiguration加载多文件的方式:</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
