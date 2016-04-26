@@ -60,12 +60,12 @@
 <meta name="description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="classpath:与classpath*:的区别">
-<meta property="og:url" content="http://zhangguodong.me/2016/04/21/classpath-与classpath-的区别/index.html">
+<meta property="og:url" content="http://zhangguodong.me/2016/04/26/classpath-与classpath-的区别/index.html">
 <meta property="og:site_name" content="Guodong">
 <meta property="og:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
 <meta property="og:image" content="http://zhangguodong.me/images/spring_success.jpg">
 <meta property="og:image" content="http://zhangguodong.me/images/spring_success2.jpg">
-<meta property="og:updated_time" content="2016-04-21T14:00:00.264Z">
+<meta property="og:updated_time" content="2016-04-26T14:33:07.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="classpath:与classpath*:的区别">
 <meta name="twitter:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
@@ -248,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T21:31:59+08:00" content="2016-04-21">
-              2016-04-21
+            <time itemprop="dateCreated" datetime="2016-04-26T21:31:59+08:00" content="2016-04-26">
+              2016-04-26
             </time>
           </span>
 
@@ -280,7 +280,10 @@
 </blockquote>
 <a id="more"></a>
 <p>查了<a href="http://blog.csdn.net/kkdelta/article/details/5507799" target="_blank" rel="external">资料</a>终于明白:</p>
-<p>1.<strong>classpath:</strong>  只能加载找到的第一个文件(ps:我测试这里要加载2个配置文件,而他只能加载一个,故无法测试成功)<br>2.<strong>classpath*:</strong>  从所有jar的classpath中加载需要加载的资源</p>
+<p>1.<strong>classpath:</strong>  只会到指定的classpath路径中查找匹配的资源文件,并且文件如果存在同名,只能加载找到的第一个匹配文件<br>2.<strong>classpath*:</strong>  从本项目的classpath和所有jar中的classpath加载匹配的资源文件</p>
+<h4 id="出错原因"><a href="#出错原因" class="headerlink" title="出错原因"></a>出错原因</h4><ul>
+<li>我测试类放在test的java下,资源文件没放在test下的resources中,而是放在main的resources中,故<code>classpath:spring/*.xml</code>会提示找不到文件(<em>资源文件应该也要放在test的resources中</em>),而<code>classpath*:spring/*.xml</code>如2中所说的就没有问题,他会查找classpath下所有匹配的(ps:maven项目)<br><a href="http://stackoverflow.com/questions/16985770/runwith-and-contextconfiguration-weird-behaviour" target="_blank" rel="external">感谢stackoverflow大佬</a>,看了这个答案才恍然大悟.</li>
+</ul>
 <h4 id="ContextConfiguration加载多文件的方式"><a href="#ContextConfiguration加载多文件的方式" class="headerlink" title="@ContextConfiguration加载多文件的方式:"></a><code>@ContextConfiguration</code>加载多文件的方式:</h4><p>1.数组方式<br><img src="/images/spring_success.jpg" alt=""><br>2.正则匹配方式<br><img src="/images/spring_success2.jpg" alt=""></p>
 
       
@@ -305,17 +308,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/21/mybatis传入多个参数/" rel="next" title="mybatis传入多个参数">
-                <i class="fa fa-chevron-left"></i> mybatis传入多个参数
+              <a href="/2016/04/26/log4j会输出2次Mybatis的sql记录/" rel="next" title="log4j会输出2次Mybatis的sql记录">
+                <i class="fa fa-chevron-left"></i> log4j会输出2次Mybatis的sql记录
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/26/log4j会输出2次Mybatis的sql记录/" rel="prev" title="log4j会输出2次Mybatis的sql记录">
-                log4j会输出2次Mybatis的sql记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -426,7 +425,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ContextConfiguration加载多文件的方式"><span class="nav-number">1.</span> <span class="nav-text">@ContextConfiguration加载多文件的方式:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#出错原因"><span class="nav-number">1.</span> <span class="nav-text">出错原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ContextConfiguration加载多文件的方式"><span class="nav-number">2.</span> <span class="nav-text">@ContextConfiguration加载多文件的方式:</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
