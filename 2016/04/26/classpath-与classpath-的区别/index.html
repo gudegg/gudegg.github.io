@@ -65,7 +65,7 @@
 <meta property="og:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
 <meta property="og:image" content="http://zhangguodong.me/images/spring_success.jpg">
 <meta property="og:image" content="http://zhangguodong.me/images/spring_success2.jpg">
-<meta property="og:updated_time" content="2016-04-26T14:39:50.803Z">
+<meta property="og:updated_time" content="2016-04-27T02:45:38.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="classpath:与classpath*:的区别">
 <meta name="twitter:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
@@ -282,7 +282,7 @@
 <p>查了<a href="http://blog.csdn.net/kkdelta/article/details/5507799" target="_blank" rel="external">资料</a>终于明白:</p>
 <p>1.<strong>classpath:</strong>  只会到指定的classpath路径中查找匹配的资源文件,并且文件如果存在同名,只能加载找到的第一个匹配文件(指定路径本项目存在的话优先从本项目查找)<br>2.<strong>classpath*:</strong>  从本项目的classpath和所有jar中的classpath加载匹配的资源文件</p>
 <h4 id="出错原因"><a href="#出错原因" class="headerlink" title="出错原因"></a>出错原因</h4><ul>
-<li>我测试类放在test的java下,资源文件没放在test下的resources中,而是放在main的resources中,故<code>classpath:spring/*.xml</code>会提示找不到文件(<em>资源文件应该也要放在test的resources中</em>),而<code>classpath*:spring/*.xml</code>如2中所说的就没有问题,他会查找classpath下所有匹配的(ps:maven项目)<br><a href="http://stackoverflow.com/questions/16985770/runwith-and-contextconfiguration-weird-behaviour" target="_blank" rel="external">感谢stackoverflow大佬</a>,看了这个答案才恍然大悟.</li>
+<li>我测试类放在test的java/spring下,资源文件没放在test下的resources/spring中,而是放在main的resources/spring中,故<code>classpath:spring/*.xml</code>会提示找不到文件(<em>资源文件应该也要放在test的resources/spring中,因为他会优先从指定路径中查找</em>),而<code>classpath*:spring/*.xml</code>如2中所说的就没有问题,他会查找classpath下所有匹配的(ps:maven项目)<br><a href="http://stackoverflow.com/questions/16985770/runwith-and-contextconfiguration-weird-behaviour" target="_blank" rel="external">感谢stackoverflow大佬</a>,看了这个答案才恍然大悟.</li>
 </ul>
 <h4 id="ContextConfiguration加载多文件的方式"><a href="#ContextConfiguration加载多文件的方式" class="headerlink" title="@ContextConfiguration加载多文件的方式:"></a><code>@ContextConfiguration</code>加载多文件的方式:</h4><p>1.数组方式<br><img src="/images/spring_success.jpg" alt=""><br>2.正则匹配方式<br><img src="/images/spring_success2.jpg" alt=""></p>
 
