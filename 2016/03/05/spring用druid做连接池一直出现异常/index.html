@@ -65,7 +65,7 @@
 <meta property="og:description" content="druid做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)">
 <meta property="og:image" content="http://zhangguodong.me/images/Properties.png">
 <meta property="og:image" content="http://zhangguodong.me/images/Properties_val.png">
-<meta property="og:updated_time" content="2016-03-26T06:46:24.623Z">
+<meta property="og:updated_time" content="2016-05-02T09:13:21.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring用druid做连接池一直出现异常">
 <meta name="twitter:description" content="druid做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)">
@@ -289,9 +289,10 @@
 <li><strong>OVERRIDE</strong> -indicates placeholders should be resolved first against system properties and then against any local properties;(先系统属性再本地配置文件)  </li>
 </ul>
 </blockquote>
-<h4 id="另外的方法导入配置文件"><a href="#另外的方法导入配置文件" class="headerlink" title="另外的方法导入配置文件"></a>另外的方法导入配置文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"propertyConfigurer"</span></span><br><span class="line">		<span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"location"</span> <span class="attr">value</span>=<span class="string">"classpath:jdbc.properties"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath*:jdbc.properties"</span> <span class="attr">system-properties-mode</span>=<span class="string">"FALLBACK"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="另外的方法导入配置文件"><a href="#另外的方法导入配置文件" class="headerlink" title="另外的方法导入配置文件"></a>另外的方法导入配置文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"propertyConfigurer"</span></span><br><span class="line">		<span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"location"</span> <span class="attr">value</span>=<span class="string">"classpath:jdbc.properties"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"systemPropertiesMode"</span> <span class="attr">value</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>这种方法导入配置文件不会有上面的问题  从官方文档可以看出他只有3种模式 <strong>默认是FALLBACK</strong></p>
+<p>这种方法导入配置文件不会有上面的问题  从官方文档可以看出他只有3种模式 <strong>默认是FALLBACK(即值为1)</strong></p>
 </blockquote>
 <p><img src="/images/Properties.png" alt=""></p>
 <ul>
@@ -442,7 +443,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#system-properties-mode属性："><span class="nav-number">1.</span> <span class="nav-text">system-properties-mode属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#另外的方法导入配置文件"><span class="nav-number">2.</span> <span class="nav-text">另外的方法导入配置文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#system-properties-mode属性："><span class="nav-number">1.</span> <span class="nav-text">system-properties-mode属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#另外的方法导入配置文件"><span class="nav-number">3.</span> <span class="nav-text">另外的方法导入配置文件</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

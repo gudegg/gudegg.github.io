@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2016/03/05/spring%E7%94%A8druid%E5%81%9A%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</loc>
+    <lastmod>2016-05-02T09:13:21.427Z</lastmod>
+    <data>
+        <display>
+        <title>spring用druid做连接池一直出现异常</title>
+        <pubTime>2016-03-05T02:22:14.000Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2016/04/30/IDEA%E9%9A%90%E8%97%8F%E4%B8%8D%E6%83%B3%E7%9C%8B%E5%88%B0%E7%9A%84%E6%96%87%E4%BB%B6/</loc>
     <lastmod>2016-04-30T13:04:12.443Z</lastmod>
     <data>
@@ -233,23 +250,6 @@
         <display>
         <title>springmvc可支持的返回类型</title>
         <pubTime>2016-03-03T12:51:20.000Z</pubTime>
-        
-        <tag>spring</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhangguodong.me/2016/03/05/spring%E7%94%A8druid%E5%81%9A%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</loc>
-    <lastmod>2016-03-26T06:46:24.623Z</lastmod>
-    <data>
-        <display>
-        <title>spring用druid做连接池一直出现异常</title>
-        <pubTime>2016-03-05T02:22:14.000Z</pubTime>
         
         <tag>spring</tag>
          
