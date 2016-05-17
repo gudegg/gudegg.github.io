@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spring," />
+  <meta name="keywords" content="jaxb," />
 
 
 
@@ -57,16 +57,40 @@
 
 
 
-<meta name="description" content="SpringMVC可支持的返回类型:">
+<meta name="description" content="Jaxb处理java对象和xml之间转换常用的annotation有：
+@XmlType
+@XmlElement
+@XmlRootElement
+@XmlAttribute
+@XmlAccessorType
+@XmlAccessorOrder
+@XmlTransient
+@XmlJavaTypeAdapter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springmvc可支持的返回类型">
-<meta property="og:url" content="http://zhangguodong.me/2016/03/03/springmvc可支持的返回类型/index.html">
+<meta property="og:title" content="Jaxb初步使用">
+<meta property="og:url" content="http://zhangguodong.me/2016/05/17/Jaxb初步使用/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="SpringMVC可支持的返回类型:">
-<meta property="og:updated_time" content="2016-03-26T06:46:38.974Z">
+<meta property="og:description" content="Jaxb处理java对象和xml之间转换常用的annotation有：
+@XmlType
+@XmlElement
+@XmlRootElement
+@XmlAttribute
+@XmlAccessorType
+@XmlAccessorOrder
+@XmlTransient
+@XmlJavaTypeAdapter">
+<meta property="og:updated_time" content="2016-05-17T13:48:50.479Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springmvc可支持的返回类型">
-<meta name="twitter:description" content="SpringMVC可支持的返回类型:">
+<meta name="twitter:title" content="Jaxb初步使用">
+<meta name="twitter:description" content="Jaxb处理java对象和xml之间转换常用的annotation有：
+@XmlType
+@XmlElement
+@XmlRootElement
+@XmlAttribute
+@XmlAccessorType
+@XmlAccessorOrder
+@XmlTransient
+@XmlJavaTypeAdapter">
 
 
 
@@ -84,7 +108,7 @@
   };
 </script>
 
-  <title> springmvc可支持的返回类型 | Guodong </title>
+  <title> Jaxb初步使用 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +257,7 @@
             
             
               
-                springmvc可支持的返回类型
+                Jaxb初步使用
               
             
           </h1>
@@ -245,8 +269,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-03T20:51:20+08:00" content="2016-03-03">
-              2016-03-03
+            <time itemprop="dateCreated" datetime="2016-05-17T21:38:06+08:00" content="2016-05-17">
+              2016-05-17
             </time>
           </span>
 
@@ -272,16 +296,60 @@
       
 
       
-        <p>SpringMVC可支持的返回类型:</p>
-<a id="more"></a>
-<blockquote>
-<ul>
-<li><strong>Model</strong> is an interface while ModelMap is a class.</li>
-<li><strong>ModelAndView</strong> is just a container for both a ModelMap and a view object. It allows a controller to return both as a single value.</li>
+        <h5 id="Jaxb处理java对象和xml之间转换常用的annotation有："><a href="#Jaxb处理java对象和xml之间转换常用的annotation有：" class="headerlink" title="Jaxb处理java对象和xml之间转换常用的annotation有："></a>Jaxb处理java对象和xml之间转换常用的annotation有：</h5><ol>
+<li>@XmlType</li>
+<li>@XmlElement</li>
+<li>@XmlRootElement</li>
+<li>@XmlAttribute</li>
+<li>@XmlAccessorType</li>
+<li>@XmlAccessorOrder</li>
+<li>@XmlTransient</li>
+<li>@XmlJavaTypeAdapter<a id="more"></a>
+</li>
+</ol>
+<h5 id="常用annotation使用说明"><a href="#常用annotation使用说明" class="headerlink" title="常用annotation使用说明"></a>常用annotation使用说明</h5><ul>
+<li><strong>@XmlType</strong><br>　　@XmlType用在class类的注解，常与@XmlRootElement，@XmlAccessorType一起使用。它有三个属性：name、propOrder、namespace，经常使用的只有前两个属性。如：</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@XmlType</span>(name = <span class="string">"basicStruct"</span>, propOrder = &#123;</span><br><span class="line">    <span class="string">"intValue"</span>,</span><br><span class="line">    <span class="string">"stringArray"</span>,</span><br><span class="line">    <span class="string">"stringValue"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>在使用@XmlType的propOrder 属性时，必须列出JavaBean对象中的所有属性，否则会报错。</p>
+<ul>
+<li><strong>@XmlElement</strong></li>
+</ul>
+<p>　　@XmlElement将java对象的属性映射为xml的节点，在使用@XmlElement时，可通过name属性改变java对象属性在xml中显示的名称。如：</p>
+<p>　　@XmlElement(name=”Address”)　　<br>　　private String yourAddress;</p>
+<ul>
+<li><strong>@XmlRootElement</strong></li>
+</ul>
+<p>　　@XmlRootElement用于类级别的注解，对应xml的跟元素，常与 @XmlType 和 @XmlAccessorType一起使用。如：</p>
+<p>　　@XmlType<br>　　@XmlAccessorType(XmlAccessType.FIELD)<br>　　@XmlRootElement<br>　　public class Address {}</p>
+<ul>
+<li><p><strong>@XmlAttribute</strong><br>　　@XmlAttribute用于把java对象的属性映射为xml的属性,并可通过name属性为生成的xml属性指定别名。如：<br>　　@XmlAttribute(name=”Country”)<br>　　private String state;</p>
+</li>
+<li><p><strong>@XmlAccessorType</strong><br>　　@XmlAccessorType用于指定由java对象生成xml文件时对java对象属性的访问方式。常与@XmlRootElement、@XmlType一起使用。它的属性值是XmlAccessType的4个枚举值，分　　　别为：</p>
+</li>
+</ul>
+<p>　　XmlAccessType.FIELD:java对象中的所有成员变量</p>
+<p>　　XmlAccessType.PROPERTY：java对象中所有通过getter/setter方式访问的成员变量</p>
+<p>　　XmlAccessType.PUBLIC_MEMBER：java对象中所有的public访问权限的成员变量和通过getter/setter方式访问的成员变量</p>
+<p>　　XmlAccessType.NONE:java对象的所有属性都不映射为xml的元素</p>
+<blockquote>
+<p><strong>注意：</strong>@XmlAccessorType的默认访问级别是XmlAccessType.PUBLIC_MEMBER，因此，如果java对象中的private成员变量设置了public权限的getter/setter方法，就不要在　　　private变量上使用@XmlElement和@XmlAttribute注解，否则在由java对象生成xml时会报同一个属性在java类里存在两次的错误。同理，如果@XmlAccessorType的访问权限　　　为XmlAccessType.NONE，如果在java的成员变量上使用了@XmlElement或@XmlAttribute注解，这些成员变量依然可以映射到xml文件。</p>
 </blockquote>
-<p>Model 是一个接口， 其实现类为ExtendedModelMap，继承了ModelMap类。 </p>
-<p>更多可返回类型请查看<a href="http://spring.cndocs.tk/mvc.html#mvc-ann-return-types" target="_blank" rel="external">中文文档</a> 、<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc-ann-return-types" target="_blank" rel="external">英文文档</a></p>
+<ul>
+<li><strong>@XmlAccessorOrder</strong><br>　　@XmlAccessorOrder用于对java对象生成的xml元素进行排序。它有两个属性值：</li>
+</ul>
+<p>　　AccessorOrder.ALPHABETICAL：对生成的xml元素按字母书序排序</p>
+<p>　　XmlAccessOrder.UNDEFINED:不排序</p>
+<ul>
+<li><p><strong>@XmlTransient</strong><br>　　@XmlTransient用于标示在由java对象映射xml时，忽略此属性。即，在生成的xml文件中不出现此元素。</p>
+</li>
+<li><p><strong>@XmlJavaTypeAdapter</strong><br>　　@XmlJavaTypeAdapter常用在转换比较复杂的对象时，如map类型或者格式化日期等。使用此注解时，需要自己写一个adapter类继承XmlAdapter抽象类，并实现里面的方法。</p>
+</li>
+</ul>
+<p>　　@XmlJavaTypeAdapter(value=xxx.class),value为自己定义的adapter类</p>
+<p>　　XmlAdapter如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">XmlAdapter</span>&lt;<span class="title">ValueType</span>,<span class="title">BoundType</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// Do-nothing constructor for the derived classes.</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">XmlAdapter</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="comment">// Convert a value type to a bound type.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> BoundType <span class="title">unmarshal</span><span class="params">(ValueType v)</span></span>;</span><br><span class="line">    <span class="comment">// Convert a bound type to a value type.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> ValueType <span class="title">marshal</span><span class="params">(BoundType v)</span></span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>转发自<a href="http://www.cnblogs.com/fragranting/archive/2012/03/25/xml--jaxb.html" target="_blank" rel="external">Jaxb annotation初步使用</a></p>
 
       
     </div>
@@ -296,7 +364,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spring/" rel="tag">#spring</a>
+            <a href="/tags/jaxb/" rel="tag">#jaxb</a>
           
         </div>
       
@@ -305,17 +373,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/27/看这11本书就够了/" rel="next" title="成为java顶尖程序员 看这11本书就够了">
-                <i class="fa fa-chevron-left"></i> 成为java顶尖程序员 看这11本书就够了
+              <a href="/2016/04/30/IDEA隐藏不想看到的文件/" rel="next" title="IDEA隐藏不想看到的文件">
+                <i class="fa fa-chevron-left"></i> IDEA隐藏不想看到的文件
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/05/spring用druid做连接池一直出现异常/" rel="prev" title="spring用druid做连接池一直出现异常">
-                spring用druid做连接池一直出现异常 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -426,7 +490,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Jaxb处理java对象和xml之间转换常用的annotation有："><span class="nav-number">1.</span> <span class="nav-text">Jaxb处理java对象和xml之间转换常用的annotation有：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常用annotation使用说明"><span class="nav-number">2.</span> <span class="nav-text">常用annotation使用说明</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
