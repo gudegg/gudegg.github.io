@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spring," />
+  <meta name="keywords" content="Joda," />
 
 
 
@@ -57,19 +57,16 @@
 
 
 
-<meta name="description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
+<meta name="description" content="Joda比JDK自带的Calendar更易用.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="classpath:与classpath*:的区别">
-<meta property="og:url" content="http://zhangguodong.me/2016/04/26/classpath-与classpath-的区别/index.html">
+<meta property="og:title" content="强大的java时间库Joda">
+<meta property="og:url" content="http://zhangguodong.me/2016/05/25/强大的java时间库Joda/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
-<meta property="og:image" content="http://zhangguodong.me/images/spring_success.jpg">
-<meta property="og:image" content="http://zhangguodong.me/images/spring_success2.jpg">
-<meta property="og:updated_time" content="2016-04-27T02:45:38.335Z">
+<meta property="og:description" content="Joda比JDK自带的Calendar更易用.">
+<meta property="og:updated_time" content="2016-05-25T03:31:00.213Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="classpath:与classpath*:的区别">
-<meta name="twitter:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
-<meta name="twitter:image" content="http://zhangguodong.me/images/spring_success.jpg">
+<meta name="twitter:title" content="强大的java时间库Joda">
+<meta name="twitter:description" content="Joda比JDK自带的Calendar更易用.">
 
 
 
@@ -87,7 +84,7 @@
   };
 </script>
 
-  <title> classpath:与classpath*:的区别 | Guodong </title>
+  <title> 强大的java时间库Joda | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +233,7 @@
             
             
               
-                classpath:与classpath*:的区别
+                强大的java时间库Joda
               
             
           </h1>
@@ -248,8 +245,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T21:31:59+08:00" content="2016-04-26">
-              2016-04-26
+            <time itemprop="dateCreated" datetime="2016-05-25T10:44:54+08:00" content="2016-05-25">
+              2016-05-25
             </time>
           </span>
 
@@ -276,15 +273,17 @@
 
       
         <blockquote>
-<p>在做mybatis多参数的测试时,发现了一个问题<code>@ContextConfiguration(locations = {&quot;classpath:spring/*.xml&quot;})</code>导入配置<br>文件无法成功运行测试,而<code>@ContextConfiguration(locations = {&quot;classpath*:spring/*.xml&quot;})</code>却可以</p>
+<p><a href="https://github.com/JodaOrg/joda-time" target="_blank" rel="external">Joda</a>比JDK自带的Calendar更易用.</p>
 </blockquote>
 <a id="more"></a>
-<p>查了<a href="http://blog.csdn.net/kkdelta/article/details/5507799" target="_blank" rel="external">资料</a>终于明白:</p>
-<p>1.<strong>classpath:</strong>  只会到指定的classpath路径中查找匹配的资源文件,并且文件如果存在同名,只能加载找到的第一个匹配文件(指定路径本项目存在的话优先从本项目查找)<br>2.<strong>classpath*:</strong>  从本项目的classpath和所有jar中的classpath加载匹配的资源文件</p>
-<h4 id="出错原因"><a href="#出错原因" class="headerlink" title="出错原因"></a>出错原因</h4><ul>
-<li>我测试类放在test的java/spring下,资源文件没放在test下的resources/spring中,而是放在main的resources/spring中,故<code>classpath:spring/*.xml</code>会提示找不到文件(<em>资源文件应该也要放在test的resources/spring中,因为他会优先从指定路径中查找</em>),而<code>classpath*:spring/*.xml</code>如2中所说的就没有问题,他会查找classpath下所有匹配的(ps:maven项目)<br><a href="http://stackoverflow.com/questions/16985770/runwith-and-contextconfiguration-weird-behaviour" target="_blank" rel="external">感谢stackoverflow大佬</a>,看了这个答案才恍然大悟.</li>
-</ul>
-<h4 id="ContextConfiguration加载多文件的方式"><a href="#ContextConfiguration加载多文件的方式" class="headerlink" title="@ContextConfiguration加载多文件的方式:"></a><code>@ContextConfiguration</code>加载多文件的方式:</h4><p>1.数组方式<br><img src="/images/spring_success.jpg" alt=""><br>2.正则匹配方式<br><img src="/images/spring_success2.jpg" alt=""></p>
+<h4 id="前一天的23-59-59"><a href="#前一天的23-59-59" class="headerlink" title="前一天的23:59:59"></a>前一天的23:59:59</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt=<span class="keyword">new</span> DateTime().plusDays(-<span class="number">1</span>).withTime(<span class="number">23</span>,<span class="number">59</span>,<span class="number">59</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="今天的0点"><a href="#今天的0点" class="headerlink" title="今天的0点"></a>今天的0点</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt=<span class="keyword">new</span> DateTime().withTime(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="时间间隔"><a href="#时间间隔" class="headerlink" title="时间间隔"></a>时间间隔</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2016-5-21 10:20:20</span></span><br><span class="line">DateTime dt1=<span class="keyword">new</span> DateTime(<span class="number">2016</span>,<span class="number">5</span>,<span class="number">21</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">20</span>,<span class="number">0</span>);</span><br><span class="line">DateTime dt2=<span class="keyword">new</span> DateTime();</span><br><span class="line">System.out.println(<span class="string">"天数差:"</span>+Days.daysBetween(dt1,dt2).getDays());</span><br><span class="line">System.out.println(<span class="string">"小时差:"</span>+Hours.hoursBetween(dt1,dt2).getHours());</span><br><span class="line">System.out.println(<span class="string">"分钟差:"</span>+Minutes.minutesBetween(dt1,dt2).getMinutes());</span><br></pre></td></tr></table></figure>
+<h4 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt4=<span class="keyword">new</span> DateTime();</span><br><span class="line">DateTimeFormatter fmt = DateTimeFormat.forPattern(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">System.out.println(dt3.toString(fmt));</span><br><span class="line">System.out.println(dt3.toString(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="增加日期"><a href="#增加日期" class="headerlink" title="增加日期"></a>增加日期</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime1 = DateTime.parse(<span class="string">"2012-12-03"</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusDays(<span class="number">30</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusHours(<span class="number">3</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusMinutes(<span class="number">3</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusMonths(<span class="number">2</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusSeconds(<span class="number">4</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusWeeks(<span class="number">5</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusYears(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="是否闰月"><a href="#是否闰月" class="headerlink" title="是否闰月"></a>是否闰月</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt5 = <span class="keyword">new</span> DateTime();</span><br><span class="line">DateTime.Property month = dt5.monthOfYear();</span><br><span class="line">System.out.println(<span class="string">"是否闰月:"</span> + month.isLeap());</span><br></pre></td></tr></table></figure>
+<h4 id="与jdk时间转换"><a href="#与jdk时间转换" class="headerlink" title="与jdk时间转换"></a>与jdk时间转换</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt6 = <span class="keyword">new</span> DateTime(<span class="keyword">new</span> Date());    </span><br><span class="line">Date date = dt6.toDate();    </span><br><span class="line">DateTime dt7 = <span class="keyword">new</span> DateTime(System.currentTimeMillis());    </span><br><span class="line">dt7.getMillis();</span><br><span class="line">Calendar calendar = Calendar.getInstance();    </span><br><span class="line">dateTime = <span class="keyword">new</span> DateTime(calendar);</span><br></pre></td></tr></table></figure>
+<p>还有好多功能 详看官方文档.<br>参考: <a href="http://ylq365.iteye.com/blog/1769680" target="_blank" rel="external">joda-time的使用</a>,<a href="http://www.joda.org/joda-time/userguide.html" target="_blank" rel="external">官方文档</a></p>
 
       
     </div>
@@ -299,7 +298,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spring/" rel="tag">#spring</a>
+            <a href="/tags/Joda/" rel="tag">#Joda</a>
           
         </div>
       
@@ -308,17 +307,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/26/log4j会输出2次Mybatis的sql记录/" rel="next" title="log4j会输出2次Mybatis的sql记录">
-                <i class="fa fa-chevron-left"></i> log4j会输出2次Mybatis的sql记录
+              <a href="/2016/05/17/Jaxb初步使用/" rel="next" title="Jaxb初步使用">
+                <i class="fa fa-chevron-left"></i> Jaxb初步使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/29/mysql所有数据库备份恢复/" rel="prev" title="mysql所有数据库备份恢复">
-                mysql所有数据库备份恢复 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,7 +424,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#出错原因"><span class="nav-number">1.</span> <span class="nav-text">出错原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ContextConfiguration加载多文件的方式"><span class="nav-number">2.</span> <span class="nav-text">@ContextConfiguration加载多文件的方式:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前一天的23-59-59"><span class="nav-number">1.</span> <span class="nav-text">前一天的23:59:59</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#今天的0点"><span class="nav-number">2.</span> <span class="nav-text">今天的0点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间间隔"><span class="nav-number">3.</span> <span class="nav-text">时间间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化输出"><span class="nav-number">4.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加日期"><span class="nav-number">5.</span> <span class="nav-text">增加日期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是否闰月"><span class="nav-number">6.</span> <span class="nav-text">是否闰月</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与jdk时间转换"><span class="nav-number">7.</span> <span class="nav-text">与jdk时间转换</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
