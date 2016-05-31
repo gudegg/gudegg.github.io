@@ -59,20 +59,20 @@
 
 <meta name="description" content="原因:我在spring 的配置文件2处地方导入了配置文件
 
-Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或)，其余的会被Spring忽略掉.">
+Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或&amp;lt;context:property-placeholder /&amp;gt;)，其余的会被Spring忽略掉.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”">
 <meta property="og:url" content="http://zhangguodong.me/2016/03/12/rediserror/index.html">
 <meta property="og:site_name" content="Guodong">
 <meta property="og:description" content="原因:我在spring 的配置文件2处地方导入了配置文件
 
-Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或)，其余的会被Spring忽略掉.">
-<meta property="og:updated_time" content="2016-03-12T02:52:24.557Z">
+Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或&amp;lt;context:property-placeholder /&amp;gt;)，其余的会被Spring忽略掉.">
+<meta property="og:updated_time" content="2016-05-31T12:45:10.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”">
 <meta name="twitter:description" content="原因:我在spring 的配置文件2处地方导入了配置文件
 
-Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或)，其余的会被Spring忽略掉.">
+Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或&amp;lt;context:property-placeholder /&amp;gt;)，其余的会被Spring忽略掉.">
 
 
 
@@ -280,13 +280,15 @@ Spring容器仅允许最多定义一个PropertyPlaceholderConfigurer(或)，其�
       
         <p><strong>原因</strong>:我在spring 的配置文件2处地方导入了配置文件</p>
 <blockquote>
-<p>Spring容器仅允许<strong>最多定义一个</strong>PropertyPlaceholderConfigurer(或<context:property-placeholder>)，其余的会被Spring忽略掉.</context:property-placeholder></p>
+<p>Spring容器仅允许<strong>最多定义一个</strong>PropertyPlaceholderConfigurer(或<code>&lt;context:property-placeholder /&gt;</code>)，其余的会被Spring忽略掉.</p>
 </blockquote>
 <a id="more"></a>
 <p><strong>解决：</strong>  </p>
 <blockquote>
-<p>一次性导入多个配置文件 <code>&lt;context:property-placeholder location=&quot;classpath:jdbc.properties,classpath:redis.properties&quot; system-properties-mode=&quot;NEVER&quot;/&gt;</code></p>
+<p>一次性导入多个配置文件</p>
 </blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath:jdbc.properties,classpath:redis.properties"</span> <span class="attr">system-properties-mode</span>=<span class="string">"NEVER"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"locations"</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">list</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">value</span>&gt;</span>classpath:jdbc.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">value</span>&gt;</span>classpath:jdbc2.properties<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">list</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>

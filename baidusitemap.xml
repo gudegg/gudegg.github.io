@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2016/03/12/rediserror/</loc>
+    <lastmod>2016-05-31T12:45:10.523Z</lastmod>
+    <data>
+        <display>
+        <title>could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”</title>
+        <pubTime>2016-03-12T02:40:29.000Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2016/05/25/%E5%BC%BA%E5%A4%A7%E7%9A%84java%E6%97%B6%E9%97%B4%E5%BA%93Joda/</loc>
     <lastmod>2016-05-25T03:31:00.213Z</lastmod>
     <data>
@@ -337,23 +354,6 @@
         <pubTime>2016-03-12T05:01:23.000Z</pubTime>
         
         <tag>java基础复习</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhangguodong.me/2016/03/12/rediserror/</loc>
-    <lastmod>2016-03-12T02:52:24.557Z</lastmod>
-    <data>
-        <display>
-        <title>could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”</title>
-        <pubTime>2016-03-12T02:40:29.000Z</pubTime>
-        
-        <tag>spring</tag>
          
          
            

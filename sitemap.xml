@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhangguodong.me/2016/03/12/rediserror/</loc>
+    
+    <lastmod>2016-05-31T12:45:10.523Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhangguodong.me/2016/05/25/%E5%BC%BA%E5%A4%A7%E7%9A%84java%E6%97%B6%E9%97%B4%E5%BA%93Joda/</loc>
     
     <lastmod>2016-05-25T03:31:00.213Z</lastmod>
@@ -152,13 +159,6 @@
     <loc>http://zhangguodong.me/2016/03/12/%E4%BB%A3%E7%A0%81%E5%9D%97/</loc>
     
     <lastmod>2016-03-12T05:36:58.236Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhangguodong.me/2016/03/12/rediserror/</loc>
-    
-    <lastmod>2016-03-12T02:52:24.557Z</lastmod>
     
   </url>
   
