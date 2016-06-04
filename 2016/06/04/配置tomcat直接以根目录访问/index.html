@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="oracle," />
+  <meta name="keywords" content="tomcat," />
 
 
 
@@ -57,31 +57,19 @@
 
 
 
-<meta name="description" content="解决
-window下给系统添加环境变量
-
-新建系统变量或者用户变量
-变量名：NLS_LANG 
-变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK">
+<meta name="description" content="法1
+直接将*.war改名ROOT.war放到webapps下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sqlplus客户端连接oracle中文乱码">
-<meta property="og:url" content="http://zhangguodong.me/2016/03/29/sqlplus客户端连接oracle中文乱码/index.html">
+<meta property="og:title" content="配置tomcat直接以根目录访问">
+<meta property="og:url" content="http://zhangguodong.me/2016/06/04/配置tomcat直接以根目录访问/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="解决
-window下给系统添加环境变量
-
-新建系统变量或者用户变量
-变量名：NLS_LANG 
-变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK">
-<meta property="og:updated_time" content="2016-03-29T12:22:44.736Z">
+<meta property="og:description" content="法1
+直接将*.war改名ROOT.war放到webapps下">
+<meta property="og:updated_time" content="2016-06-04T09:02:16.123Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqlplus客户端连接oracle中文乱码">
-<meta name="twitter:description" content="解决
-window下给系统添加环境变量
-
-新建系统变量或者用户变量
-变量名：NLS_LANG 
-变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK">
+<meta name="twitter:title" content="配置tomcat直接以根目录访问">
+<meta name="twitter:description" content="法1
+直接将*.war改名ROOT.war放到webapps下">
 
 
 
@@ -99,7 +87,7 @@ window下给系统添加环境变量
   };
 </script>
 
-  <title> sqlplus客户端连接oracle中文乱码 | Guodong </title>
+  <title> 配置tomcat直接以根目录访问 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +236,7 @@ window下给系统添加环境变量
             
             
               
-                sqlplus客户端连接oracle中文乱码
+                配置tomcat直接以根目录访问
               
             
           </h1>
@@ -260,8 +248,8 @@ window下给系统添加环境变量
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-29T20:16:18+08:00" content="2016-03-29">
-              2016-03-29
+            <time itemprop="dateCreated" datetime="2016-06-04T16:54:35+08:00" content="2016-06-04">
+              2016-06-04
             </time>
           </span>
 
@@ -287,13 +275,15 @@ window下给系统添加环境变量
       
 
       
-        <h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><blockquote>
-<p>window下给系统添加环境变量</p>
-</blockquote>
-<h4 id="新建系统变量或者用户变量"><a href="#新建系统变量或者用户变量" class="headerlink" title="新建系统变量或者用户变量"></a>新建<code>系统变量</code>或者<code>用户变量</code></h4><ul>
-<li>变量名：NLS_LANG </li>
-<li>变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK</li>
+        <h4 id="法1"><a href="#法1" class="headerlink" title="法1"></a>法1</h4><ul>
+<li>直接将*.war改名ROOT.war放到webapps下</li>
 </ul>
+<a id="more"></a>
+<h4 id="法2"><a href="#法2" class="headerlink" title="法2"></a>法2</h4><ul>
+<li>修改文件“conf/server.xml”，在Host节点下增加如下<code>&lt;Context&gt;</code>的内容配置：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span>  <span class="attr">appBase</span>=<span class="string">"webapps"</span> <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    ......</span><br><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">""</span> <span class="attr">docBase</span>=<span class="string">"D:/tomcat/myapps/gude.war"</span>&gt;</span><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：<br>    1）path 的值设置为空；<br>    2）应用不要放到tomcat的webapps目录下(如上述配置是放到自定义的文件夹myapps内的)，否则访问时路径很有问题；<br>    3）docBase指定到绝对路径。<br>    如此设置后重启tomcat，如果docBase指向的是war文件，会自动将war解压到webapps/ROOT目录；如果docBase指向的是应用已解压好的目录，如 docBase=”D:/tomcat/myapps/gude”，tomcat不会生成webapps/ROOT目录（这种情况下之前可以不用删除webapps/ROOT目录，但webapps/ROOT目录内的内容是无法访问的），访问时将直接使用docBase指定的目录。</p>
 
       
     </div>
@@ -308,7 +298,7 @@ window下给系统添加环境变量
       
         <div class="post-tags">
           
-            <a href="/tags/oracle/" rel="tag">#oracle</a>
+            <a href="/tags/tomcat/" rel="tag">#tomcat</a>
           
         </div>
       
@@ -317,16 +307,16 @@ window下给系统添加环境变量
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/22/chrome扩展开发调试/" rel="next" title="chrome扩展开发调试">
-                <i class="fa fa-chevron-left"></i> chrome扩展开发调试
+              <a href="/2016/05/25/强大的java时间库Joda/" rel="next" title="强大的java时间库Joda">
+                <i class="fa fa-chevron-left"></i> 强大的java时间库Joda
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/31/oracle中null值/" rel="prev" title="oracle中null值">
-                oracle中null值 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/04/收集常用的maven中央仓库镜像/" rel="prev" title="收集常用的maven中央仓库镜像">
+                收集常用的maven中央仓库镜像 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -438,7 +428,7 @@ window下给系统添加环境变量
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建系统变量或者用户变量"><span class="nav-number">1.1.</span> <span class="nav-text">新建系统变量或者用户变量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#法1"><span class="nav-number">1.</span> <span class="nav-text">法1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#法2"><span class="nav-number">2.</span> <span class="nav-text">法2</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

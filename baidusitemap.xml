@@ -4,6 +4,40 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2016/06/04/%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E7%9A%84maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/</loc>
+    <lastmod>2016-06-04T09:14:40.469Z</lastmod>
+    <data>
+        <display>
+        <title>收集常用的maven中央仓库镜像</title>
+        <pubTime>2016-06-04T09:03:19.000Z</pubTime>
+        
+        <tag>maven</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhangguodong.me/2016/06/04/%E9%85%8D%E7%BD%AEtomcat%E7%9B%B4%E6%8E%A5%E4%BB%A5%E6%A0%B9%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE/</loc>
+    <lastmod>2016-06-04T09:02:16.123Z</lastmod>
+    <data>
+        <display>
+        <title>配置tomcat直接以根目录访问</title>
+        <pubTime>2016-06-04T08:54:35.000Z</pubTime>
+        
+        <tag>tomcat</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2016/03/12/rediserror/</loc>
     <lastmod>2016-05-31T12:45:10.523Z</lastmod>
     <data>

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="oracle," />
+  <meta name="keywords" content="maven," />
 
 
 
@@ -57,31 +57,31 @@
 
 
 
-<meta name="description" content="解决
-window下给系统添加环境变量
+<meta name="description" content="由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像
+镜像列表:
 
-新建系统变量或者用户变量
-变量名：NLS_LANG 
-变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK">
+http://uk.maven.org/maven2/ (推荐)
+http://maven.antelink.com/content/groups/public/ (推荐)
+https://repo.spring.io/plugins-release/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sqlplus客户端连接oracle中文乱码">
-<meta property="og:url" content="http://zhangguodong.me/2016/03/29/sqlplus客户端连接oracle中文乱码/index.html">
+<meta property="og:title" content="收集常用的maven中央仓库镜像">
+<meta property="og:url" content="http://zhangguodong.me/2016/06/04/收集常用的maven中央仓库镜像/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="解决
-window下给系统添加环境变量
+<meta property="og:description" content="由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像
+镜像列表:
 
-新建系统变量或者用户变量
-变量名：NLS_LANG 
-变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK">
-<meta property="og:updated_time" content="2016-03-29T12:22:44.736Z">
+http://uk.maven.org/maven2/ (推荐)
+http://maven.antelink.com/content/groups/public/ (推荐)
+https://repo.spring.io/plugins-release/">
+<meta property="og:updated_time" content="2016-06-04T09:14:40.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqlplus客户端连接oracle中文乱码">
-<meta name="twitter:description" content="解决
-window下给系统添加环境变量
+<meta name="twitter:title" content="收集常用的maven中央仓库镜像">
+<meta name="twitter:description" content="由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像
+镜像列表:
 
-新建系统变量或者用户变量
-变量名：NLS_LANG 
-变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK">
+http://uk.maven.org/maven2/ (推荐)
+http://maven.antelink.com/content/groups/public/ (推荐)
+https://repo.spring.io/plugins-release/">
 
 
 
@@ -99,7 +99,7 @@ window下给系统添加环境变量
   };
 </script>
 
-  <title> sqlplus客户端连接oracle中文乱码 | Guodong </title>
+  <title> 收集常用的maven中央仓库镜像 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +248,7 @@ window下给系统添加环境变量
             
             
               
-                sqlplus客户端连接oracle中文乱码
+                收集常用的maven中央仓库镜像
               
             
           </h1>
@@ -260,8 +260,8 @@ window下给系统添加环境变量
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-29T20:16:18+08:00" content="2016-03-29">
-              2016-03-29
+            <time itemprop="dateCreated" datetime="2016-06-04T17:03:19+08:00" content="2016-06-04">
+              2016-06-04
             </time>
           </span>
 
@@ -287,13 +287,15 @@ window下给系统添加环境变量
       
 
       
-        <h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><blockquote>
-<p>window下给系统添加环境变量</p>
-</blockquote>
-<h4 id="新建系统变量或者用户变量"><a href="#新建系统变量或者用户变量" class="headerlink" title="新建系统变量或者用户变量"></a>新建<code>系统变量</code>或者<code>用户变量</code></h4><ul>
-<li>变量名：NLS_LANG </li>
-<li>变量值：SIMPLIFIED CHINESE_CHINA.ZHS16GBK</li>
-</ul>
+        <p>由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像</p>
+<p><strong>镜像列表:</strong></p>
+<ol>
+<li><a href="http://uk.maven.org/maven2/" target="_blank" rel="external">http://uk.maven.org/maven2/</a> (推荐)</li>
+<li><a href="http://maven.antelink.com/content/groups/public/" target="_blank" rel="external">http://maven.antelink.com/content/groups/public/</a> (推荐)</li>
+<li><a href="https://repo.spring.io/plugins-release/" target="_blank" rel="external">https://repo.spring.io/plugins-release/</a></li>
+</ol>
+<a id="more"></a>
+<p>在(maven安装路径/config/settings.xml)中进行如下修改:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>UK<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>UK Central<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://uk.maven.org/maven2<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -308,7 +310,7 @@ window下给系统添加环境变量
       
         <div class="post-tags">
           
-            <a href="/tags/oracle/" rel="tag">#oracle</a>
+            <a href="/tags/maven/" rel="tag">#maven</a>
           
         </div>
       
@@ -317,17 +319,13 @@ window下给系统添加环境变量
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/22/chrome扩展开发调试/" rel="next" title="chrome扩展开发调试">
-                <i class="fa fa-chevron-left"></i> chrome扩展开发调试
+              <a href="/2016/06/04/配置tomcat直接以根目录访问/" rel="next" title="配置tomcat直接以根目录访问">
+                <i class="fa fa-chevron-left"></i> 配置tomcat直接以根目录访问
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/31/oracle中null值/" rel="prev" title="oracle中null值">
-                oracle中null值 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -438,7 +436,7 @@ window下给系统添加环境变量
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建系统变量或者用户变量"><span class="nav-number">1.1.</span> <span class="nav-text">新建系统变量或者用户变量</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
