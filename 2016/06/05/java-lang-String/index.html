@@ -63,7 +63,7 @@
 <meta property="og:url" content="http://zhangguodong.me/2016/06/05/java-lang-String/index.html">
 <meta property="og:site_name" content="Guodong">
 <meta property="og:description" content="今天使用mybatis进行如下查询时一直报错:1select * from people where name like concat(&apos;%&apos;,&apos;$&amp;#123;name&amp;#125;&apos;,&apos;%&apos;)">
-<meta property="og:updated_time" content="2016-06-05T03:35:07.017Z">
+<meta property="og:updated_time" content="2016-06-05T03:50:14.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'name' in 'class java.lang.String'">
 <meta name="twitter:description" content="今天使用mybatis进行如下查询时一直报错:1select * from people where name like concat(&apos;%&apos;,&apos;$&amp;#123;name&amp;#125;&apos;,&apos;%&apos;)">
@@ -276,7 +276,7 @@
 <a id="more"></a>
 <p>异常:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.reflection.ReflectionException: There is no getter for property named &apos;name&apos; in &apos;class java.lang.String&apos;</span><br><span class="line">	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:381)</span><br><span class="line">	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:164)</span><br><span class="line">	at org.apache.ibatis.reflection.wrapper.BeanWrapper.getBeanProperty(BeanWrapper.java:162)</span><br><span class="line">	at org.apache.ibatis.reflection.wrapper.BeanWrapper.get(BeanWrapper.java:49)</span><br><span class="line">	at org.apache.ibatis.reflection.MetaObject.getValue(MetaObject.java:122)</span><br><span class="line">	at org.apache.ibatis.scripting.xmltags.DynamicContext$ContextMap.get(DynamicContext.java:94)</span><br><span class="line">	at org.apache.ibatis.scripting.xmltags.DynamicContext$ContextAccessor.getProperty(DynamicContext.java:108)</span><br><span class="line">	at org.apache.ibatis.ognl.OgnlRuntime.getProperty(OgnlRuntime.java:2420)</span><br><span class="line">	at org.apache.ibatis.ognl.ASTProperty.getValueBody(ASTProperty.java:114)</span><br><span class="line">	at org.apache.ibatis.ognl.SimpleNode.evaluateGetValueBody(SimpleNode.java:212)</span><br><span class="line">	at org.apache.ibatis.ognl.SimpleNode.getValue(SimpleNode.java:258)</span><br><span class="line">	at org.apache.ibatis.ognl.Ognl.getValue(Ognl.java:494)</span><br></pre></td></tr></table></figure></p>
 <h5 id="查了相关博客-终于解决了"><a href="#查了相关博客-终于解决了" class="headerlink" title="查了相关博客,终于解决了:"></a>查了相关博客,终于解决了:</h5><blockquote>
-<p>对上面的异常，网上说问题原因是Mybatis默认采用ONGL解析参数(ps:还不懂,得恶补)，所以会自动采用对象树的形式获取传入的变量值，解决方法有两个：</p>
+<p>对上面的异常，网上说问题原因是Mybatis默认采用OGNL解析参数(ps:还不懂,得恶补)，所以会自动采用对象树的形式获取传入的变量值，解决方法有两个：</p>
 </blockquote>
 <ol>
 <li><p>将参数名（上面的例子为’name’）替换为”_parameter” ，即：</p>

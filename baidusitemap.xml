@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://zhangguodong.me/2016/06/05/java-lang-String/</loc>
-    <lastmod>2016-06-05T03:35:07.017Z</lastmod>
+    <lastmod>2016-06-05T03:50:14.882Z</lastmod>
     <data>
         <display>
         <title>org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'name' in 'class java.lang.String'</title>
