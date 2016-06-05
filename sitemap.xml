@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhangguodong.me/about/index.html</loc>
+    
+    <lastmod>2016-06-05T04:32:07.980Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhangguodong.me/2016/06/05/java-lang-String/</loc>
     
     <lastmod>2016-06-05T03:50:14.882Z</lastmod>
@@ -82,13 +89,6 @@
     <loc>http://zhangguodong.me/2016/04/26/log4j%E4%BC%9A%E8%BE%93%E5%87%BA2%E6%AC%A1Mybatis%E7%9A%84sql%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2016-04-26T05:15:51.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhangguodong.me/about/index.html</loc>
-    
-    <lastmod>2016-04-23T02:55:12.484Z</lastmod>
     
   </url>
   
