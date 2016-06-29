@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spring," />
+  <meta name="keywords" content="java基础复习," />
 
 
 
@@ -57,19 +57,16 @@
 
 
 
-<meta name="description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
+<meta name="description" content="基于接口动态代理 :Proxy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="classpath:与classpath*:的区别">
-<meta property="og:url" content="http://zhangguodong.me/2016/04/26/classpath-与classpath-的区别/index.html">
+<meta property="og:title" content="动态代理">
+<meta property="og:url" content="http://zhangguodong.me/2016/06/29/动态代理/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
-<meta property="og:image" content="http://zhangguodong.me/images/spring_success.jpg">
-<meta property="og:image" content="http://zhangguodong.me/images/spring_success2.jpg">
-<meta property="og:updated_time" content="2016-04-27T02:45:38.335Z">
+<meta property="og:description" content="基于接口动态代理 :Proxy">
+<meta property="og:updated_time" content="2016-06-29T02:27:04.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="classpath:与classpath*:的区别">
-<meta name="twitter:description" content="在做mybatis多参数的测试时,发现了一个问题@ContextConfiguration(locations = {&amp;quot;classpath:spring/*.xml&amp;quot;})导入配置文件无法成功运行测试,而@ContextConfiguration(locations = {&amp;quot;classpath*:spring/*.xml&amp;quot;})却可以">
-<meta name="twitter:image" content="http://zhangguodong.me/images/spring_success.jpg">
+<meta name="twitter:title" content="动态代理">
+<meta name="twitter:description" content="基于接口动态代理 :Proxy">
 
 
 
@@ -87,7 +84,7 @@
   };
 </script>
 
-  <title> classpath:与classpath*:的区别 | Guodong </title>
+  <title> 动态代理 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +233,7 @@
             
             
               
-                classpath:与classpath*:的区别
+                动态代理
               
             
           </h1>
@@ -248,8 +245,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T21:31:59+08:00" content="2016-04-26">
-              2016-04-26
+            <time itemprop="dateCreated" datetime="2016-06-29T10:03:28+08:00" content="2016-06-29">
+              2016-06-29
             </time>
           </span>
 
@@ -275,16 +272,23 @@
       
 
       
-        <blockquote>
-<p>在做mybatis多参数的测试时,发现了一个问题<code>@ContextConfiguration(locations = {&quot;classpath:spring/*.xml&quot;})</code>导入配置<br>文件无法成功运行测试,而<code>@ContextConfiguration(locations = {&quot;classpath*:spring/*.xml&quot;})</code>却可以</p>
-</blockquote>
-<a id="more"></a>
-<p>查了<a href="http://blog.csdn.net/kkdelta/article/details/5507799" target="_blank" rel="external">资料</a>终于明白:</p>
-<p>1.<strong>classpath:</strong>  只会到指定的classpath路径中查找匹配的资源文件,并且文件如果存在同名,只能加载找到的第一个匹配文件(指定路径本项目存在的话优先从本项目查找)<br>2.<strong>classpath*:</strong>  从本项目的classpath和所有jar中的classpath加载匹配的资源文件</p>
-<h4 id="出错原因"><a href="#出错原因" class="headerlink" title="出错原因"></a>出错原因</h4><ul>
-<li>我测试类放在test的java/spring下,资源文件没放在test下的resources/spring中,而是放在main的resources/spring中,故<code>classpath:spring/*.xml</code>会提示找不到文件(<em>资源文件应该也要放在test的resources/spring中,因为他会优先从指定路径中查找</em>),而<code>classpath*:spring/*.xml</code>如2中所说的就没有问题,他会查找classpath下所有匹配的(ps:maven项目)<br><a href="http://stackoverflow.com/questions/16985770/runwith-and-contextconfiguration-weird-behaviour" target="_blank" rel="external">感谢stackoverflow大佬</a>,看了这个答案才恍然大悟.</li>
+        <h4 id="基于接口动态代理-Proxy"><a href="#基于接口动态代理-Proxy" class="headerlink" title="基于接口动态代理 :Proxy"></a>基于接口动态代理 :Proxy</h4><a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//接口:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sports</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paly</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口实现类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Basketball</span> <span class="keyword">implements</span> <span class="title">Sports</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"打篮球"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client_Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Sports sports = <span class="keyword">new</span> Basketball();</span><br><span class="line">        Sports sports_Porxy = (Sports) Proxy.newProxyInstance(sports.getClass().getClassLoader(), sports.getClass().getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/**　　</span><br><span class="line">             * <span class="doctag">@param</span> proxy 指代我们所代理的那个真实对象</span><br><span class="line">             * <span class="doctag">@param</span> method 指代的是我们所要调用真实对象的某个方法的Method对象</span><br><span class="line">             * <span class="doctag">@param</span> args 指代的是调用真实对象某个方法时接受的参数</span><br><span class="line">             * <span class="doctag">@return</span></span><br><span class="line">             * <span class="doctag">@throws</span> Throwable</span><br><span class="line">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"先开始准备运动"</span>);</span><br><span class="line">                Object obj = method.invoke(sports, args);</span><br><span class="line">                <span class="keyword">return</span> obj;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        sports_Porxy.paly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输出:<br>先开始准备运动<br>打篮球</li>
 </ul>
-<h4 id="ContextConfiguration加载多文件的方式"><a href="#ContextConfiguration加载多文件的方式" class="headerlink" title="@ContextConfiguration加载多文件的方式:"></a><code>@ContextConfiguration</code>加载多文件的方式:</h4><p>1.数组方式<br><img src="/images/spring_success.jpg" alt=""><br>2.正则匹配方式<br><img src="/images/spring_success2.jpg" alt=""></p>
+<h4 id="基于类的动态代理-CGLIB"><a href="#基于类的动态代理-CGLIB" class="headerlink" title="基于类的动态代理 :CGLIB"></a>基于类的动态代理 :CGLIB</h4><ul>
+<li>前提:<ol>
+<li>被代理类不能被final修饰</li>
+<li>必须是public</li>
+</ol>
+</li>
+</ul>
+<p>先要加入CGLIB架包:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib-nodep<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FootBall</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"踢足球"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client_Main_cglib</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> FootBall footBall = <span class="keyword">new</span> FootBall();</span><br><span class="line"></span><br><span class="line">        FootBall footBall_Proxy = (FootBall) Enhancer.create(footBall.getClass(), <span class="keyword">new</span> MethodInterceptor() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"先开始准备运动"</span>);</span><br><span class="line">                Object obj= method.invoke(footBall,objects);</span><br><span class="line">                <span class="keyword">return</span> obj;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        footBall_Proxy.play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输出:<br>先开始准备运动<br>踢足球</li>
+</ul>
 
       
     </div>
@@ -299,7 +303,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spring/" rel="tag">#spring</a>
+            <a href="/tags/java基础复习/" rel="tag">#java基础复习</a>
           
         </div>
       
@@ -308,17 +312,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/26/log4j会输出2次Mybatis的sql记录/" rel="next" title="log4j会输出2次Mybatis的sql记录">
-                <i class="fa fa-chevron-left"></i> log4j会输出2次Mybatis的sql记录
+              <a href="/2016/06/26/Base64编码原理/" rel="next" title="Base64编码原理">
+                <i class="fa fa-chevron-left"></i> Base64编码原理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/29/mysql所有数据库备份恢复/" rel="prev" title="mysql所有数据库备份恢复">
-                mysql所有数据库备份恢复 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,7 +429,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#出错原因"><span class="nav-number">1.</span> <span class="nav-text">出错原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ContextConfiguration加载多文件的方式"><span class="nav-number">2.</span> <span class="nav-text">@ContextConfiguration加载多文件的方式:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于接口动态代理-Proxy"><span class="nav-number">1.</span> <span class="nav-text">基于接口动态代理 :Proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于类的动态代理-CGLIB"><span class="nav-number">2.</span> <span class="nav-text">基于类的动态代理 :CGLIB</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
