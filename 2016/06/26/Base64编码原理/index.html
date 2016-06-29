@@ -66,7 +66,7 @@
 <meta property="og:description" content="编码原理
 3字节转化成4字节">
 <meta property="og:image" content="http://zhangguodong.me/images/Base64.jpg">
-<meta property="og:updated_time" content="2016-06-26T10:59:23.581Z">
+<meta property="og:updated_time" content="2016-06-29T12:11:02.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Base64编码原理">
 <meta name="twitter:description" content="编码原理
@@ -282,7 +282,7 @@
 </blockquote>
 <a id="more"></a>
 <ul>
-<li>例子<br>  3字节(24位):<br>  10100011 10111100 10110010<br>  4字节(32位,所以每个只能从上面3字节拿到6位,不够的补0):<br>  00101000 00111011 00110010 00110010 </li>
+<li>例子<br>  3字节(24位):<br>  10100011 10111100 10110010<br>  4字节(32位,所以每个只能从上面3字节拿到6位,前面2个高位不够的补0):<br>  00101000 00111011 00110010 00110010 </li>
 </ul>
 <blockquote>
 <p>每个字节的表示范围:00000000~00111111 整数:(0~63)正好64个整数,而这64位整数分别对应着键盘上可见的字符:<strong>Base64是一个码表</strong>    </p>
