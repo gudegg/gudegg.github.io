@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Joda," />
+  <meta name="keywords" content="redis," />
 
 
 
@@ -57,16 +57,28 @@
 
 
 
-<meta name="description" content="Joda比JDK自带的Calendar更易用.">
+<meta name="description" content="单机搭建
+环境:centos6.6 64位
+
+
+安装redis需要先将官网下载的源码进行编译，编译依赖gcc环境，如果没有gcc环境，需要安装gcc：yum install gcc-c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强大的java时间库Joda">
-<meta property="og:url" content="http://zhangguodong.me/2016/05/25/强大的java时间库Joda/index.html">
+<meta property="og:title" content="redis集群搭建">
+<meta property="og:url" content="http://zhangguodong.me/2016/07/18/redis集群搭建/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="Joda比JDK自带的Calendar更易用.">
-<meta property="og:updated_time" content="2016-06-29T12:22:04.160Z">
+<meta property="og:description" content="单机搭建
+环境:centos6.6 64位
+
+
+安装redis需要先将官网下载的源码进行编译，编译依赖gcc环境，如果没有gcc环境，需要安装gcc：yum install gcc-c++">
+<meta property="og:updated_time" content="2016-07-18T03:30:50.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="强大的java时间库Joda">
-<meta name="twitter:description" content="Joda比JDK自带的Calendar更易用.">
+<meta name="twitter:title" content="redis集群搭建">
+<meta name="twitter:description" content="单机搭建
+环境:centos6.6 64位
+
+
+安装redis需要先将官网下载的源码进行编译，编译依赖gcc环境，如果没有gcc环境，需要安装gcc：yum install gcc-c++">
 
 
 
@@ -84,7 +96,7 @@
   };
 </script>
 
-  <title> 强大的java时间库Joda | Guodong </title>
+  <title> redis集群搭建 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +245,7 @@
             
             
               
-                强大的java时间库Joda
+                redis集群搭建
               
             
           </h1>
@@ -245,8 +257,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T10:44:54+08:00" content="2016-05-25">
-              2016-05-25
+            <time itemprop="dateCreated" datetime="2016-07-18T10:27:14+08:00" content="2016-07-18">
+              2016-07-18
             </time>
           </span>
 
@@ -272,18 +284,68 @@
       
 
       
-        <blockquote>
-<p><a href="https://github.com/JodaOrg/joda-time" target="_blank" rel="external">Joda</a>比JDK自带的Calendar更易用.</p>
-</blockquote>
+        <h4 id="单机搭建"><a href="#单机搭建" class="headerlink" title="单机搭建"></a>单机搭建</h4><ul>
+<li>环境:centos6.6 64位</li>
+</ul>
+<ol>
+<li>安装redis需要先将官网下载的源码进行编译，编译依赖gcc环境，如果没有gcc环境，需要安装gcc：yum install gcc-c++</li>
+</ol>
 <a id="more"></a>
-<h4 id="前一天的23-59-59"><a href="#前一天的23-59-59" class="headerlink" title="前一天的23:59:59"></a>前一天的23:59:59</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt=<span class="keyword">new</span> DateTime().plusDays(-<span class="number">1</span>).withTime(<span class="number">23</span>,<span class="number">59</span>,<span class="number">59</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="今天的0点"><a href="#今天的0点" class="headerlink" title="今天的0点"></a>今天的0点</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt=<span class="keyword">new</span> DateTime().withTime(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="时间间隔"><a href="#时间间隔" class="headerlink" title="时间间隔"></a>时间间隔</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2016-5-21 10:20:20</span></span><br><span class="line">DateTime dt1=<span class="keyword">new</span> DateTime(<span class="number">2016</span>,<span class="number">5</span>,<span class="number">21</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">20</span>,<span class="number">0</span>);</span><br><span class="line">DateTime dt2=<span class="keyword">new</span> DateTime();</span><br><span class="line">System.out.println(<span class="string">"天数差:"</span>+Days.daysBetween(dt1,dt2).getDays());</span><br><span class="line">System.out.println(<span class="string">"小时差:"</span>+Hours.hoursBetween(dt1,dt2).getHours());</span><br><span class="line">System.out.println(<span class="string">"分钟差:"</span>+Minutes.minutesBetween(dt1,dt2).getMinutes());</span><br></pre></td></tr></table></figure>
-<h4 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt4=<span class="keyword">new</span> DateTime();</span><br><span class="line">DateTimeFormatter fmt = DateTimeFormat.forPattern(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">System.out.println(dt3.toString(fmt));</span><br><span class="line">System.out.println(dt3.toString(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>));</span><br></pre></td></tr></table></figure>
-<h4 id="增加日期"><a href="#增加日期" class="headerlink" title="增加日期"></a>增加日期</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DateTime dateTime1 = DateTime.parse(<span class="string">"2012-12-03"</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusDays(<span class="number">30</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusHours(<span class="number">3</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusMinutes(<span class="number">3</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusMonths(<span class="number">2</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusSeconds(<span class="number">4</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusWeeks(<span class="number">5</span>);  </span><br><span class="line">dateTime1 = dateTime1.plusYears(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="是否闰月"><a href="#是否闰月" class="headerlink" title="是否闰月"></a>是否闰月</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt5 = <span class="keyword">new</span> DateTime();</span><br><span class="line">DateTime.Property month = dt5.monthOfYear();</span><br><span class="line">System.out.println(<span class="string">"是否闰月:"</span> + month.isLeap());</span><br></pre></td></tr></table></figure>
-<h4 id="与jdk时间转换"><a href="#与jdk时间转换" class="headerlink" title="与jdk时间转换"></a>与jdk时间转换</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DateTime dt6 = <span class="keyword">new</span> DateTime(<span class="keyword">new</span> Date());    </span><br><span class="line">Date date = dt6.toDate();  <span class="comment">//法1  </span></span><br><span class="line">DateTime dt7 = <span class="keyword">new</span> DateTime(System.currentTimeMillis());    </span><br><span class="line">Date date2= <span class="keyword">new</span> Date(dt7.getMillis());<span class="comment">//法2</span></span><br><span class="line">Calendar calendar = Calendar.getInstance();    </span><br><span class="line">DateTime dateTime = <span class="keyword">new</span> DateTime(calendar);</span><br></pre></td></tr></table></figure>
-<p>还有好多功能 详看官方文档.<br>参考: <a href="http://ylq365.iteye.com/blog/1769680" target="_blank" rel="external">joda-time的使用</a>,<a href="http://www.joda.org/joda-time/userguide.html" target="_blank" rel="external">官方文档</a></p>
+<ol>
+<li><p>从<a href="http://redis.io/download" target="_blank" rel="external">官网</a>下载最新redis源码,目前最新版为3.2.1,将redis-3.2.1.tar.gz拷贝到/usr/local目录下</p>
+</li>
+<li><p>解压 tar -zxvf redis-3.2.1.tar.gz</p>
+</li>
+<li><p>进入解压后的目录进行编译<br>  cd /usr/local/redis-3.2.1<br>  make</p>
+</li>
+<li><p>安装到指定目录<br> cd /usr/local/redis-3.2.1<br> make PREFIX=/usr/local/redis install</p>
+</li>
+</ol>
+<h4 id="启动redis"><a href="#启动redis" class="headerlink" title="启动redis"></a>启动redis</h4><ul>
+<li>前端启动模式<br>/usr/local/redis/bin/redis-server<br>默认是前端启动模式，端口是6379</li>
+<li>后端启动<br>1)从redis的源码目录中复制redis.conf到redis的安装目录。<br>2)修改配置文件<br>将<code>bind 127.0.0.1 改为 bind 0.0.0.0</code>(否则外网客户端无法连接redis,服务器防火墙记得关闭或者开放端口)<br> <code>daemonize no   改为 yes</code><br>3) ./redis-server redis.conf  </li>
+</ul>
+<ol>
+<li>连接redis: ./redis-cli -p 6379</li>
+</ol>
+<h4 id="redis集群搭建"><a href="#redis集群搭建" class="headerlink" title="redis集群搭建"></a>redis集群搭建</h4><ul>
+<li>搭建集群需要使用到官方提供的ruby脚本。需要安装ruby的环境。<br>  安装ruby:<br>  yum install ruby<br>  yum install rubygems<br>  安装ruby和redis的接口程序:<a href="/download/redis-3.0.0.gem">redis-3.0.0.gem</a><br>  执行:gem install redis-3.0.0.gem</li>
+</ul>
+<ol>
+<li><p>mkdir /usr/local/redis-cluster</p>
+</li>
+<li><p>cd /usr/local/redis </p>
+</li>
+<li><p>创建6个redis实例:cp -r bin /usr/local/redis-cluster/redis01 (复制6台 01到06) </p>
+</li>
+<li><p>修改里面的配置文件redis.conf <code>端口号</code>7001到7006 ,<code>cluster-enabled no</code>改为yes</p>
+</li>
+<li><p>复制redis源码包src下的redis-trib.rb到redis-cluster</p>
+</li>
+<li><p>redis-cluster下创建启动脚本startall.sh,命令如下:(也可以手动一个一个启动)<br>cd redis01<br>./redis-server redis.conf<br>cd ..<br>cd redis02<br>./redis-server redis.conf<br>cd ..<br>cd redis03<br>./redis-server redis.conf<br>cd ..<br>cd redis04<br>./redis-server redis.conf<br>cd ..<br>cd redis05<br>./redis-server redis.conf<br>cd ..<br>cd redis06<br>./redis-server redis.conf<br>cd ..</p>
+</li>
+<li>chmod +x startall.sh</li>
+<li>./startall.sh</li>
+<li>创建集群:<code>./redis-trib.rb create --replicas 1 192.168.2.200:7001 192.168.2.200:7002 192.168.2.200:7003 192.168.2.200:7004 192.168.2.200:7005  192.168.2.200:7006</code><br>出现: Can I set the above configuration? (type ‘yes’ to accept):  <strong>yes</strong>(输入yes)   集群就创建完成                         </li>
+</ol>
+<h4 id="测试集群"><a href="#测试集群" class="headerlink" title="测试集群:"></a>测试集群:</h4><ol>
+<li><p>连接集群:redis01/redis-cli -h 192.168.25.153 -p 7002 -c (连接集群一定要加上-c,其中-c表示以集群方式连接redis，-h指定ip地址，-p指定端口号)</p>
+</li>
+<li><p>查询集群信息命令: 连接上reids集群,执行cluster nodes</p>
+</li>
+</ol>
+<h4 id="关闭redis"><a href="#关闭redis" class="headerlink" title="关闭redis"></a>关闭redis</h4><ol>
+<li>2种方式关闭redis <ul>
+<li>在外面直接使用: ./redis-cli -p 7001 shutdown</li>
+<li>连接上redis: redis 192.168.36.189:6379&gt; shutdown</li>
+</ul>
+</li>
+<li>在redis-cluster目录创建集群关闭stopall.sh:<br>./redis01/redis-cli -p 7001 shutdown<br>./redis01/redis-cli -p 7002 shutdown<br>./redis01/redis-cli -p 7003 shutdown<br>./redis01/redis-cli -p 7004 shutdown<br>./redis01/redis-cli -p 7005 shutdown<br>./redis01/redis-cli -p 7006 shutdown</li>
+<li><p>chmod +x stopall.sh</p>
+</li>
+<li><p>关闭集群:./stopall.sh (之后要启动集群直接使用./startall.sh 无需在使用创建集群命令,创建集群命令使用一次成功就行)</p>
+</li>
+</ol>
 
       
     </div>
@@ -298,7 +360,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Joda/" rel="tag">#Joda</a>
+            <a href="/tags/redis/" rel="tag">#redis</a>
           
         </div>
       
@@ -307,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/17/Jaxb初步使用/" rel="next" title="Jaxb初步使用">
-                <i class="fa fa-chevron-left"></i> Jaxb初步使用
+              <a href="/2016/06/29/动态代理/" rel="next" title="动态代理">
+                <i class="fa fa-chevron-left"></i> 动态代理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/04/配置tomcat直接以根目录访问/" rel="prev" title="配置tomcat直接以根目录访问">
-                配置tomcat直接以根目录访问 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -428,7 +486,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前一天的23-59-59"><span class="nav-number">1.</span> <span class="nav-text">前一天的23:59:59</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#今天的0点"><span class="nav-number">2.</span> <span class="nav-text">今天的0点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间间隔"><span class="nav-number">3.</span> <span class="nav-text">时间间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化输出"><span class="nav-number">4.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加日期"><span class="nav-number">5.</span> <span class="nav-text">增加日期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是否闰月"><span class="nav-number">6.</span> <span class="nav-text">是否闰月</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与jdk时间转换"><span class="nav-number">7.</span> <span class="nav-text">与jdk时间转换</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单机搭建"><span class="nav-number">1.</span> <span class="nav-text">单机搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动redis"><span class="nav-number">2.</span> <span class="nav-text">启动redis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis集群搭建"><span class="nav-number">3.</span> <span class="nav-text">redis集群搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试集群"><span class="nav-number">4.</span> <span class="nav-text">测试集群:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭redis"><span class="nav-number">5.</span> <span class="nav-text">关闭redis</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
