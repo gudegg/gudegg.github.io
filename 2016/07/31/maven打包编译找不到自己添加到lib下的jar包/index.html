@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java基础复习," />
+  <meta name="keywords" content="maven," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="基于接口动态代理 :Proxy">
+<meta name="description" content="在项目开发中,我们有时需要添加自己的jar又没有放到maven中央仓库中,当我们把jar放到/WEB-INF/lib中时,需要对pom.xml进行配置,要不然编译打包会报错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态代理">
-<meta property="og:url" content="http://zhangguodong.me/2016/06/29/动态代理/index.html">
+<meta property="og:title" content="maven打包编译找不到自己添加到lib下的jar包">
+<meta property="og:url" content="http://zhangguodong.me/2016/07/31/maven打包编译找不到自己添加到lib下的jar包/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="基于接口动态代理 :Proxy">
-<meta property="og:updated_time" content="2016-06-29T02:27:04.544Z">
+<meta property="og:description" content="在项目开发中,我们有时需要添加自己的jar又没有放到maven中央仓库中,当我们把jar放到/WEB-INF/lib中时,需要对pom.xml进行配置,要不然编译打包会报错">
+<meta property="og:updated_time" content="2016-07-31T09:58:15.425Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态代理">
-<meta name="twitter:description" content="基于接口动态代理 :Proxy">
+<meta name="twitter:title" content="maven打包编译找不到自己添加到lib下的jar包">
+<meta name="twitter:description" content="在项目开发中,我们有时需要添加自己的jar又没有放到maven中央仓库中,当我们把jar放到/WEB-INF/lib中时,需要对pom.xml进行配置,要不然编译打包会报错">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> 动态代理 | Guodong </title>
+  <title> maven打包编译找不到自己添加到lib下的jar包 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +233,7 @@
             
             
               
-                动态代理
+                maven打包编译找不到自己添加到lib下的jar包
               
             
           </h1>
@@ -245,8 +245,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T10:03:28+08:00" content="2016-06-29">
-              2016-06-29
+            <time itemprop="dateCreated" datetime="2016-07-31T17:44:11+08:00" content="2016-07-31">
+              2016-07-31
             </time>
           </span>
 
@@ -272,23 +272,13 @@
       
 
       
-        <h4 id="基于接口动态代理-Proxy"><a href="#基于接口动态代理-Proxy" class="headerlink" title="基于接口动态代理 :Proxy"></a>基于接口动态代理 :Proxy</h4><a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//接口:</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sports</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paly</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口实现类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Basketball</span> <span class="keyword">implements</span> <span class="title">Sports</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"打篮球"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client_Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Sports sports = <span class="keyword">new</span> Basketball();</span><br><span class="line">        Sports sports_Porxy = (Sports) Proxy.newProxyInstance(sports.getClass().getClassLoader(), sports.getClass().getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="comment">/**　　</span><br><span class="line">             * <span class="doctag">@param</span> proxy 指代我们所代理的那个真实对象</span><br><span class="line">             * <span class="doctag">@param</span> method 指代的是我们所要调用真实对象的某个方法的Method对象</span><br><span class="line">             * <span class="doctag">@param</span> args 指代的是调用真实对象某个方法时接受的参数</span><br><span class="line">             * <span class="doctag">@return</span></span><br><span class="line">             * <span class="doctag">@throws</span> Throwable</span><br><span class="line">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"先开始准备运动"</span>);</span><br><span class="line">                Object obj = method.invoke(sports, args);</span><br><span class="line">                <span class="keyword">return</span> obj;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        sports_Porxy.paly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>输出:<br>先开始准备运动<br>打篮球</li>
-</ul>
-<h4 id="基于类的动态代理-CGLIB"><a href="#基于类的动态代理-CGLIB" class="headerlink" title="基于类的动态代理 :CGLIB"></a>基于类的动态代理 :CGLIB</h4><ul>
-<li>前提:<ol>
-<li>被代理类不能被final修饰</li>
-<li>必须是public</li>
-</ol>
-</li>
-</ul>
-<p>先要加入CGLIB架包:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib-nodep<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FootBall</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"踢足球"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client_Main_cglib</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> FootBall footBall = <span class="keyword">new</span> FootBall();</span><br><span class="line"></span><br><span class="line">        FootBall footBall_Proxy = (FootBall) Enhancer.create(footBall.getClass(), <span class="keyword">new</span> MethodInterceptor() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"先开始准备运动"</span>);</span><br><span class="line">                Object obj= method.invoke(footBall,objects);</span><br><span class="line">                <span class="keyword">return</span> obj;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        footBall_Proxy.play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>输出:<br>先开始准备运动<br>踢足球</li>
-</ul>
+        <blockquote>
+<p>在项目开发中,我们有时需要添加自己的jar又没有放到maven中央仓库中,当我们把jar放到/WEB-INF/lib中时,需要对pom.xml进行配置,要不然编译打包会报错</p>
+</blockquote>
+<a id="more"></a>
+<p>具体如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">compilerArguments</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">extdirs</span>&gt;</span>$&#123;project.basedir&#125;\\src\\main\\webapp\\WEB-INF\\lib<span class="tag">&lt;/<span class="name">extdirs</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">compilerArguments</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>只需添加<code>&lt;extdirs&gt;${project.basedir}\\src\\main\\webapp\\WEB-INF\\lib&lt;/extdirs&gt;</code></p>
 
       
     </div>
@@ -303,7 +293,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java基础复习/" rel="tag">#java基础复习</a>
+            <a href="/tags/maven/" rel="tag">#maven</a>
           
         </div>
       
@@ -312,17 +302,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/26/Base64编码原理/" rel="next" title="Base64编码原理">
-                <i class="fa fa-chevron-left"></i> Base64编码原理
+              <a href="/2016/07/18/3v-3高/" rel="next" title="3v+3高">
+                <i class="fa fa-chevron-left"></i> 3v+3高
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/18/redis集群搭建/" rel="prev" title="redis集群搭建">
-                redis集群搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -433,7 +419,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于接口动态代理-Proxy"><span class="nav-number">1.</span> <span class="nav-text">基于接口动态代理 :Proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于类的动态代理-CGLIB"><span class="nav-number">2.</span> <span class="nav-text">基于类的动态代理 :CGLIB</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
