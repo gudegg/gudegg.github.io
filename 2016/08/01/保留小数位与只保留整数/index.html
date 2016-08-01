@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spring," />
+  <meta name="keywords" content="java基础复习," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="SpringMVC可支持的返回类型:">
+<meta name="description" content="常用的几种小数位操作方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springmvc可支持的返回类型">
-<meta property="og:url" content="http://zhangguodong.me/2016/03/03/springmvc可支持的返回类型/index.html">
+<meta property="og:title" content="保留小数位与只保留整数">
+<meta property="og:url" content="http://zhangguodong.me/2016/08/01/保留小数位与只保留整数/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="SpringMVC可支持的返回类型:">
-<meta property="og:updated_time" content="2016-03-26T06:46:38.974Z">
+<meta property="og:description" content="常用的几种小数位操作方法">
+<meta property="og:updated_time" content="2016-08-01T07:06:23.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springmvc可支持的返回类型">
-<meta name="twitter:description" content="SpringMVC可支持的返回类型:">
+<meta name="twitter:title" content="保留小数位与只保留整数">
+<meta name="twitter:description" content="常用的几种小数位操作方法">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> springmvc可支持的返回类型 | Guodong </title>
+  <title> 保留小数位与只保留整数 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +233,7 @@
             
             
               
-                springmvc可支持的返回类型
+                保留小数位与只保留整数
               
             
           </h1>
@@ -245,8 +245,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-03T20:51:20+08:00" content="2016-03-03">
-              2016-03-03
+            <time itemprop="dateCreated" datetime="2016-08-01T14:56:36+08:00" content="2016-08-01">
+              2016-08-01
             </time>
           </span>
 
@@ -272,17 +272,12 @@
       
 
       
-        <p>SpringMVC可支持的返回类型:</p>
-<a id="more"></a>
-<blockquote>
-<ul>
-<li><strong>Model</strong> is an interface while ModelMap is a class.</li>
-<li><strong>ModelAndView</strong> is just a container for both a ModelMap and a view object. It allows a controller to return both as a single value.</li>
-</ul>
+        <blockquote>
+<p>常用的几种小数位操作方法</p>
 </blockquote>
-<p>Model 是一个接口， 其实现类为ExtendedModelMap，继承了ModelMap类。 </p>
-<p>更多可返回类型请查看<a href="http://spring.cndocs.tk/mvc.html#mvc-ann-return-types" target="_blank" rel="external">中文文档</a> 、<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc-ann-return-types" target="_blank" rel="external">英文文档</a></p>
-
+<a id="more"></a>
+<h5 id="保留小数位"><a href="#保留小数位" class="headerlink" title="保留小数位"></a>保留小数位</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> f = <span class="number">111231.5585</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    BigDecimal bigDecimal = <span class="keyword">new</span> BigDecimal(f);</span><br><span class="line">    <span class="comment">//四舍六入五凑偶</span></span><br><span class="line">    f = bigDecimal.setScale(<span class="number">3</span>, RoundingMode.HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//四舍六入五凑偶</span></span><br><span class="line">    DecimalFormat df = <span class="keyword">new</span> DecimalFormat(<span class="string">"#.000"</span>);</span><br><span class="line">    String f2 = df.format(f);</span><br><span class="line">    <span class="keyword">double</span> f3 = Double.valueOf(f2);</span><br><span class="line">    System.out.println(f3);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//四舍五入</span></span><br><span class="line">    String ff = String.format(<span class="string">"%.3f"</span>, f);</span><br><span class="line">    System.out.println(ff);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//四舍六入五凑偶</span></span><br><span class="line">    NumberFormat nf = NumberFormat.getNumberInstance();</span><br><span class="line">    nf.setMaximumFractionDigits(<span class="number">3</span>);</span><br><span class="line">    String ff = nf.format(f);</span><br><span class="line">    System.out.println(ff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="只保留整数位"><a href="#只保留整数位" class="headerlink" title="只保留整数位"></a>只保留整数位</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> f = <span class="number">111231.5585</span>;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Double d = Double.valueOf(f);</span><br><span class="line">    <span class="comment">//只保留整数位,小数位直接舍弃</span></span><br><span class="line">    System.out.println(d.intValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -296,7 +291,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spring/" rel="tag">#spring</a>
+            <a href="/tags/java基础复习/" rel="tag">#java基础复习</a>
           
         </div>
       
@@ -305,17 +300,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/27/看这11本书就够了/" rel="next" title="成为java顶尖程序员 看这11本书就够了">
-                <i class="fa fa-chevron-left"></i> 成为java顶尖程序员 看这11本书就够了
+              <a href="/2016/07/31/maven打包编译找不到自己添加到lib下的jar包/" rel="next" title="maven打包编译找不到自己添加到lib下的jar包">
+                <i class="fa fa-chevron-left"></i> maven打包编译找不到自己添加到lib下的jar包
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/05/spring用druid做连接池一直出现异常/" rel="prev" title="spring用druid做连接池一直出现异常">
-                spring用druid做连接池一直出现异常 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -426,7 +417,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#保留小数位"><span class="nav-number">1.</span> <span class="nav-text">保留小数位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#只保留整数位"><span class="nav-number">2.</span> <span class="nav-text">只保留整数位</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

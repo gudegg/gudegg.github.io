@@ -66,7 +66,7 @@
 <meta property="og:description" content="编码原理
 3字节转化成4字节">
 <meta property="og:image" content="http://zhangguodong.me/images/Base64.jpg">
-<meta property="og:updated_time" content="2016-06-29T12:11:02.907Z">
+<meta property="og:updated_time" content="2016-08-01T07:24:44.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Base64编码原理">
 <meta name="twitter:description" content="编码原理
@@ -282,11 +282,12 @@
 </blockquote>
 <a id="more"></a>
 <ul>
-<li>例子<br>  3字节(24位):<br>  10100011 10111100 10110010<br>  4字节(32位,所以每个只能从上面3字节拿到6位,前面2个高位不够的补0):<br>  00101000 00111011 00110010 00110010 </li>
+<li>例子<br>  3字节(24位):<br>  10100011 10111100 10110010<br>  4字节(32位,所以每个只能从上面3字节拿到6位,转换的时候，结果不够6位的用0来补上相应的位置，之后再在6位的前面补两个0,转换完空出的结果就用“=”来补位):<br>  00101000 00111011 00110010 00110010 </li>
 </ul>
 <blockquote>
 <p>每个字节的表示范围:00000000~00111111 整数:(0~63)正好64个整数,而这64位整数分别对应着键盘上可见的字符:<strong>Base64是一个码表</strong>    </p>
 </blockquote>
+<p>a : <code>011000</code> <code>01</code><br>base64: <code>00011000</code> <code>00010000</code>=&gt;24 16 查表可知也就是YQ,故a的base64编码为YQ==(<code>=</code>为补位)</p>
 <h4 id="码表"><a href="#码表" class="headerlink" title="码表"></a>码表</h4><p><img src="/images/Base64.jpg" alt=""></p>
 
       
@@ -389,7 +390,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

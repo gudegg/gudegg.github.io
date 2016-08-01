@@ -4,6 +4,40 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2016/06/26/Base64%E7%BC%96%E7%A0%81%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2016-08-01T07:24:44.701Z</lastmod>
+    <data>
+        <display>
+        <title>Base64编码原理</title>
+        <pubTime>2016-06-26T10:43:15.000Z</pubTime>
+        
+        <tag>base64</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhangguodong.me/2016/08/01/%E4%BF%9D%E7%95%99%E5%B0%8F%E6%95%B0%E4%BD%8D%E4%B8%8E%E5%8F%AA%E4%BF%9D%E7%95%99%E6%95%B4%E6%95%B0/</loc>
+    <lastmod>2016-08-01T07:06:23.332Z</lastmod>
+    <data>
+        <display>
+        <title>保留小数位与只保留整数</title>
+        <pubTime>2016-08-01T06:56:36.000Z</pubTime>
+        
+        <tag>java基础复习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2016/07/31/maven%E6%89%93%E5%8C%85%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0%E8%87%AA%E5%B7%B1%E6%B7%BB%E5%8A%A0%E5%88%B0lib%E4%B8%8B%E7%9A%84jar%E5%8C%85/</loc>
     <lastmod>2016-07-31T09:58:15.425Z</lastmod>
     <data>
@@ -80,23 +114,6 @@
         <pubTime>2016-05-25T02:44:54.000Z</pubTime>
         
         <tag>Joda</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhangguodong.me/2016/06/26/Base64%E7%BC%96%E7%A0%81%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2016-06-29T12:11:02.907Z</lastmod>
-    <data>
-        <display>
-        <title>Base64编码原理</title>
-        <pubTime>2016-06-26T10:43:15.000Z</pubTime>
-        
-        <tag>base64</tag>
          
          
            
