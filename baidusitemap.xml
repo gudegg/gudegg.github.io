@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2016/06/04/%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E7%9A%84maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/</loc>
+    <lastmod>2016-08-02T04:24:58.846Z</lastmod>
+    <data>
+        <display>
+        <title>收集常用的maven中央仓库镜像</title>
+        <pubTime>2016-06-04T09:03:19.000Z</pubTime>
+        
+        <tag>maven</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2016/06/26/Base64%E7%BC%96%E7%A0%81%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2016-08-01T07:24:44.701Z</lastmod>
     <data>
@@ -149,23 +166,6 @@
         <pubTime>2016-06-05T03:18:43.000Z</pubTime>
         
         <tag>mybatis</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhangguodong.me/2016/06/04/%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E7%9A%84maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/</loc>
-    <lastmod>2016-06-04T09:14:40.469Z</lastmod>
-    <data>
-        <display>
-        <title>收集常用的maven中央仓库镜像</title>
-        <pubTime>2016-06-04T09:03:19.000Z</pubTime>
-        
-        <tag>maven</tag>
          
          
            

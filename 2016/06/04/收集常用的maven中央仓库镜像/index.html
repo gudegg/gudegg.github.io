@@ -60,9 +60,10 @@
 <meta name="description" content="由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像
 镜像列表:
 
+https://maven-central.storage.googleapis.com (极力推荐)
 http://uk.maven.org/maven2/ (推荐)
 http://maven.antelink.com/content/groups/public/ (推荐)
-https://repo.spring.io/plugins-release/">
+https://repo.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="收集常用的maven中央仓库镜像">
 <meta property="og:url" content="http://zhangguodong.me/2016/06/04/收集常用的maven中央仓库镜像/index.html">
@@ -70,18 +71,20 @@ https://repo.spring.io/plugins-release/">
 <meta property="og:description" content="由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像
 镜像列表:
 
+https://maven-central.storage.googleapis.com (极力推荐)
 http://uk.maven.org/maven2/ (推荐)
 http://maven.antelink.com/content/groups/public/ (推荐)
-https://repo.spring.io/plugins-release/">
-<meta property="og:updated_time" content="2016-06-04T09:14:40.469Z">
+https://repo.">
+<meta property="og:updated_time" content="2016-08-02T04:24:58.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="收集常用的maven中央仓库镜像">
 <meta name="twitter:description" content="由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像
 镜像列表:
 
+https://maven-central.storage.googleapis.com (极力推荐)
 http://uk.maven.org/maven2/ (推荐)
 http://maven.antelink.com/content/groups/public/ (推荐)
-https://repo.spring.io/plugins-release/">
+https://repo.">
 
 
 
@@ -290,12 +293,14 @@ https://repo.spring.io/plugins-release/">
         <p>由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像</p>
 <p><strong>镜像列表:</strong></p>
 <ol>
+<li><a href="https://maven-central.storage.googleapis.com" target="_blank" rel="external">https://maven-central.storage.googleapis.com</a> (极力推荐)</li>
 <li><a href="http://uk.maven.org/maven2/" target="_blank" rel="external">http://uk.maven.org/maven2/</a> (推荐)</li>
 <li><a href="http://maven.antelink.com/content/groups/public/" target="_blank" rel="external">http://maven.antelink.com/content/groups/public/</a> (推荐)</li>
 <li><a href="https://repo.spring.io/plugins-release/" target="_blank" rel="external">https://repo.spring.io/plugins-release/</a></li>
 </ol>
 <a id="more"></a>
 <p>在(maven安装路径/config/settings.xml)中进行如下修改:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>UK<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>UK Central<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://uk.maven.org/maven2<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Takari公司，<a href="http://takari.io" target="_blank" rel="external">http://takari.io</a>,也即Maven创始人Jason van Zyl创建的公司，最近宣布在Google Cloud Storage上建立了Maven镜像仓库，开放给全球所有的开发者使用。主流的依赖管理工具如Maven、Apache Ivy、Gradle等都可以使用此中央仓库。<br>要使用此Maven镜像中央仓库，只需在Maven的settings.xml配置文件中，修改节的内容即可，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">id</span>&gt;</span>google-maven-central<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>Google Maven Central<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven-central.storage.googleapis.com<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
