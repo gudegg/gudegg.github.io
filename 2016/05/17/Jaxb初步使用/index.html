@@ -79,7 +79,7 @@
 @XmlAccessorOrder
 @XmlTransient
 @XmlJavaTypeAdapter">
-<meta property="og:updated_time" content="2016-05-17T14:21:36.240Z">
+<meta property="og:updated_time" content="2016-08-12T06:55:43.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jaxb初步使用">
 <meta name="twitter:description" content="Jaxb处理java对象和xml之间转换常用的annotation有：
@@ -335,7 +335,7 @@
 <li><code>XmlAccessType.NONE:</code>java对象的所有属性都不映射为xml的元素</li>
 </ol>
 <blockquote>
-<p><strong>注意：</strong>@XmlAccessorType的默认访问级别是XmlAccessType.PUBLIC_MEMBER，因此，如果java对象中的private成员变量设置了public权限的getter/setter方法，就不要在　　　private变量上使用@XmlElement和@XmlAttribute注解，否则在由java对象生成xml时会报同一个属性在java类里存在两次的错误。同理，如果@XmlAccessorType的访问权限　　　为XmlAccessType.NONE，如果在java的成员变量上使用了@XmlElement或@XmlAttribute注解，这些成员变量依然可以映射到xml文件。</p>
+<p><strong>注意：</strong>@XmlAccessorType的默认访问级别是XmlAccessType.PUBLIC_MEMBER，因此，如果java对象中的private成员变量设置了public权限的getter/setter方法，就不要在private变量上使用@XmlElement和@XmlAttribute注解，否则在由java对象生成xml时会报同一个属性在java类里存在两次的错误。同理，如果@XmlAccessorType的访问权限为XmlAccessType.NONE，如果在java的成员变量上使用了@XmlElement或@XmlAttribute注解，这些成员变量依然可以映射到xml文件。</p>
 </blockquote>
 <ul>
 <li><strong>@XmlAccessorOrder</strong></li>
