@@ -840,12 +840,15 @@
         
           
             <blockquote>
-<p>log4j作为mybatis日志系统时,会输出2次sql记录</p>
+<p>log4j作为mybatis日志系统时,控制台会输出2次sql记录</p>
 </blockquote>
 <h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p><img src="/images/mybatis.jpg" alt=""></p>
-<blockquote>
-<p>设为debug级别时,本身就会输出log无需在设置控制台输出(即stdout)</p>
-</blockquote>
+<ol>
+<li>法1: 如图所示,没有设置输出到哪里,他会默认继承rootLogger,输出到stdout和file,这样也只会输出一次到控制台的log</li>
+<li>法2:<pre><code>log4j.additivity.com.mybatis.dao=false #默认为true,打印信息向上级传递,这里即传递给rootLogger,false就不会传递
+log4j.logger.com.mybatis.dao=debug,stdout #我们自己设置输出到stdout,当然后面也可以加file,这样也就只输出到控制台一次,不会传递给rootLogger
+</code></pre></li>
+</ol>
 
           
         
