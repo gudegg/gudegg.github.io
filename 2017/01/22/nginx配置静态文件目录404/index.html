@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java基础复习," />
+  <meta name="keywords" content="nginx," />
 
 
 
@@ -57,25 +57,16 @@
 
 
 
-<meta name="description" content="静态代码块
-主要目的就是对静态属性进行初始化
-
-123static &amp;#123;       System.out.println(&quot;静态代码块&quot;);   &amp;#125;">
+<meta name="description" content="今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="静态代码块、构造代码块、构造函数">
-<meta property="og:url" content="http://zhangguodong.me/2016/03/12/代码块/index.html">
+<meta property="og:title" content="nginx配置静态文件目录404">
+<meta property="og:url" content="http://zhangguodong.me/2017/01/22/nginx配置静态文件目录404/index.html">
 <meta property="og:site_name" content="Guodong">
-<meta property="og:description" content="静态代码块
-主要目的就是对静态属性进行初始化
-
-123static &amp;#123;       System.out.println(&quot;静态代码块&quot;);   &amp;#125;">
-<meta property="og:updated_time" content="2016-03-12T05:36:58.236Z">
+<meta property="og:description" content="今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。">
+<meta property="og:updated_time" content="2017-01-22T05:10:13.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静态代码块、构造代码块、构造函数">
-<meta name="twitter:description" content="静态代码块
-主要目的就是对静态属性进行初始化
-
-123static &amp;#123;       System.out.println(&quot;静态代码块&quot;);   &amp;#125;">
+<meta name="twitter:title" content="nginx配置静态文件目录404">
+<meta name="twitter:description" content="今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。">
 
 
 
@@ -93,7 +84,7 @@
   };
 </script>
 
-  <title> 静态代码块、构造代码块、构造函数 | Guodong </title>
+  <title> nginx配置静态文件目录404 | Guodong </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -242,7 +233,7 @@
             
             
               
-                静态代码块、构造代码块、构造函数
+                nginx配置静态文件目录404
               
             
           </h1>
@@ -254,8 +245,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-12T13:01:23+08:00" content="2016-03-12">
-              2016-03-12
+            <time itemprop="dateCreated" datetime="2017-01-22T12:24:46+08:00" content="2017-01-22">
+              2017-01-22
             </time>
           </span>
 
@@ -281,28 +272,31 @@
       
 
       
-        <h4 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h4><blockquote>
-<p>主要目的就是对静态属性进行初始化</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">       System.out.println(<span class="string">"静态代码块"</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+        <p>今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。</p>
 <a id="more"></a>
-<h4 id="构造代码块"><a href="#构造代码块" class="headerlink" title="构造代码块"></a>构造代码块</h4><blockquote>
-<p>在类中直接定义没有任何修饰符、前缀、后缀的代码块</p>
+<h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><p>一开始配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">	    root /home/static;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>当我访问/static/a.css这样实际上要到/home/static/static/下找文件，而我的目的是让/static/去访问/home/static/下的文件，这样就造成了404</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">       System.out.println(<span class="string">"构造代码块"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@Author</span> Gude</span><br><span class="line"> * <span class="doctag">@Date</span> 2016/3/12.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Person() &#123;</span><br><span class="line">        System.out.println(<span class="string">"无参构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"构造代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"带参构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Person();</span><br><span class="line">        System.out.println(<span class="string">"-------"</span>);</span><br><span class="line">        <span class="keyword">new</span> Person(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h5><blockquote>
-<p>静态代码块<br>构造代码块<br>无参构造方法<br>---------<br>构造代码块<br>带参构造方法</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">	    root /home;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">	    alias /home/static/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="alias与root区别"><a href="#alias与root区别" class="headerlink" title="alias与root区别"></a>alias与root区别</h4><ul>
+<li>官方root<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sets the root directory for requests. For example, with the following configuration</span><br><span class="line">location /i/ &#123;</span><br><span class="line">    root /data/w3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>The <strong>/data/w3/i/top.gif</strong> file will be sent in response to the <strong>“/i/top.gif”</strong> request</p>
+<ul>
+<li>官方alias<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Defines a replacement for the specified location. For example, with the following configuration</span><br><span class="line">location /i/ &#123;</span><br><span class="line">    alias /data/w3/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>on request of <strong>“/i/top.gif”</strong>, the file <strong>/data/w3/images/top.gif</strong> will be sent.</p>
+<blockquote>
+<p>当访问/i/top.gif时，root是去/data/w3/i/top.gif请求文件，alias是去/data/w3/images/top.gif请求,也就是说<br>root响应的路径：<strong>配置的路径+完整访问路径(完整的location配置路径+静态文件)</strong><br>alias响应的路径：<strong>配置路径+静态文件(去除location中配置的路径)</strong></p>
 </blockquote>
-<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ol>
-<li><strong>静态代码块</strong>随着类的加载被执行,并且只执行<strong>一次</strong> ,并优先于主函数,此时<strong>对象还没有建立</strong>，并且只能调用<strong>静态成员变量</strong></li>
-<li><strong>构造代码块</strong>在建立对象时执行，但它的执行是优先于构造函数的(ps:每次建立新的对象都会执行一次)</li>
-<li><strong>构造函数</strong>每创建一个对象时就会执行一次。同时构造函数是给特定对象进行初始化，而构造代码是给所有对象进行初始化，作用区域不同</li>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ol>
+<li>使用alias时目录名后面一定要加“/”</li>
+<li>一般情况下，在location /中配置root，在location /other中配置alias</li>
 </ol>
-<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><blockquote>
-<p> 静态代码块 &gt; 构造代码块 &gt; 构造函数。</p>
-</blockquote>
-<p><a href="http://www.cnblogs.com/chenssy/p/3413229.html" target="_blank" rel="external">参考</a></p>
 
       
     </div>
@@ -317,7 +311,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java基础复习/" rel="tag">#java基础复习</a>
+            <a href="/tags/nginx/" rel="tag">#nginx</a>
           
         </div>
       
@@ -326,17 +320,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/12/rediserror/" rel="next" title="could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”">
-                <i class="fa fa-chevron-left"></i> could not resolve placeholder ‘redis.host1’ in string value “${redis.host1}”
+              <a href="/2016/09/18/爬取百度网盘用户分享/" rel="next" title="爬取百度网盘用户分享">
+                <i class="fa fa-chevron-left"></i> 爬取百度网盘用户分享
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/13/变量初始化/" rel="prev" title="变量初始化">
-                变量初始化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -447,7 +437,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态代码块"><span class="nav-number">1.</span> <span class="nav-text">静态代码块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造代码块"><span class="nav-number">2.</span> <span class="nav-text">构造代码块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#运行结果"><span class="nav-number">2.1.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析"><span class="nav-number">3.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行顺序"><span class="nav-number">4.</span> <span class="nav-text">执行顺序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误"><span class="nav-number">1.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alias与root区别"><span class="nav-number">3.</span> <span class="nav-text">alias与root区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">4.</span> <span class="nav-text">注意</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
