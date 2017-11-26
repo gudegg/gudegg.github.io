@@ -4,8 +4,25 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2017/11/25/%E7%90%86%E8%A7%A3GC%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2017-11-26T13:43:52.695Z</lastmod>
+    <data>
+        <display>
+        <title>java虚拟机运行时数据区域</title>
+        <pubTime>2017-11-25T11:25:22.000Z</pubTime>
+        
+        <tag>java虚拟机</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2017/11/19/java%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/</loc>
-    <lastmod>2017-11-25T09:01:10.446Z</lastmod>
+    <lastmod>2017-11-26T13:35:41.288Z</lastmod>
     <data>
         <display>
         <title>java虚拟机运行时数据区域</title>
@@ -21,12 +38,12 @@
 
     
   <url>
-    <loc>http://zhangguodong.me/2017/11/22/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</loc>
-    <lastmod>2017-11-25T08:50:38.261Z</lastmod>
+    <loc>http://zhangguodong.me/2017/11/20/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2017-11-26T13:35:29.400Z</lastmod>
     <data>
         <display>
-        <title>java虚拟机垃圾收集器</title>
-        <pubTime>2017-11-22T14:10:01.000Z</pubTime>
+        <title>垃圾收集算法</title>
+        <pubTime>2017-11-20T13:10:01.000Z</pubTime>
         
         <tag>java虚拟机</tag>
          
@@ -38,12 +55,12 @@
 
     
   <url>
-    <loc>http://zhangguodong.me/2017/11/20/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2017-11-25T07:41:42.692Z</lastmod>
+    <loc>http://zhangguodong.me/2017/11/22/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</loc>
+    <lastmod>2017-11-26T13:35:11.055Z</lastmod>
     <data>
         <display>
-        <title>垃圾收集算法</title>
-        <pubTime>2017-11-20T13:10:01.000Z</pubTime>
+        <title>java虚拟机垃圾收集器</title>
+        <pubTime>2017-11-22T14:10:01.000Z</pubTime>
         
         <tag>java虚拟机</tag>
          

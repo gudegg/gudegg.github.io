@@ -77,7 +77,7 @@ ParNew收集器
 
 Parallel Scavenge收集器
 采用复制算法，并行多线程收集器。它的目标则是达到一个可控制的吞吐量。吞吐量=运行用户代码时间/(运行用户代码时间+垃圾收集时间">
-<meta property="og:updated_time" content="2017-11-25T08:50:38.261Z">
+<meta property="og:updated_time" content="2017-11-26T13:35:11.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java虚拟机垃圾收集器">
 <meta name="twitter:description" content="新生代收集器Serial收集器
@@ -333,6 +333,7 @@ Parallel Scavenge收集器
 <li>并行(Parallel)：指多条垃圾收集线程并行工作，但此时用户线程处于等待状态。</li>
 <li>并发：指用户线程和垃圾收集线程同时执行（但不一定是并行的，可能会交替执行），用户线程在继续执行，而垃圾收集程序运行在另外一个cpu上。</li>
 </ul>
+<p>参考: 深入理解java虚拟机</p>
 
       
     </div>
@@ -363,6 +364,10 @@ Parallel Scavenge收集器
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/25/理解GC日志/" rel="prev" title="java虚拟机运行时数据区域">
+                java虚拟机运行时数据区域 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -430,7 +435,7 @@ Parallel Scavenge收集器
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-count">41</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
