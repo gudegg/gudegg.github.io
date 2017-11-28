@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="nginx," />
+  <meta name="keywords" content="java虚拟机," />
 
 
 
@@ -57,16 +57,25 @@
 
 
 
-<meta name="description" content="今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。">
+<meta name="description" content="java堆是垃圾收集器的主要管理区域，堆可以细分为：新生代和老年代,再细致一点可以分为:Eden区、from survivor区和to survivor区。
+堆内存Java中的堆是JVM所管理的最大的一块内存空间，主要用于存放各种类的实例对象。老年代:新生代=&amp;gt;默认情况下是2:1,可以通过-XX:NewSize=size调整比例，默认为2,详细可看官方文档
+
+By default, the">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx配置静态文件目录404">
-<meta property="og:url" content="http://zhangguodong.me/2017/01/22/nginx配置静态文件目录404/index.html">
+<meta property="og:title" content="java堆-新生代和老年代">
+<meta property="og:url" content="http://zhangguodong.me/2017/11/28/java堆的新生代和老年代/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。">
-<meta property="og:updated_time" content="2017-01-22T05:10:13.158Z">
+<meta property="og:description" content="java堆是垃圾收集器的主要管理区域，堆可以细分为：新生代和老年代,再细致一点可以分为:Eden区、from survivor区和to survivor区。
+堆内存Java中的堆是JVM所管理的最大的一块内存空间，主要用于存放各种类的实例对象。老年代:新生代=&amp;gt;默认情况下是2:1,可以通过-XX:NewSize=size调整比例，默认为2,详细可看官方文档
+
+By default, the">
+<meta property="og:updated_time" content="2017-11-28T13:18:52.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx配置静态文件目录404">
-<meta name="twitter:description" content="今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。">
+<meta name="twitter:title" content="java堆-新生代和老年代">
+<meta name="twitter:description" content="java堆是垃圾收集器的主要管理区域，堆可以细分为：新生代和老年代,再细致一点可以分为:Eden区、from survivor区和to survivor区。
+堆内存Java中的堆是JVM所管理的最大的一块内存空间，主要用于存放各种类的实例对象。老年代:新生代=&amp;gt;默认情况下是2:1,可以通过-XX:NewSize=size调整比例，默认为2,详细可看官方文档
+
+By default, the">
 
 
 
@@ -84,7 +93,7 @@
   };
 </script>
 
-  <title> nginx配置静态文件目录404 | Gude Blog </title>
+  <title> java堆-新生代和老年代 | Gude Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +242,7 @@
             
             
               
-                nginx配置静态文件目录404
+                java堆-新生代和老年代
               
             
           </h1>
@@ -245,8 +254,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-22T12:24:46+08:00" content="2017-01-22">
-              2017-01-22
+            <time itemprop="dateCreated" datetime="2017-11-28T20:38:21+08:00" content="2017-11-28">
+              2017-11-28
             </time>
           </span>
 
@@ -272,31 +281,71 @@
       
 
       
-        <p>今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。</p>
+        <p>java堆是垃圾收集器的主要管理区域，堆可以细分为：<strong>新生代和老年代</strong>,再细致一点可以分为:<strong>Eden区、from survivor区和to survivor区</strong>。</p>
+<h4 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h4><p>Java中的堆是JVM所管理的最大的一块内存空间，主要用于存放各种类的实例对象。<br><strong>老年代:新生代</strong>=&gt;默认情况下是2:1,可以通过<code>-XX:NewSize=size</code>调整比例，默认为2,详细可看<a href="https://docs.oracle.com/cd/E19900-01/819-4742/abeik/index.html" target="_blank" rel="external">官方文档</a></p>
+<blockquote>
+<p>By default, the Application Server is invoked with the Java HotSpot Server JVM. The default NewRatio for the Server JVM is 2: the old generation occupies 2/3 of the heap while the new generation occupies 1/3. The larger new generation can accommodate many more short-lived objects, decreasing the need for slow major collections. The old generation is still sufficiently large enough to hold many long-lived objects</p>
+</blockquote>
+<p><strong>Eden区:from Survivor区:to Survivor区</strong>=&gt;默认情况下是8:1:1，可以通过 <code>-XX:SurvivorRatio=size</code> 来调整比例，默认是8</p>
 <a id="more"></a>
-<h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><p>一开始配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">	    root /home/static;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>当我访问/static/a.css这样实际上要到/home/static/static/下找文件，而我的目的是让/static/去访问/home/static/下的文件，这样就造成了404</p>
-</blockquote>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">	    root /home;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">	    alias /home/static/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="alias与root区别"><a href="#alias与root区别" class="headerlink" title="alias与root区别"></a>alias与root区别</h4><ul>
-<li>官方root<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sets the root directory for requests. For example, with the following configuration</span><br><span class="line">location /i/ &#123;</span><br><span class="line">    root /data/w3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>The <strong>/data/w3/i/top.gif</strong> file will be sent in response to the <strong>“/i/top.gif”</strong> request</p>
-<ul>
-<li>官方alias<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Defines a replacement for the specified location. For example, with the following configuration</span><br><span class="line">location /i/ &#123;</span><br><span class="line">    alias /data/w3/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>on request of <strong>“/i/top.gif”</strong>, the file <strong>/data/w3/images/top.gif</strong> will be sent.</p>
-<blockquote>
-<p>当访问/i/top.gif时，root是去/data/w3/i/top.gif请求文件，alias是去/data/w3/images/top.gif请求,也就是说<br>root响应的路径：<strong>配置的路径+完整访问路径(完整的location配置路径+静态文件)</strong><br>alias响应的路径：<strong>配置路径+静态文件(去除location中配置的路径)</strong></p>
-</blockquote>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ol>
-<li>使用alias时目录名后面一定要加“/”</li>
-<li>一般情况下，在location /中配置root，在location /other中配置alias</li>
-</ol>
+<h4 id="GC堆"><a href="#GC堆" class="headerlink" title="GC堆"></a>GC堆</h4><p>GC分为两种:Minor GC、Full GC(或称为Major GC)。<a href="/2017/11/28/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/#空间分配担保">详解GC参考</a></p>
+<h4 id="虚拟机常用参数"><a href="#虚拟机常用参数" class="headerlink" title="虚拟机常用参数"></a>虚拟机常用参数</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-Xms</td>
+<td style="text-align:center">初始堆大小。如：-Xms256m</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xmx    最大堆大小。如：-Xmx512m</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xmn</td>
+<td style="text-align:center">新生代大小。通常为 Xmx 的 1/3 或 1/4。新生代 = Eden + 2 个 Survivor 空间。实际可用空间为 = Eden + 1 个 Survivor，即 90%</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xss</td>
+<td style="text-align:center">JDK1.5+ 每个线程堆栈大小为 1M，一般来说如果栈不是很深的话， 1M 是绝对够用了的。</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:NewRatio</td>
+<td style="text-align:center">新生代与老年代的比例，如 –XX:NewRatio=2，则新生代占整个堆空间的1/3，老年代占2/3</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:SurvivorRatio</td>
+<td style="text-align:center">新生代中 Eden 与 Survivor 的比值。默认值为 8。即 Eden 占新生代空间的 8/10，另外两个 Survivor 各占 1/10</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:PermSize</td>
+<td style="text-align:center">永久代(方法区)的初始大小 (jdk1.8中,永久代最终被移除,方法区移至Metaspace)</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MaxPermSize</td>
+<td style="text-align:center">永久代(方法区)的最大值 (jdk1.8中,永久代最终被移除,方法区移至Metaspace)</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MetaspaceSize</td>
+<td style="text-align:center">设置元空间大小,如:-XX:MetaspaceSize=128M</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MaxMetaspaceSize</td>
+<td style="text-align:center">设置元空间最大大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:+PrintGCDetails</td>
+<td style="text-align:center">打印 GC 信息</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:+HeapDumpOnOutOfMemoryError</td>
+<td style="text-align:center">让虚拟机在发生内存溢出时 Dump 出当前的内存堆转储快照，以便分析用</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -311,7 +360,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag">#nginx</a>
+            <a href="/tags/java虚拟机/" rel="tag">#java虚拟机</a>
           
         </div>
       
@@ -320,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/18/爬取百度网盘用户分享/" rel="next" title="爬取百度网盘用户分享">
-                <i class="fa fa-chevron-left"></i> 爬取百度网盘用户分享
+              <a href="/2017/11/28/内存分配和回收策略/" rel="next" title="内存分配和回收策略">
+                <i class="fa fa-chevron-left"></i> 内存分配和回收策略
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/20/maven打包报错/" rel="prev" title="IntelliJ IDEA maven打包报错：Fatal error compiling: 无效的目标发行版: 1.8 -> [Help 1]">
-                IntelliJ IDEA maven打包报错：Fatal error compiling: 无效的目标发行版: 1.8 -> [Help 1] <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -451,7 +496,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误"><span class="nav-number">1.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alias与root区别"><span class="nav-number">3.</span> <span class="nav-text">alias与root区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">4.</span> <span class="nav-text">注意</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆内存"><span class="nav-number">1.</span> <span class="nav-text">堆内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GC堆"><span class="nav-number">2.</span> <span class="nav-text">GC堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟机常用参数"><span class="nav-number">3.</span> <span class="nav-text">虚拟机常用参数</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
