@@ -77,7 +77,7 @@ ParNew收集器
 
 Parallel Scavenge收集器
 采用复制算法，并行多线程收集器。它的目标则是达到一个可控制的吞吐量。吞吐量=运行用户代码时间/(运行用户代码时间+垃圾收集时间">
-<meta property="og:updated_time" content="2017-11-26T13:35:11.055Z">
+<meta property="og:updated_time" content="2017-12-01T11:29:42.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java虚拟机垃圾收集器">
 <meta name="twitter:description" content="新生代收集器Serial收集器
@@ -306,8 +306,12 @@ Parallel Scavenge收集器
 <hr>
 <h4 id="老年代收集器"><a href="#老年代收集器" class="headerlink" title="老年代收集器"></a>老年代收集器</h4><h5 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h5><blockquote>
 <p>采用<code>标记-整理算法</code>，单线程收集器</p>
-<h5 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h5><p>采用<code>标记-整理算法</code>，多线程收集器</p>
-<h5 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h5><p>以获取最短回收停顿时间为目标的收集器，采用<code>标记-清除算法</code>，它的优点就是：并发标记，低停顿。</p>
+</blockquote>
+<h5 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h5><blockquote>
+<p>采用<code>标记-整理算法</code>，多线程收集器</p>
+</blockquote>
+<h5 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h5><blockquote>
+<p>以获取最短回收停顿时间为目标的收集器，采用<code>标记-清除算法</code>，它的优点就是：并发标记，低停顿。</p>
 </blockquote>
 <h4 id="老年代新生代并存收集器"><a href="#老年代新生代并存收集器" class="headerlink" title="老年代新生代并存收集器"></a>老年代新生代并存收集器</h4><h5 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h5><blockquote>
 <p>HotSpot团队赋予它的使命是未来替换掉JDK1.5发布的CMS收集器。与其他收集器相比，它具备如下特点：并行与并发、分代收集、空间整合、可预测的停顿</p>
