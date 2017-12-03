@@ -235,6 +235,98 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/03/el表达式失效/" itemprop="url">
+                  el表达式失效
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-03T17:34:46+08:00" content="2016-09-03">
+              2016-09-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天在用IDEA进行springmvc项目搭建时,jsp中的el表达式死活不解析.查了相关资料终于找到了原因.<br>idea搭建的maven web项目默认生成的web.xml如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE web-app PUBLIC</span><br><span class="line"> "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"</span><br><span class="line"> "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Archetype Created Web Application<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在servlet2.4之前,isELIgnored默认值为true.(<code>&lt;%@ page isELIgnored=&quot;true&quot;%&gt;</code> 表示是否禁用EL语言,TRUE表示禁止.FALSE表示不禁,JSP2.0(对应servlet2.4)中默认启用EL语言)</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/03/el表达式失效/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/06/swagger2整合springmvc快速生成rest风格接口文档/" itemprop="url">
                   swagger2整合springmvc快速生成rest风格接口文档
                 </a>
@@ -1053,105 +1145,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/04/收集常用的maven中央仓库镜像/" itemprop="url">
-                  收集常用的maven中央仓库镜像
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-04T17:03:19+08:00" content="2016-06-04">
-              2016-06-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>由于maven中央仓库在国外,国内访问的速度非常的慢,收集几个速度还算不错的镜像</p>
-<p><strong>镜像列表:</strong></p>
-<ol>
-<li><a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a> (阿里云 包不全 但是速度快 一般的包都有)</li>
-<li><a href="http://uk.maven.org/maven2/">http://uk.maven.org/maven2/</a> (推荐)</li>
-<li><a href="http://maven.antelink.com/content/groups/public/">http://maven.antelink.com/content/groups/public/</a> (推荐)</li>
-<li><a href="https://maven-central.storage.googleapis.com/">https://maven-central.storage.googleapis.com/</a> (有些地区被墙)</li>
-<li><a href="https://repo.spring.io/plugins-release/">https://repo.spring.io/plugins-release/</a></li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/04/收集常用的maven中央仓库镜像/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1197,7 +1190,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1207,7 +1200,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mysql," />
+  <meta name="keywords" content="数据库," />
 
 
 
@@ -57,16 +57,28 @@
 
 
 
-<meta name="description" content="导出所有数据库1mysqldump -u root -p --opt --all-databases &amp;gt; alldb.sql">
+<meta name="description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。
+Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。
+
+
+接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql所有数据库备份恢复">
-<meta property="og:url" content="http://zhangguodong.me/2016/04/29/mysql所有数据库备份恢复/index.html">
+<meta property="og:title" content="Datasource和DriverManager获取Connection的区别">
+<meta property="og:url" content="http://zhangguodong.me/2017/12/03/Datasource和DriverManager获取Connection的区别/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="导出所有数据库1mysqldump -u root -p --opt --all-databases &amp;gt; alldb.sql">
-<meta property="og:updated_time" content="2016-04-29T02:26:37.362Z">
+<meta property="og:description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。
+Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。
+
+
+接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
+<meta property="og:updated_time" content="2017-12-03T08:45:35.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql所有数据库备份恢复">
-<meta name="twitter:description" content="导出所有数据库1mysqldump -u root -p --opt --all-databases &amp;gt; alldb.sql">
+<meta name="twitter:title" content="Datasource和DriverManager获取Connection的区别">
+<meta name="twitter:description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。
+Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。
+
+
+接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
 
 
 
@@ -84,7 +96,7 @@
   };
 </script>
 
-  <title> mysql所有数据库备份恢复 | Gude Blog </title>
+  <title> Datasource和DriverManager获取Connection的区别 | Gude Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +245,7 @@
             
             
               
-                mysql所有数据库备份恢复
+                Datasource和DriverManager获取Connection的区别
               
             
           </h1>
@@ -245,8 +257,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-29T10:14:05+08:00" content="2016-04-29">
-              2016-04-29
+            <time itemprop="dateCreated" datetime="2017-12-03T15:14:23+08:00" content="2017-12-03">
+              2017-12-03
             </time>
           </span>
 
@@ -272,10 +284,23 @@
       
 
       
-        <h4 id="导出所有数据库"><a href="#导出所有数据库" class="headerlink" title="导出所有数据库"></a>导出所有数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p <span class="comment">--opt --all-databases &gt; alldb.sql</span></span><br></pre></td></tr></table></figure>
+        <ul>
+<li>Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。</li>
+<li>Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。</li>
+</ul>
+<blockquote>
+<p>接下来看<a href="https://github.com/brettwooldridge/HikariCP" target="_blank" rel="external">HikariCP</a>是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用<code>driver.connect(jdbcUrl, driverProperties);</code>,而DriverManager获取Connection也是调用<code>driver.connect(url, info);</code>。具体的连接由数据库的驱动实现。</p>
+</blockquote>
 <a id="more"></a>
-<h4 id="导入所有数据库"><a href="#导入所有数据库" class="headerlink" title="导入所有数据库"></a>导入所有数据库</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p &lt; alldb.sql</span><br></pre></td></tr></table></figure>
-<p><a href="http://dev.mysql.com/doc/refman/5.5/en/mysqldump.html" target="_blank" rel="external">官方文档</a></p>
+<ul>
+<li><p>DriverManager.getConnection(“”)调用最终会走到如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取注册的驱动进行 如：Class.forName("")注册驱动</span></span><br><span class="line"><span class="keyword">for</span>(DriverInfo aDriver : registeredDrivers) &#123;</span><br><span class="line">            <span class="comment">// If the caller does not have permission to load the driver then</span></span><br><span class="line">            <span class="comment">// skip it.</span></span><br><span class="line">            <span class="keyword">if</span>(isDriverAllowed(aDriver.driver, callerCL)) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    println(<span class="string">"    trying "</span> + aDriver.driver.getClass().getName());</span><br><span class="line">                    Connection con = aDriver.driver.connect(url, info);</span><br><span class="line">                    <span class="keyword">if</span> (con != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// Success!</span></span><br><span class="line">                        println(<span class="string">"getConnection returning "</span> + aDriver.driver.getClass().getName());</span><br><span class="line">                        <span class="keyword">return</span> (con);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (SQLException ex) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (reason == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        reason = ex;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                println(<span class="string">"    skipping: "</span> + aDriver.getClass().getName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HikariCP初始化会走到DriverDataSource类的getConnection方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> driver.connect(jdbcUrl, driverProperties);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>Datasource和DriverManager最终获取Connection的方式都是一样的</strong>，都是通过driver.connect()获取，只不过Datasource(指具体的连接池实现)会在初始化的帮我们创建一定数量的连接,这样就不需要每次都去创建Connection，需要使用的时候们只要去池中取未被使用的连接就可以，使用完的连接会被自动释放。而DriverManager需要每次都去创建，这样会耗费内存和时间(除非你只需一个连接就能搞定)。因此，我们在编写项目的时候，都推荐使用了连接池。</p>
 
       
     </div>
@@ -290,7 +315,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mysql/" rel="tag">#mysql</a>
+            <a href="/tags/数据库/" rel="tag">#数据库</a>
           
         </div>
       
@@ -299,17 +324,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/26/classpath-与classpath-的区别/" rel="next" title="classpath:与classpath*:的区别">
-                <i class="fa fa-chevron-left"></i> classpath:与classpath*:的区别
+              <a href="/2017/12/02/java堆的新生代和老年代/" rel="next" title="java堆-新生代和老年代">
+                <i class="fa fa-chevron-left"></i> java堆-新生代和老年代
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/30/IDEA隐藏不想看到的文件/" rel="prev" title="IDEA隐藏不想看到的文件">
-                IDEA隐藏不想看到的文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -430,7 +451,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#导出所有数据库"><span class="nav-number">1.</span> <span class="nav-text">导出所有数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入所有数据库"><span class="nav-number">2.</span> <span class="nav-text">导入所有数据库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
