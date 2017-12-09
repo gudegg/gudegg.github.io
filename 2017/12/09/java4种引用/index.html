@@ -58,30 +58,21 @@
 
 
 <meta name="description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。
-
-引用类型
-Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
-
-强引用ja">
+引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
+强引用java的默">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java4种引用">
 <meta property="og:url" content="http://zhangguodong.me/2017/12/09/java4种引用/index.html">
 <meta property="og:site_name" content="Gude Blog">
 <meta property="og:description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。
-
-引用类型
-Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
-
-强引用ja">
-<meta property="og:updated_time" content="2017-12-09T13:00:30.014Z">
+引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
+强引用java的默">
+<meta property="og:updated_time" content="2017-12-09T13:03:50.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java4种引用">
 <meta name="twitter:description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。
-
-引用类型
-Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
-
-强引用ja">
+引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
+强引用java的默">
 
 
 
@@ -287,12 +278,8 @@ Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(So
       
 
       
-        <blockquote>
-<p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
-</blockquote>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><blockquote>
-<p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
-</blockquote>
+        <p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
 <h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>java的默认实现，类似<code>Object obj=new Object()</code>,它会尽可能长时间存在于JVM，当没有任何对象指向它的时候才会被GC回收<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">strongRefTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Object obj=<span class="keyword">new</span> Object();</span><br><span class="line">    Object strongRef=obj;</span><br><span class="line">    obj=<span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    <span class="comment">/***</span><br><span class="line">     * GC后不会被回收</span><br><span class="line">     */</span></span><br><span class="line">    assertNotNull(strongRef);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>    
 <h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p> 当所引用的对象在 JVM 内不再有强引用时，它会尽可能保留引用直到JVM内存不足时才会被回收，如果此次回收还没有足够的内存，就会抛出内存溢出异常。在JDK1.2后提供SoftReference类来实现软引用，这一特性使得它非常适合缓存应用。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-XX:+PrintGCDetails -Xmx10m </span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SoftRefTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">byte</span>[] a = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>];</span><br><span class="line">    SoftReference&lt;<span class="keyword">byte</span>[]&gt; softReference = <span class="keyword">new</span> SoftReference&lt;<span class="keyword">byte</span>[]&gt;(a);</span><br><span class="line">   </span><br><span class="line">    a=<span class="keyword">null</span>;</span><br><span class="line">    map.put(<span class="string">"a"</span>, softReference);</span><br><span class="line">    assertNotNull(((SoftReference)(map.get(<span class="string">"a"</span>))).get());</span><br><span class="line">    <span class="comment">//在这里发生Full GC,对象a、softReference都被回收</span></span><br><span class="line">    <span class="keyword">byte</span>[] c = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>];</span><br><span class="line">    assertNull(((SoftReference)(map.get(<span class="string">"a"</span>))).get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

@@ -281,12 +281,8 @@
 
       
         
-          <blockquote>
-<p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
-</blockquote>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><blockquote>
-<p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
-</blockquote>
+          <p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
 <h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>java的默认实现，类似<code>Object obj=new Object()</code>,它会尽可能长时间存在于JVM，当没有任何对象指向它的时候才会被GC回收<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">strongRefTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Object obj=<span class="keyword">new</span> Object();</span><br><span class="line">    Object strongRef=obj;</span><br><span class="line">    obj=<span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    <span class="comment">/***</span><br><span class="line">     * GC后不会被回收</span><br><span class="line">     */</span></span><br><span class="line">    assertNotNull(strongRef);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/12/09/java4种引用/#more" rel="contents">
