@@ -69,7 +69,7 @@
 
 -XX:+PrintGC参数-XX:+PrintGC（或者-verbose:gc）开启了简单GC日志模式，为每一次新生代（young generation）的GC和每一次的Full GC打印一行信息。下面举例说明：
 12[GC 246656K-&amp;">
-<meta property="og:updated_time" content="2017-11-26T16:17:08.499Z">
+<meta property="og:updated_time" content="2017-12-09T08:34:09.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解GC日志">
 <meta name="twitter:description" content="GC日志是一个很重要的工具，它准确记录了每一次的GC的执行时间和执行结果，通过分析GC日志可以优化堆设置和GC设置，或者改进应用程序的对象分配模式。
@@ -287,7 +287,7 @@
 <h4 id="XX-PrintGC"><a href="#XX-PrintGC" class="headerlink" title="-XX:+PrintGC"></a>-XX:+PrintGC</h4><p>参数-XX:+PrintGC（或者-verbose:gc）开启了<strong>简单GC日志模式</strong>，为每一次新生代（young generation）的GC和每一次的Full GC打印一行信息。下面举例说明：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[GC 246656K-&gt;243120K(376320K), 0.0929090 secs]</span><br><span class="line">[Full GC 243120K-&gt;241951K(629760K), 1.5589690 secs]</span><br></pre></td></tr></table></figure>
 <p>每行开始首先是GC的类型（可以是“GC”或者“Full GC”），然后是在GC之前和GC之后已使用的堆空间，再然后是当前的堆容量，最后是GC持续的时间（以秒计）。</p>
-<h4 id="XX-PrintGCDetails"><a href="#XX-PrintGCDetails" class="headerlink" title="-XX:PrintGCDetails"></a>-XX:PrintGCDetails</h4><p>开启了<strong>详细GC日志模式</strong>。在这种模式下，日志格式和所使用的GC算法有关。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[GC (Metadata GC Threshold) [PSYoungGen: 19427K-&gt;4592K(95232K)] 29052K-&gt;15061K(129536K), 0.0051148 secs] [Times: user=0.01 sys=0.00, real=0.01 secs] </span><br><span class="line">[Full GC (Metadata GC Threshold) [PSYoungGen: 4592K-&gt;0K(95232K)] [ParOldGen: 10469K-&gt;9121K(34304K)] 15061K-&gt;9121K(129536K), [Metaspace: 20783K-&gt;20783K(1067008K)], 0.0407688 secs] [Times: user=0.13 sys=0.00, real=0.04 secs] </span><br><span class="line">[GC (Allocation Failure)) [PSYoungGen: 35510K-&gt;3651K(92160K)] 44632K-&gt;12780K(126464K), 0.0040306 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </span><br><span class="line">[Full GC (System.gc()) [PSYoungGen: 3651K-&gt;0K(92160K)] [ParOldGen: 9129K-&gt;9619K(34304K)] 12780K-&gt;9619K(126464K), [Metaspace: 22762K-&gt;22762K(1069056K)], 0.0613941 secs] [Times: user=0.27 sys=0.00, real=0.06 secs]</span><br></pre></td></tr></table></figure></p>
+<h4 id="XX-PrintGCDetails"><a href="#XX-PrintGCDetails" class="headerlink" title="-XX:+PrintGCDetails"></a>-XX:+PrintGCDetails</h4><p>开启了<strong>详细GC日志模式</strong>。在这种模式下，日志格式和所使用的GC算法有关。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[GC (Metadata GC Threshold) [PSYoungGen: 19427K-&gt;4592K(95232K)] 29052K-&gt;15061K(129536K), 0.0051148 secs] [Times: user=0.01 sys=0.00, real=0.01 secs] </span><br><span class="line">[Full GC (Metadata GC Threshold) [PSYoungGen: 4592K-&gt;0K(95232K)] [ParOldGen: 10469K-&gt;9121K(34304K)] 15061K-&gt;9121K(129536K), [Metaspace: 20783K-&gt;20783K(1067008K)], 0.0407688 secs] [Times: user=0.13 sys=0.00, real=0.04 secs] </span><br><span class="line">[GC (Allocation Failure)) [PSYoungGen: 35510K-&gt;3651K(92160K)] 44632K-&gt;12780K(126464K), 0.0040306 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </span><br><span class="line">[Full GC (System.gc()) [PSYoungGen: 3651K-&gt;0K(92160K)] [ParOldGen: 9129K-&gt;9619K(34304K)] 12780K-&gt;9619K(126464K), [Metaspace: 22762K-&gt;22762K(1069056K)], 0.0613941 secs] [Times: user=0.27 sys=0.00, real=0.06 secs]</span><br></pre></td></tr></table></figure></p>
 <h4 id="新生代GC"><a href="#新生代GC" class="headerlink" title="新生代GC"></a>新生代GC</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [PSYoungGen: 35510K-&gt;3651K(92160K)] 44632K-&gt;12780K(126464K), 0.0040306 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>[GC</code>与<code>[Full GC</code>表示GC类型</li>
@@ -417,7 +417,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -470,7 +470,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#XX-PrintGC"><span class="nav-number">1.</span> <span class="nav-text">-XX:+PrintGC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XX-PrintGCDetails"><span class="nav-number">2.</span> <span class="nav-text">-XX:PrintGCDetails</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代GC"><span class="nav-number">3.</span> <span class="nav-text">新生代GC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老年代GC"><span class="nav-number">4.</span> <span class="nav-text">老年代GC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Metaspace常用VM参数"><span class="nav-number">5.</span> <span class="nav-text">Metaspace常用VM参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元空间-Metaspace-：永久代为什么被移出HotSpot-JVM了（针对jdk1-8）"><span class="nav-number">6.</span> <span class="nav-text">元空间(Metaspace)：永久代为什么被移出HotSpot JVM了（针对jdk1.8）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#XX-PrintGC"><span class="nav-number">1.</span> <span class="nav-text">-XX:+PrintGC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XX-PrintGCDetails"><span class="nav-number">2.</span> <span class="nav-text">-XX:+PrintGCDetails</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代GC"><span class="nav-number">3.</span> <span class="nav-text">新生代GC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老年代GC"><span class="nav-number">4.</span> <span class="nav-text">老年代GC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Metaspace常用VM参数"><span class="nav-number">5.</span> <span class="nav-text">Metaspace常用VM参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元空间-Metaspace-：永久代为什么被移出HotSpot-JVM了（针对jdk1-8）"><span class="nav-number">6.</span> <span class="nav-text">元空间(Metaspace)：永久代为什么被移出HotSpot JVM了（针对jdk1.8）</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
