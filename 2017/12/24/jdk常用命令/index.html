@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="maven," />
+  <meta name="keywords" content="java虚拟机," />
 
 
 
@@ -57,16 +57,36 @@
 
 
 
-<meta name="description" content="今天使用IntelliJ IDEA准备对spring-boot开发项目进行打包时，一直报： Fatal error compiling: 无效的目标发行版: 1.8 -&amp;gt; [Help 1] ,但是我的系统环境全部是jdk 1.8,百思不得其解">
+<meta name="description" content="进程的本地虚拟机唯一ID(LVMID),LVMID与操作系统的进程ID(PID)是一致的。
+
+jps显示所有HotSpot虚拟机进程
+
+jps 显示类名
+jps -l 显示主类的全名
+jps -v 输出进程启动的JVM参数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IntelliJ IDEA maven打包报错：Fatal error compiling: 无效的目标发行版: 1.8 -> [Help 1]">
-<meta property="og:url" content="http://zhangguodong.me/2017/04/20/maven打包报错/index.html">
+<meta property="og:title" content="jdk常用命令">
+<meta property="og:url" content="http://zhangguodong.me/2017/12/24/jdk常用命令/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="今天使用IntelliJ IDEA准备对spring-boot开发项目进行打包时，一直报： Fatal error compiling: 无效的目标发行版: 1.8 -&amp;gt; [Help 1] ,但是我的系统环境全部是jdk 1.8,百思不得其解">
-<meta property="og:updated_time" content="2017-04-20T06:32:36.420Z">
+<meta property="og:description" content="进程的本地虚拟机唯一ID(LVMID),LVMID与操作系统的进程ID(PID)是一致的。
+
+jps显示所有HotSpot虚拟机进程
+
+jps 显示类名
+jps -l 显示主类的全名
+jps -v 输出进程启动的JVM参数">
+<meta property="og:image" content="http://zhangguodong.me/images/jstat6.png">
+<meta property="og:updated_time" content="2017-12-24T14:16:21.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IntelliJ IDEA maven打包报错：Fatal error compiling: 无效的目标发行版: 1.8 -> [Help 1]">
-<meta name="twitter:description" content="今天使用IntelliJ IDEA准备对spring-boot开发项目进行打包时，一直报： Fatal error compiling: 无效的目标发行版: 1.8 -&amp;gt; [Help 1] ,但是我的系统环境全部是jdk 1.8,百思不得其解">
+<meta name="twitter:title" content="jdk常用命令">
+<meta name="twitter:description" content="进程的本地虚拟机唯一ID(LVMID),LVMID与操作系统的进程ID(PID)是一致的。
+
+jps显示所有HotSpot虚拟机进程
+
+jps 显示类名
+jps -l 显示主类的全名
+jps -v 输出进程启动的JVM参数">
+<meta name="twitter:image" content="http://zhangguodong.me/images/jstat6.png">
 
 
 
@@ -84,7 +104,7 @@
   };
 </script>
 
-  <title> IntelliJ IDEA maven打包报错：Fatal error compiling: 无效的目标发行版: 1.8 -> [Help 1] | Gude Blog </title>
+  <title> jdk常用命令 | Gude Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +253,7 @@
             
             
               
-                IntelliJ IDEA maven打包报错：Fatal error compiling: 无效的目标发行版: 1.8 -> [Help 1]
+                jdk常用命令
               
             
           </h1>
@@ -245,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-20T13:44:11+08:00" content="2017-04-20">
-              2017-04-20
+            <time itemprop="dateCreated" datetime="2017-12-24T20:54:25+08:00" content="2017-12-24">
+              2017-12-24
             </time>
           </span>
 
@@ -273,11 +293,43 @@
 
       
         <blockquote>
-<p>今天使用IntelliJ IDEA准备对spring-boot开发项目进行打包时，一直报：<strong> Fatal error compiling: 无效的目标发行版: 1.8 -&gt; [Help 1] </strong>,但是我的系统环境全部是jdk 1.8,百思不得其解</p>
+<p>进程的本地虚拟机唯一ID(<strong>LVMID</strong>),LVMID与操作系统的进程ID(<strong>PID</strong>)是一致的。</p>
 </blockquote>
+<h4 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h4><p>显示所有HotSpot虚拟机进程</p>
+<ol>
+<li><code>jps</code> 显示类名</li>
+<li><code>jps -l</code> 显示主类的全名</li>
+<li><code>jps -v</code> 输出进程启动的JVM参数</li>
+</ol>
 <a id="more"></a>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>IntelliJ IDEA中maven会自己对jdk环境进行设置，导致IDEA中的maven使用的jdk是1.7</p>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>IntelliJ IDEA中打开File &gt; Settings &gt; Build &gt; Build Tools &gt; Maven &gt; Runner ,将JRE版本设为1.8就能完美解决</p>
+<h4 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h4><p>收集HotSpot虚拟机各方面的运行数据</p>
+<ol>
+<li><code>jstat -gc vmid</code> 监视堆状况<blockquote>
+<p>如果是本地虚拟机进程<strong>VMID</strong>与<strong>LVMID</strong>相同，如果是远程虚拟机，VMID格式是：[protocol:][//]vmid[@hostname[:port]/servername] </p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/images/jstat6.png" alt=""><br>S0C：第一个幸存区的大小<br>S1C：第二个幸存区的大小<br>S0U：第一个幸存区的使用大小<br>S1U：第二个幸存区的使用大小<br>EC：Eden区的大小<br>EU：Eden区的使用大小<br>OC：老年代大小<br>OU：老年代使用大小<br>MC：方法区大小<br>MU：方法区使用大小<br>CCSC:压缩类空间大小<br>CCSU:压缩类空间使用大小<br>YGC：年轻代垃圾回收次数<br>YGCT：年轻代垃圾回收消耗时间<br>FGC：老年代垃圾回收次数<br>FGCT：老年代垃圾回收消耗时间<br>GCT：垃圾回收消耗总时间</p>
+<ol>
+<li><code>jstat -gcutil vmid</code> 与-gc基本相同，不过输出的是已使用空间占总空间的百分比</li>
+<li><code>jstat -gc -vmid 1000 20</code> 表示1000毫秒查询一次。共查询20次</li>
+</ol>
+<h4 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h4><p>显示虚拟机配置信息<br>1 <code>jinfo vmid</code> </p>
+<h4 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h4><p>生成虚拟机堆转换快照</p>
+<ol>
+<li><code>jmap -heap vmid</code> 显示虚拟机堆详细信息</li>
+<li><code>jmap -dump:live,format=b,file=heap.bin &lt;pid&gt;</code> live子参数说明是否只dump出存活的对象</li>
+<li><code>jmap -histo vmid</code> 显示堆中对象详细信息，包括类、实例数量、合计容量<br>示例：jmap -dump:format=b,file=test.bin 12444</li>
+</ol>
+<h4 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h4><p>虚拟机堆转存快照分析工具,配合jmap使用</p>
+<ol>
+<li><code>jhat test.bin</code></li>
+</ol>
+<h4 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h4><p>堆跟踪工具</p>
+<ol>
+<li><code>jstack -l vmid</code> 除堆栈外，显示关于锁的附加信息</li>
+</ol>
+<p><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html" target="_blank" rel="external">oracle官方文档</a></p>
 
       
     </div>
@@ -292,7 +344,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/maven/" rel="tag">#maven</a>
+            <a href="/tags/java虚拟机/" rel="tag">#java虚拟机</a>
           
         </div>
       
@@ -301,17 +353,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/22/nginx配置静态文件目录404/" rel="next" title="nginx配置静态文件目录404">
-                <i class="fa fa-chevron-left"></i> nginx配置静态文件目录404
+              <a href="/2017/12/16/数据库连接池连接复用原理/" rel="next" title="数据库连接池连接复用原理">
+                <i class="fa fa-chevron-left"></i> 数据库连接池连接复用原理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/19/java运行时数据区域/" rel="prev" title="java虚拟机运行时数据区域">
-                java虚拟机运行时数据区域 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -432,7 +480,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#jps"><span class="nav-number">1.</span> <span class="nav-text">jps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jstat"><span class="nav-number">2.</span> <span class="nav-text">jstat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jinfo"><span class="nav-number">3.</span> <span class="nav-text">jinfo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jmap"><span class="nav-number">4.</span> <span class="nav-text">jmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jhat"><span class="nav-number">5.</span> <span class="nav-text">jhat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jstack"><span class="nav-number">6.</span> <span class="nav-text">jstack</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
