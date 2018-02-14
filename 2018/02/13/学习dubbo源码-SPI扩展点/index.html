@@ -1,0 +1,833 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="dubbo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。
+
+java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习dubbo源码-SPI扩展点">
+<meta property="og:url" content="http://zhangguodong.me/2018/02/13/学习dubbo源码-SPI扩展点/index.html">
+<meta property="og:site_name" content="Gude Blog">
+<meta property="og:description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。
+
+java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+<meta property="og:updated_time" content="2018-02-14T05:40:12.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习dubbo源码-SPI扩展点">
+<meta name="twitter:description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。
+
+java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 学习dubbo源码-SPI扩展点 | Gude Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75359994-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e7e77b632c64e1c6270a20477a9f48ec";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gude Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                学习dubbo源码-SPI扩展点
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-02-13T20:54:25+08:00" content="2018-02-13">
+              2018-02-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。</p>
+</blockquote>
+<h3 id="java-SPI"><a href="#java-SPI" class="headerlink" title="java SPI"></a>java SPI</h3><p>全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。<br>当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务接口名的文件，并把具体的实现类写进去。<br>MySql驱动mysql-connector-java中，META-INF/services/文件中就有一个java.sql.Driver文件，内容是:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.mysql.jdbc.Driver</span><br><span class="line">com.mysql.fabric.jdbc.FabricMySQLDriver</span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过如下加载扩展点<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ServiceLoader&lt;接口&gt; serviceLoader=ServiceLoader.load(接口.class); </span><br><span class="line">		</span><br><span class="line"><span class="keyword">for</span>(接口 cmd:serviceLoader)&#123;  </span><br><span class="line">    cmd.method();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="external">官方文档</a>对ServiceLoader类的功能介绍<br><a id="more"></a></p>
+<h3 id="dubbo不是使用java原生SPI机制"><a href="#dubbo不是使用java原生SPI机制" class="headerlink" title="dubbo不是使用java原生SPI机制"></a>dubbo不是使用java原生SPI机制</h3><h4 id="为什么不使用原生的？"><a href="#为什么不使用原生的？" class="headerlink" title="为什么不使用原生的？"></a>为什么不使用原生的？</h4><ol>
+<li>原生的一次性加载所有扩展点实现，造成资源的浪费</li>
+<li>如果扩展点加载失败，连扩展点的名称都拿不到了。比如：JDK 标准的 ScriptEngine，通过 getName() 获取脚本类型的名称，但如果 RubyScriptEngine 因为所依赖的 jruby.jar 不存在，导致 RubyScriptEngine 类加载失败，这个失败原因被吃掉了，和 ruby 对应不起来，当用户执行 ruby 脚本时，会报不支持 ruby，而不是真正失败的原因。</li>
+<li>原生的没有IOC和AOP的功能</li>
+<li>原生的不支持缓存和默认值</li>
+</ol>
+<h4 id="dubbo-SPI"><a href="#dubbo-SPI" class="headerlink" title="dubbo SPI"></a>dubbo SPI</h4><blockquote>
+<p>ExtensionLoader类是dubbo实现SPI的核心类，dubbo的扩展都是通过调用ExtensionLoader的getExtension方法加载的,我们主要目的是通过他获取一个实现类。</p>
+</blockquote>
+<h4 id="getExtensionLoader-为该接口new一个ExtensionLoader，然后缓存起来。"><a href="#getExtensionLoader-为该接口new一个ExtensionLoader，然后缓存起来。" class="headerlink" title="getExtensionLoader 为该接口new一个ExtensionLoader，然后缓存起来。"></a>getExtensionLoader 为该接口new一个ExtensionLoader，然后缓存起来。</h4><p>将断点打在类com.alibaba.dubbo.container.Main的<code>private static final ExtensionLoader&lt;Container&gt; loader = ExtensionLoader.getExtensionLoader(Container.class);</code>上<br>调用过程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ExtensionLoader.getExtensionLoader(Container.class)</span><br><span class="line">EXTENSION_LOADERS.putIfAbsent(type, <span class="keyword">new</span> ExtensionLoader&lt;T&gt;(type)); </span><br><span class="line">  --&gt;<span class="keyword">this</span>.type = type;</span><br><span class="line">  --&gt;objectFactory = (type == ExtensionFactory.class ? <span class="keyword">null</span> : ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension());</span><br><span class="line">     --&gt;ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension()</span><br><span class="line">       --&gt;<span class="keyword">this</span>.type = type;</span><br><span class="line">       --&gt;objectFactory =<span class="keyword">null</span>;</span><br></pre></td></tr></table></figure></p>
+<p>执行以上代码完成了2个属性的初始化</p>
+<ol>
+<li>每个一个ExtensionLoader都包含了2个值 type 和 objectFactory<ul>
+<li>Class&lt;?&gt; type；//构造器  初始化时要得到的接口名 (标示当前ExtensionLoader所属SPI接口)</li>
+<li>ExtensionFactory objectFactory//构造器  初始化时 (用于IOC注入) AdaptiveExtensionFactory[SpiExtensionFactory,SpringExtensionFactory]</li>
+</ul>
+</li>
+<li>new 一个ExtensionLoader缓存在<code>ConcurrentMap&lt;Class&lt;?&gt;, ExtensionLoader&lt;?&gt;&gt; EXTENSION_LOADERS</code><blockquote>
+<p>需要特别注意ExtensionFactory也是SPI接口，唯一不同点是他的objectFactory=null</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="getAdaptiveExtension-获取自适应扩展点"><a href="#getAdaptiveExtension-获取自适应扩展点" class="headerlink" title="getAdaptiveExtension 获取自适应扩展点"></a>getAdaptiveExtension 获取自适应扩展点</h4><p>Protocol protocol =ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--&gt;getAdaptiveExtension()<span class="comment">//为cachedAdaptiveInstance赋值</span></span><br><span class="line">  --&gt;createAdaptiveExtension()</span><br><span class="line">    --&gt;getAdaptiveExtensionClass()</span><br><span class="line">      --&gt;getExtensionClasses()<span class="comment">//为cachedClasses 赋值</span></span><br><span class="line">        --&gt;loadExtensionClasses()</span><br><span class="line">          --&gt;loadFile</span><br><span class="line">      --&gt;createAdaptiveExtensionClass()<span class="comment">//自动生成和编译一个动态的adpative类，这个类是一个代理类</span></span><br><span class="line">        --&gt;ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.common.compiler.Compiler.class).getAdaptiveExtension()</span><br><span class="line">        --&gt;compiler.compile(code, classLoader)</span><br><span class="line">    --&gt;injectExtension()<span class="comment">//作用：IOC动态注入</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>主要复杂的过程loadFile：</li>
+</ul>
+<ol>
+<li>读取dubbo定义的META-INF/dubbo/internal(dubbo内部默认实现全部放在这个目录，还有2个目录META-INF/dubbo/和META-INF/services/)下定义的当前需要加载的扩展点实现</li>
+<li>如果定义的实现类被@Adaptive注解，缓存到cachedAdaptiveClass</li>
+<li>只有当该class无adative注解，并且构造函数包含目标接口（type）类型，缓存到cachedWrapperClasses， 例如protocol里面的spi就只有ProtocolFilterWrapper和ProtocolListenerWrapper能命中</li>
+<li>如果2和3都不满足，则判断当前实现类是否被@Activate注解，并缓存到cachedActivates中，并将类作为key，实现自定义简称作为val缓存到cachedNames(META-INF/dubbo/internal里面文件的内容是实现自定义简称=具体实现类)<br>META-INF/dubbo/internal/com.alibaba.dubbo.rpc.Protocol内容<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filter=com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper</span><br><span class="line">listener=com.alibaba.dubbo.rpc.protocol.ProtocolListenerWrapper</span><br><span class="line">mock=com.alibaba.dubbo.rpc.support.MockProtocol</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>createAdaptiveExtensionClass 只有当META-INF/dubbo/internal定义的实现类没有一个被@Adaptive注解才会动态生成代理类<br>Protocol接口生成的动态类如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.alibaba.dubbo.rpc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.dubbo.common.extension.ExtensionLoader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Protocol</span>$<span class="title">Adaptive</span> <span class="keyword">implements</span> <span class="title">com</span>.<span class="title">alibaba</span>.<span class="title">dubbo</span>.<span class="title">rpc</span>.<span class="title">Protocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">//没有打上@Adaptive的方法如果被调到抛异常</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"method public abstract void com.alibaba.dubbo.rpc.Protocol.destroy() of interface com.alibaba.dubbo.rpc.Protocol is not adaptive method!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getDefaultPort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"method public abstract int com.alibaba.dubbo.rpc.Protocol.getDefaultPort() of interface com.alibaba.dubbo.rpc.Protocol is not adaptive method!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> com.alibaba.dubbo.rpc.<span class="function">Invoker <span class="title">refer</span><span class="params">(java.lang.Class arg0, com.alibaba.dubbo.common.URL arg1)</span> <span class="keyword">throws</span> com.alibaba.dubbo.rpc.RpcException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arg1 == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"url == null"</span>);</span><br><span class="line">        com.alibaba.dubbo.common.URL url = arg1;</span><br><span class="line">        String extName = (url.getProtocol() == <span class="keyword">null</span> ? <span class="string">"dubbo"</span> : url.getProtocol());</span><br><span class="line">        <span class="keyword">if</span> (extName == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Fail to get extension(com.alibaba.dubbo.rpc.Protocol) name from url("</span> + url.toString() + <span class="string">") use keys([protocol])"</span>);</span><br><span class="line">        com.alibaba.dubbo.rpc.Protocol extension = (com.alibaba.dubbo.rpc.Protocol) ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.rpc.Protocol.class).getExtension(extName);</span><br><span class="line">        <span class="keyword">return</span> extension.refer(arg0, arg1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> com.alibaba.dubbo.rpc.<span class="function">Exporter <span class="title">export</span><span class="params">(com.alibaba.dubbo.rpc.Invoker arg0)</span> <span class="keyword">throws</span> com.alibaba.dubbo.rpc.RpcException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arg0 == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"com.alibaba.dubbo.rpc.Invoker argument == null"</span>);</span><br><span class="line">        <span class="keyword">if</span> (arg0.getUrl() == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"com.alibaba.dubbo.rpc.Invoker argument getUrl() == null"</span>);</span><br><span class="line">        com.alibaba.dubbo.common.URL url = arg0.getUrl();</span><br><span class="line">        String extName = (url.getProtocol() == <span class="keyword">null</span> ? <span class="string">"dubbo"</span> : url.getProtocol());</span><br><span class="line">        <span class="keyword">if</span> (extName == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Fail to get extension(com.alibaba.dubbo.rpc.Protocol) name from url("</span> + url.toString() + <span class="string">") use keys([protocol])"</span>);</span><br><span class="line">        com.alibaba.dubbo.rpc.Protocol extension = (com.alibaba.dubbo.rpc.Protocol) ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.rpc.Protocol.class).getExtension(extName);</span><br><span class="line">        <span class="keyword">return</span> extension.export(arg0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Transporter接口生成的动态类如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.alibaba.dubbo.remoting;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.dubbo.common.extension.ExtensionLoader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Transporter</span>$<span class="title">Adaptive</span> <span class="keyword">implements</span> <span class="title">com</span>.<span class="title">alibaba</span>.<span class="title">dubbo</span>.<span class="title">remoting</span>.<span class="title">Transporter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> com.alibaba.dubbo.remoting.<span class="function">Client <span class="title">connect</span><span class="params">(com.alibaba.dubbo.common.URL arg0, com.alibaba.dubbo.remoting.ChannelHandler arg1)</span> <span class="keyword">throws</span> com.alibaba.dubbo.remoting.RemotingException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arg0 == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"url == null"</span>);</span><br><span class="line">        com.alibaba.dubbo.common.URL url = arg0;</span><br><span class="line">        String extName = url.getParameter(<span class="string">"client"</span>, url.getParameter(<span class="string">"transporter"</span>, <span class="string">"netty"</span>));</span><br><span class="line">        <span class="keyword">if</span> (extName == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Fail to get extension(com.alibaba.dubbo.remoting.Transporter) name from url("</span> + url.toString() + <span class="string">") use keys([client, transporter])"</span>);</span><br><span class="line">        com.alibaba.dubbo.remoting.Transporter extension = (com.alibaba.dubbo.remoting.Transporter) ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.remoting.Transporter.class).getExtension(extName);</span><br><span class="line">        <span class="keyword">return</span> extension.connect(arg0, arg1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> com.alibaba.dubbo.remoting.<span class="function">Server <span class="title">bind</span><span class="params">(com.alibaba.dubbo.common.URL arg0, com.alibaba.dubbo.remoting.ChannelHandler arg1)</span> <span class="keyword">throws</span> com.alibaba.dubbo.remoting.RemotingException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arg0 == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"url == null"</span>);</span><br><span class="line">        com.alibaba.dubbo.common.URL url = arg0;</span><br><span class="line">        String extName = url.getParameter(<span class="string">"server"</span>, url.getParameter(<span class="string">"transporter"</span>, <span class="string">"netty"</span>));</span><br><span class="line">        <span class="keyword">if</span> (extName == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Fail to get extension(com.alibaba.dubbo.remoting.Transporter) name from url("</span> + url.toString() + <span class="string">") use keys([server, transporter])"</span>);</span><br><span class="line">        com.alibaba.dubbo.remoting.Transporter extension = (com.alibaba.dubbo.remoting.Transporter) ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.remoting.Transporter.class).getExtension(extName);</span><br><span class="line">        <span class="keyword">return</span> extension.bind(arg0, arg1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>生成动态类名称为<strong>接口名$Adaptive</strong></li>
+<li>生成动态类的前提是SPI接口方法需要被@Adaptive注解，并且方法参数<code>必须包含URL或者参数有URL成员</code>(URL为dubbo自定义的,URL几乎贯穿整个SPI接口调用链)，通过URL传入不同的参数动态选择不同的实现</li>
+<li>采用哪种方式获取扩展名?<code>String extName = url.getParameter(&quot;server&quot;, url.getParameter(&quot;transporter&quot;, &quot;netty&quot;));</code>与<code>String extName = (url.getProtocol() == null ? &quot;dubbo&quot; : url.getProtocol());</code>2种方式<ol>
+<li>当@Adaptive(“xxx”)指定为protocol时走<code>url.getProtocol()</code>否则走url.getParameter(‘’,’默认’)，默认值是@SPI(‘val’)中的val</li>
+<li>当默认@Adaptive不指定值时，以扩展点接口名为xxx.</li>
+<li>Protocol接口特殊，它默认方法是不指定值，2中它xxx=protocol，又与1中说的指定为Protocol，所有它走url.getProtocol()</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>compiler.compile(code, classLoader)<br>1.Compiler也是SPI接口，加载<code>CompilerClassLoader classLoader = findClassLoader(); com.alibaba.dubbo.common.compiler.Compiler compiler = ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.common.compiler.Compiler.class)</code>默认采用javassist实现动态类生成<br>2.为什么选用javassist? 可以看下作者博客<a href="http://javatar.iteye.com/blog/814426" target="_blank" rel="external">代理方案性能对比</a></li>
+<li>injectExtension</li>
+</ul>
+<ol>
+<li>当objectFactory不为空是，实现类有set开头的方法，并且方法参数有SPI接口的方法就能进行注入</li>
+<li>objectFactory有2个主要实现SpringExtensionFactory和SpiExtensionFactory，SpiExtensionFactory注入的是自适应扩展点(@Adaptive注解的类或者是动态生成的)，SpringExtensionFactory注入的是bean</li>
+</ol>
+<h4 id="getExtension-String-name-通过扩展点名称获取扩展"><a href="#getExtension-String-name-通过扩展点名称获取扩展" class="headerlink" title="getExtension(String name)通过扩展点名称获取扩展"></a>getExtension(String name)通过扩展点名称获取扩展</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">getExtension(String name) <span class="comment">//指定对象缓存在cachedInstances；get出来的对象wrapper对象，例如protocol就是ProtocolFilterWrapper和ProtocolListenerWrapper其中一个。</span></span><br><span class="line">  --&gt;createExtension(String name)</span><br><span class="line">    --&gt;getExtensionClasses()</span><br><span class="line">    --&gt;injectExtension(T instance)<span class="comment">//dubbo的IOC反转控制，就是从spi和spring里面提取对象赋值。</span></span><br><span class="line">      --&gt;objectFactory.getExtension(pt, property)</span><br><span class="line">        --&gt;SpiExtensionFactory.getExtension(type, name)</span><br><span class="line">          --&gt;ExtensionLoader.getExtensionLoader(type)</span><br><span class="line">          --&gt;loader.getAdaptiveExtension()</span><br><span class="line">        --&gt;SpringExtensionFactory.getExtension(type, name)</span><br><span class="line">          --&gt;context.getBean(name)</span><br><span class="line">    --&gt;injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance))<span class="comment">//AOP的简单设计</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>和getAdaptiveExtension很多地方都是一样的，</li>
+<li><p>有个不同就是<code>injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance))</code>，当包装类含有当前type的构造函数时，创建此构造函数并进行注入</p>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><h4 id="SPI"><a href="#SPI" class="headerlink" title="@SPI"></a>@SPI</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SPI &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 默认扩展点名</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只有在接口打了@SPI注解的接口类才会去查找扩展点实现</p>
+</li>
+</ol>
+<h4 id="Adaptive"><a href="#Adaptive" class="headerlink" title="@Adaptive"></a>@Adaptive</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Adaptive &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 从&#123;<span class="doctag">@link</span> URL&#125;的Key名，对应的Value作为要Adapt成的Extension名。</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 如果&#123;<span class="doctag">@link</span> URL&#125;这些Key都没有Value，使用 用 缺省的扩展（在接口的&#123;<span class="doctag">@link</span> SPI&#125;中设定的值）。&lt;br&gt;</span><br><span class="line">     * 比如，&lt;code&gt;String[] &#123;"key1", "key2"&#125;&lt;/code&gt;，表示</span><br><span class="line">     * &lt;ol&gt;</span><br><span class="line">     * &lt;li&gt;先在URL上找key1的Value作为要Adapt成的Extension名；</span><br><span class="line">     * &lt;li&gt;key1没有Value，则使用key2的Value作为要Adapt成的Extension名。</span><br><span class="line">     * &lt;li&gt;key2没有Value，使用缺省的扩展。</span><br><span class="line">     * &lt;li&gt;如果没有设定缺省扩展，则方法调用会抛出&#123;<span class="doctag">@link</span> IllegalStateException&#125;。</span><br><span class="line">     * &lt;/ol&gt;</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 如果不设置则缺省使用Extension接口类名的点分隔小写字串。&lt;br&gt;</span><br><span class="line">     * 即对于Extension接口&#123;<span class="doctag">@code</span> com.alibaba.dubbo.xxx.YyyInvokerWrapper&#125;的缺省值为&lt;code&gt;String[] &#123;"yyy.invoker.wrapper"&#125;&lt;/code&gt;</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@see</span> SPI#value()</span><br><span class="line">     */</span></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>注解在类上作为一个自适应扩展点</li>
+<li><p>注解在方法上，用于动态生成代理类</p>
+<h4 id="Activate"><a href="#Activate" class="headerlink" title="@Activate"></a>@Activate</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Activate &#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * Group过滤条件。</span><br><span class="line">     * &lt;br /&gt;</span><br><span class="line">     * 包含&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的group参数给的值，则返回扩展。</span><br><span class="line">     * &lt;br /&gt;</span><br><span class="line">     * 如没有Group设置，则不过滤。</span><br><span class="line">     */</span></span><br><span class="line">    String[] group() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * Key过滤条件。包含&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的URL的参数Key中有，则返回扩展。</span><br><span class="line">     * &lt;p/&gt;</span><br><span class="line">     * 示例：&lt;br/&gt;</span><br><span class="line">     * 注解的值 &lt;code&gt;<span class="doctag">@Activate</span>("cache,validatioin")&lt;/code&gt;，</span><br><span class="line">     * 则&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的URL的参数有&lt;code&gt;cache&lt;/code&gt;Key，或是&lt;code&gt;validatioin&lt;/code&gt;则返回扩展。</span><br><span class="line">     * &lt;br/&gt;</span><br><span class="line">     * 如没有设置，则不过滤。</span><br><span class="line">     */</span></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 排序信息，可以不提供。</span><br><span class="line">     */</span></span><br><span class="line">    String[] before() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 排序信息，可以不提供。</span><br><span class="line">     */</span></span><br><span class="line">    String[] after() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 排序信息，可以不提供。</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">order</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于集合类扩展点，比如：Filter, InvokerListener, ExportListener, TelnetHandler, StatusChecker 等，可以同时加载多个实现，此时，可以用自动激活来简化配置</p>
+</li>
+<li>可以通过getActivateExtension(URL url, String key)获取激活扩展点集合</li>
+</ol>
+<p><a href="http://dubbo.io/books/dubbo-dev-book/SPI.html" target="_blank" rel="external">扩展点加载</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dubbo/" rel="tag">#dubbo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/24/jdk常用命令/" rel="next" title="jdk常用命令">
+                <i class="fa fa-chevron-left"></i> jdk常用命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.png"
+               alt="Gude" />
+          <p class="site-author-name" itemprop="name">Gude</p>
+          <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gudegg" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java-SPI"><span class="nav-number">1.</span> <span class="nav-text">java SPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo不是使用java原生SPI机制"><span class="nav-number">2.</span> <span class="nav-text">dubbo不是使用java原生SPI机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不使用原生的？"><span class="nav-number">2.1.</span> <span class="nav-text">为什么不使用原生的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dubbo-SPI"><span class="nav-number">2.2.</span> <span class="nav-text">dubbo SPI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getExtensionLoader-为该接口new一个ExtensionLoader，然后缓存起来。"><span class="nav-number">2.3.</span> <span class="nav-text">getExtensionLoader 为该接口new一个ExtensionLoader，然后缓存起来。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getAdaptiveExtension-获取自适应扩展点"><span class="nav-number">2.4.</span> <span class="nav-text">getAdaptiveExtension 获取自适应扩展点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getExtension-String-name-通过扩展点名称获取扩展"><span class="nav-number">2.5.</span> <span class="nav-text">getExtension(String name)通过扩展点名称获取扩展</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解"><span class="nav-number">3.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SPI"><span class="nav-number">3.1.</span> <span class="nav-text">@SPI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adaptive"><span class="nav-number">3.2.</span> <span class="nav-text">@Adaptive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activate"><span class="nav-number">3.3.</span> <span class="nav-text">@Activate</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gude
+  
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+  </span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+
+&nbsp;&nbsp;|&nbsp;&nbsp;<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<!--百度自动推送-->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!--360自动推送-->
+<script>
+(function(){
+   var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?dbdef9d20cbbaf907d0c815b70dab453":"https://jspassport.ssl.qhimg.com/11.0.1.js?dbdef9d20cbbaf907d0c815b70dab453";
+   document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+
+</body>
+</html>
