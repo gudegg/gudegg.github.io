@@ -4,6 +4,40 @@
 
     
   <url>
+    <loc>http://zhangguodong.me/2018/04/05/%E5%AD%A6%E4%B9%A0dubbo%E6%BA%90%E7%A0%81-%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2018-04-07T07:48:41.383Z</lastmod>
+    <data>
+        <display>
+        <title>学习dubbo源码-服务暴露原理</title>
+        <pubTime>2018-04-05T06:50:40.000Z</pubTime>
+        
+        <tag>dubbo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhangguodong.me/2018/04/07/%E5%AD%A6%E4%B9%A0dubbo%E6%BA%90%E7%A0%81-%E6%9C%AC%E5%9C%B0%E6%9A%B4%E9%9C%B2/</loc>
+    <lastmod>2018-04-07T07:28:25.754Z</lastmod>
+    <data>
+        <display>
+        <title>学习dubbo源码-本地暴露</title>
+        <pubTime>2018-04-07T07:21:11.000Z</pubTime>
+        
+        <tag>dubbo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangguodong.me/2018/02/19/%E5%AD%A6%E4%B9%A0dubbo%E6%BA%90%E7%A0%81-Compile%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91/</loc>
     <lastmod>2018-02-19T13:32:33.351Z</lastmod>
     <data>
