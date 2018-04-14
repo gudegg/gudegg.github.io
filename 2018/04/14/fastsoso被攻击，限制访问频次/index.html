@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java虚拟机," />
+  <meta name="keywords" content="fastsoso," />
 
 
 
@@ -57,36 +57,16 @@
 
 
 
-<meta name="description" content="进程的本地虚拟机唯一ID(LVMID),LVMID与操作系统的进程ID(PID)是一致的。
-
-jps显示所有HotSpot虚拟机进程
-
-jps 显示类名
-jps -l 显示主类的全名
-jps -v 输出进程启动的JVM参数">
+<meta name="description" content="fastsoso最近被大量ip攻击，单核的服务器实在承受不起，最近想要给他加个拦截，对于每分钟访问数超过一定阈值的ip，直接进行拦截！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jdk常用命令">
-<meta property="og:url" content="http://zhangguodong.me/2017/12/24/jdk常用命令/index.html">
+<meta property="og:title" content="fastsoso被攻击，限制访问频次">
+<meta property="og:url" content="http://zhangguodong.me/2018/04/14/fastsoso被攻击，限制访问频次/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="进程的本地虚拟机唯一ID(LVMID),LVMID与操作系统的进程ID(PID)是一致的。
-
-jps显示所有HotSpot虚拟机进程
-
-jps 显示类名
-jps -l 显示主类的全名
-jps -v 输出进程启动的JVM参数">
-<meta property="og:image" content="http://zhangguodong.me/images/jstat6.png">
-<meta property="og:updated_time" content="2017-12-24T14:16:21.157Z">
+<meta property="og:description" content="fastsoso最近被大量ip攻击，单核的服务器实在承受不起，最近想要给他加个拦截，对于每分钟访问数超过一定阈值的ip，直接进行拦截！">
+<meta property="og:updated_time" content="2018-04-14T08:50:19.859Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jdk常用命令">
-<meta name="twitter:description" content="进程的本地虚拟机唯一ID(LVMID),LVMID与操作系统的进程ID(PID)是一致的。
-
-jps显示所有HotSpot虚拟机进程
-
-jps 显示类名
-jps -l 显示主类的全名
-jps -v 输出进程启动的JVM参数">
-<meta name="twitter:image" content="http://zhangguodong.me/images/jstat6.png">
+<meta name="twitter:title" content="fastsoso被攻击，限制访问频次">
+<meta name="twitter:description" content="fastsoso最近被大量ip攻击，单核的服务器实在承受不起，最近想要给他加个拦截，对于每分钟访问数超过一定阈值的ip，直接进行拦截！">
 
 
 
@@ -104,7 +84,7 @@ jps -v 输出进程启动的JVM参数">
   };
 </script>
 
-  <title> jdk常用命令 | Gude Blog </title>
+  <title> fastsoso被攻击，限制访问频次 | Gude Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +233,7 @@ jps -v 输出进程启动的JVM参数">
             
             
               
-                jdk常用命令
+                fastsoso被攻击，限制访问频次
               
             
           </h1>
@@ -265,8 +245,8 @@ jps -v 输出进程启动的JVM参数">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-24T20:54:25+08:00" content="2017-12-24">
-              2017-12-24
+            <time itemprop="dateCreated" datetime="2018-04-14T16:32:45+08:00" content="2018-04-14">
+              2018-04-14
             </time>
           </span>
 
@@ -293,44 +273,10 @@ jps -v 输出进程启动的JVM参数">
 
       
         <blockquote>
-<p>进程的本地虚拟机唯一ID(<strong>LVMID</strong>),LVMID与操作系统的进程ID(<strong>PID</strong>)是一致的。</p>
+<p>fastsoso最近被大量ip攻击，单核的服务器实在承受不起，最近想要给他加个拦截，对于每分钟访问数超过一定阈值的ip，直接进行拦截！</p>
 </blockquote>
-<h4 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h4><p>显示所有HotSpot虚拟机进程</p>
-<ol>
-<li><code>jps</code> 显示类名</li>
-<li><code>jps -l</code> 显示主类的全名</li>
-<li><code>jps -v</code> 输出进程启动的JVM参数</li>
-</ol>
 <a id="more"></a>
-<h4 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h4><p>收集HotSpot虚拟机各方面的运行数据</p>
-<ol>
-<li><code>jstat -gc vmid</code> 监视堆状况<blockquote>
-<p>如果是本地虚拟机进程<strong>VMID</strong>与<strong>LVMID</strong>相同，如果是远程虚拟机，VMID格式是：[protocol:][//]vmid[@hostname[:port]/servername] </p>
-</blockquote>
-</li>
-</ol>
-<p><img src="/images/jstat6.png" alt=""><br>S0C：第一个幸存区的大小<br>S1C：第二个幸存区的大小<br>S0U：第一个幸存区的使用大小<br>S1U：第二个幸存区的使用大小<br>EC：Eden区的大小<br>EU：Eden区的使用大小<br>OC：老年代大小<br>OU：老年代使用大小<br>MC：方法区大小<br>MU：方法区使用大小<br>CCSC:压缩类空间大小<br>CCSU:压缩类空间使用大小<br>YGC：年轻代垃圾回收次数<br>YGCT：年轻代垃圾回收消耗时间<br>FGC：老年代垃圾回收次数<br>FGCT：老年代垃圾回收消耗时间<br>GCT：垃圾回收消耗总时间</p>
-<ol>
-<li><code>jstat -gcutil vmid</code> 与-gc基本相同，不过输出的是已使用空间占总空间的百分比</li>
-<li><code>jstat -gc -vmid 1000 20</code> 表示1000毫秒查询一次。共查询20次</li>
-</ol>
-<h4 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h4><p>显示虚拟机配置信息<br>1 <code>jinfo vmid</code> </p>
-<h4 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h4><p>生成虚拟机堆转换快照</p>
-<ol>
-<li><code>jmap -heap vmid</code> 显示虚拟机堆详细信息</li>
-<li><code>jmap -dump:live,format=b,file=heap.bin &lt;pid&gt;</code> live子参数说明是否只dump出存活的对象</li>
-<li><code>jmap -histo vmid</code> 显示堆中对象详细信息，包括类、实例数量、合计容量<br>示例：jmap -dump:format=b,file=test.bin 12444</li>
-</ol>
-<h4 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h4><p>虚拟机堆转存快照分析工具,配合jmap使用</p>
-<ol>
-<li><code>jhat test.bin</code></li>
-</ol>
-<h4 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h4><p>堆跟踪工具</p>
-<ol>
-<li><code>jstack -l vmid</code> 除堆栈外，显示关于锁的附加信息</li>
-</ol>
-<p><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html" target="_blank" rel="external">oracle官方文档</a></p>
-
+<h4 id="redis实现访问频次控制"><a href="#redis实现访问频次控制" class="headerlink" title="redis实现访问频次控制"></a>redis实现访问频次控制</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IpBlockInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Logger LOGGER = LoggerFactory.getLogger(IpBlockInterceptor.class);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(<span class="string">"HH:mm"</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">long</span> EXPIRE_TIME = TimeUnit.SECONDS.toMillis(<span class="number">60</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">long</span> MAX_COUNT = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        String clientIp = getClientIp(request);</span><br><span class="line">        <span class="keyword">if</span> (clientIp != <span class="keyword">null</span> &amp;&amp; clientIp.trim().length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">//ip+小时+分作为key,并且每个key有效期为1分钟</span></span><br><span class="line">            String key = clientIp + <span class="string">"|"</span> + LocalTime.now().format(DATE_TIME_FORMATTER);</span><br><span class="line">            <span class="keyword">long</span> count = <span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">            Boolean exist = stringRedisTemplate.hasKey(key);</span><br><span class="line">            <span class="keyword">if</span> (exist) &#123;</span><br><span class="line">                count = stringRedisTemplate.opsForValue().increment(key, <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//存在并发 同时请求可能返回都为false 所以设置键值对的时候 要用setnx而不是set setnx只有一个请求会成功设置值</span></span><br><span class="line">                Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(key, <span class="string">"1"</span>);</span><br><span class="line">                <span class="keyword">if</span> (success) &#123;</span><br><span class="line">                    stringRedisTemplate.expire(key, EXPIRE_TIME, TimeUnit.MILLISECONDS);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    count = stringRedisTemplate.opsForValue().increment(key, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (count &lt; MAX_COUNT) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//超过设置的阈值，直接进行拦截</span></span><br><span class="line">            LOGGER.debug(<span class="string">"ip:[&#123;&#125;] has been block"</span>, clientIp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getClientIp</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String remoteAddr = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (request != <span class="keyword">null</span>) &#123;</span><br><span class="line">            remoteAddr = request.getHeader(<span class="string">"X-FORWARDED-FOR"</span>);</span><br><span class="line">            <span class="keyword">if</span> (remoteAddr == <span class="keyword">null</span> || <span class="string">""</span>.equals(remoteAddr)) &#123;</span><br><span class="line">                remoteAddr = request.getRemoteAddr();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> remoteAddr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -344,7 +290,7 @@ jps -v 输出进程启动的JVM参数">
       
         <div class="post-tags">
           
-            <a href="/tags/java虚拟机/" rel="tag">#java虚拟机</a>
+            <a href="/tags/fastsoso/" rel="tag">#fastsoso</a>
           
         </div>
       
@@ -353,17 +299,13 @@ jps -v 输出进程启动的JVM参数">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/16/数据库连接池连接复用原理/" rel="next" title="数据库连接池连接复用原理">
-                <i class="fa fa-chevron-left"></i> 数据库连接池连接复用原理
+              <a href="/2018/04/07/学习dubbo源码-本地暴露/" rel="next" title="学习dubbo源码-本地暴露">
+                <i class="fa fa-chevron-left"></i> 学习dubbo源码-本地暴露
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/18/学习dubbo源码-SPI扩展点/" rel="prev" title="学习dubbo源码-SPI扩展点">
-                学习dubbo源码-SPI扩展点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -484,7 +426,7 @@ jps -v 输出进程启动的JVM参数">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#jps"><span class="nav-number">1.</span> <span class="nav-text">jps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jstat"><span class="nav-number">2.</span> <span class="nav-text">jstat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jinfo"><span class="nav-number">3.</span> <span class="nav-text">jinfo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jmap"><span class="nav-number">4.</span> <span class="nav-text">jmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jhat"><span class="nav-number">5.</span> <span class="nav-text">jhat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jstack"><span class="nav-number">6.</span> <span class="nav-text">jstack</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis实现访问频次控制"><span class="nav-number">1.</span> <span class="nav-text">redis实现访问频次控制</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
