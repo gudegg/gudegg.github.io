@@ -72,7 +72,7 @@
 <meta property="og:image" content="http://zhangguodong.me/images/local7.png">
 <meta property="og:image" content="http://zhangguodong.me/images/local8.png">
 <meta property="og:image" content="http://zhangguodong.me/images/local9.png">
-<meta property="og:updated_time" content="2018-04-07T07:28:25.754Z">
+<meta property="og:updated_time" content="2018-04-15T06:24:00.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习dubbo源码-本地暴露">
 <meta name="twitter:description" content="本地暴露1  主要目的是获取exporter">
@@ -291,7 +291,7 @@
 </ul>
 <p>Javassist中$w、$1含义：<br><img src="/images/local5.png" alt=""><br><a href="https://www.jianshu.com/p/b9b3ff0e1bf8" target="_blank" rel="external">详细含义信息请看这里</a></p>
 <p><img src="/images/local6.png" alt=""><br><img src="/images/local7.png" alt=""><br>5 8个默认过滤器，创建过滤链，对invoker进行相关操作</p>
-<p><img src="/images/local8.png" alt=""><br>6 创建InjvmInvoker并放到exporterMap中，不管远程暴露还是本地暴露，都会放到这个Map中。<code>exporterMap.put(key, this)//本地暴露:key=com.alibaba.dubbo.demo.DemoService, this=InjvmExporter</code><br><code>远程暴露: exporterMap.put(key, this)//key=com.alibaba.dubbo.demo.DemoService:20880, this=DubboExporter</code></p>
+<p><img src="/images/local8.png" alt=""><br>6 创建InjvmExporter并放到exporterMap中，不管远程暴露还是本地暴露，都会放到这个Map中。<code>exporterMap.put(key, this)//本地暴露:key=com.alibaba.dubbo.demo.DemoService, this=InjvmExporter</code><br><code>远程暴露: exporterMap.put(key, this)//key=com.alibaba.dubbo.demo.DemoService:20880, this=DubboExporter</code></p>
 <p><img src="/images/local9.png" alt=""><br>7 本地暴露完成</p>
 
       
@@ -394,7 +394,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
