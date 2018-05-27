@@ -235,6 +235,103 @@
             
               
                 
+                <a class="post-title-link" href="/2017/12/03/Datasource和DriverManager获取Connection的区别/" itemprop="url">
+                  Datasource和DriverManager获取Connection的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-03T15:14:23+08:00" content="2017-12-03">
+              2017-12-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li>Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。</li>
+<li>Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。</li>
+</ul>
+<blockquote>
+<p>接下来看<a href="https://github.com/brettwooldridge/HikariCP">HikariCP</a>是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用<code>driver.connect(jdbcUrl, driverProperties);</code>,而DriverManager获取Connection也是调用<code>driver.connect(url, info);</code>。具体的连接由数据库的驱动实现。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/03/Datasource和DriverManager获取Connection的区别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/02/java堆的新生代和老年代/" itemprop="url">
                   java堆-新生代和老年代
                 </a>
@@ -1074,98 +1171,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/03/el表达式失效/" itemprop="url">
-                  el表达式失效
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-03T17:34:46+08:00" content="2016-09-03">
-              2016-09-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天在用IDEA进行springmvc项目搭建时,jsp中的el表达式死活不解析.查了相关资料终于找到了原因.<br>idea搭建的maven web项目默认生成的web.xml如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE web-app PUBLIC</span><br><span class="line"> "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"</span><br><span class="line"> "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Archetype Created Web Application<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>在servlet2.4之前,isELIgnored默认值为true.(<code>&lt;%@ page isELIgnored=&quot;true&quot;%&gt;</code> 表示是否禁用EL语言,TRUE表示禁止.FALSE表示不禁,JSP2.0(对应servlet2.4)中默认启用EL语言)</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/03/el表达式失效/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1211,7 +1216,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
