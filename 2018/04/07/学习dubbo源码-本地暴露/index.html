@@ -72,7 +72,7 @@
 <meta property="og:image" content="http://zhangguodong.me/images/local7.png">
 <meta property="og:image" content="http://zhangguodong.me/images/local8.png">
 <meta property="og:image" content="http://zhangguodong.me/images/local9.png">
-<meta property="og:updated_time" content="2018-04-15T06:24:00.250Z">
+<meta property="og:updated_time" content="2018-05-31T14:46:02.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习dubbo源码-本地暴露">
 <meta name="twitter:description" content="本地暴露1  主要目的是获取exporter">
@@ -290,7 +290,12 @@
 </li>
 </ul>
 <p>Javassist中$w、$1含义：<br><img src="/images/local5.png" alt=""><br><a href="https://www.jianshu.com/p/b9b3ff0e1bf8" target="_blank" rel="external">详细含义信息请看这里</a></p>
-<p><img src="/images/local6.png" alt=""><br><img src="/images/local7.png" alt=""><br>5 8个默认过滤器，创建过滤链，对invoker进行相关操作</p>
+<p><img src="/images/local6.png" alt=""><br><img src="/images/local7.png" alt=""></p>
+<h5 id="为什么要包装调用方法"><a href="#为什么要包装调用方法" class="headerlink" title="为什么要包装调用方法?"></a>为什么要包装调用方法?</h5><blockquote>
+<p>远程到提供者只会传给调用方法名称，如果不动态生成包装类，只能使用反射进行调用，反射相比直接调用方法，性能较低。</p>
+</blockquote>
+<p><a href="https://docs.oracle.com/javase/tutorial/reflect/index.html" target="_blank" rel="external">oracle官方反射介绍</a></p>
+<p>5 8个默认过滤器，创建过滤链，对invoker进行相关操作</p>
 <p><img src="/images/local8.png" alt=""><br>6 创建InjvmExporter并放到exporterMap中，不管远程暴露还是本地暴露，都会放到这个Map中。<code>exporterMap.put(key, this)//本地暴露:key=com.alibaba.dubbo.demo.DemoService, this=InjvmExporter</code><br><code>远程暴露: exporterMap.put(key, this)//key=com.alibaba.dubbo.demo.DemoService:20880, this=DubboExporter</code></p>
 <p><img src="/images/local9.png" alt=""><br>7 本地暴露完成</p>
 
@@ -394,7 +399,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -447,7 +452,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地暴露"><span class="nav-number">1.</span> <span class="nav-text">本地暴露</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地暴露"><span class="nav-number">1.</span> <span class="nav-text">本地暴露</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么要包装调用方法"><span class="nav-number">1.0.1.</span> <span class="nav-text">为什么要包装调用方法?</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

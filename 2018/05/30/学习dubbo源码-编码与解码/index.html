@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="dubbo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="客户端消息编码1234567891011121314151617181920212223final class NettyCodecAdapter &amp;#123;       @Sharable    private class InternalEncoder extends OneToOneEncoder &amp;#123;        @Override        protected Objec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习dubbo源码-编码与解码">
+<meta property="og:url" content="http://zhangguodong.me/2018/05/30/学习dubbo源码-编码与解码/index.html">
+<meta property="og:site_name" content="Gude Blog">
+<meta property="og:description" content="客户端消息编码1234567891011121314151617181920212223final class NettyCodecAdapter &amp;#123;       @Sharable    private class InternalEncoder extends OneToOneEncoder &amp;#123;        @Override        protected Objec">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/F732C21C6DF847F7AF350B4C744795E4/1987">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/911006FEBA324747BAD71B8959941E83/2342">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/B803861803C64D84BC5922F1ACF1E5E4/2352">
+<meta property="og:updated_time" content="2018-05-31T14:51:17.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习dubbo源码-编码与解码">
+<meta name="twitter:description" content="客户端消息编码1234567891011121314151617181920212223final class NettyCodecAdapter &amp;#123;       @Sharable    private class InternalEncoder extends OneToOneEncoder &amp;#123;        @Override        protected Objec">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/F732C21C6DF847F7AF350B4C744795E4/1987">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 学习dubbo源码-编码与解码 | Gude Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75359994-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e7e77b632c64e1c6270a20477a9f48ec";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gude Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                学习dubbo源码-编码与解码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-30T21:49:09+08:00" content="2018-05-30">
+              2018-05-30
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="客户端消息编码"><a href="#客户端消息编码" class="headerlink" title="客户端消息编码"></a>客户端消息编码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyCodecAdapter</span> </span>&#123;</span><br><span class="line">       <span class="meta">@Sharable</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalEncoder</span> <span class="keyword">extends</span> <span class="title">OneToOneEncoder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">encode</span><span class="params">(ChannelHandlerContext ctx, Channel ch, Object msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            com.alibaba.dubbo.remoting.buffer.ChannelBuffer buffer =</span><br><span class="line">                    com.alibaba.dubbo.remoting.buffer.ChannelBuffers.dynamicBuffer(<span class="number">1024</span>);</span><br><span class="line">            NettyChannel channel = NettyChannel.getOrAddChannel(ch, url, handler);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">/**</span><br><span class="line">                *-&gt;DubboCountCodec //编码啥都不干 调用下一个编码器</span><br><span class="line">                *--&gt;ExchangeCodec</span><br><span class="line">                *---&gt;DubboCodec</span><br><span class="line">                **/</span></span><br><span class="line">                codec.encode(channel, buffer, msg);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                NettyChannel.removeChannelIfDisconnected(ch);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ChannelBuffers.wrappedBuffer(buffer.toByteBuffer());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/F732C21C6DF847F7AF350B4C744795E4/1987" alt="image"></p>
+<p>dubbo的消息头是一个定长的 16个字节。</p>
+<ul>
+<li>针对Request:</li>
+</ul>
+<ol>
+<li><p>第1-2个字节：固定魔法值：MAGIC = (short) 0xdabb</p>
+</li>
+<li><p>第3个字节： 5位序列化方式 、1位双向(有去有回) 或单向（有去无回）、1位事件标识、1位请求request还是响应response  </p>
+</li>
+<li><p>第4个字节：状态位，request没设置第四个字节 </p>
+</li>
+<li><p>第5-12个字节：请求id,占用8个字节，全局唯一ID，consumer和provider的来回通信标记。</p>
+</li>
+<li><p>第13-16个字节：消息体的长度占用4字节，消息头+请求数据的长度。\</p>
+<a id="more"></a>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExchangeCodec</span> <span class="keyword">extends</span> <span class="title">TelnetCodec</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">short</span> MAGIC = (<span class="keyword">short</span>) <span class="number">0xdabb</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span> MAGIC_HIGH = Bytes.short2bytes(MAGIC)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span> MAGIC_LOW = Bytes.short2bytes(MAGIC)[<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// message flag.</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span> FLAG_REQUEST = (<span class="keyword">byte</span>) <span class="number">0x80</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span> FLAG_TWOWAY = (<span class="keyword">byte</span>) <span class="number">0x40</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span> FLAG_EVENT = (<span class="keyword">byte</span>) <span class="number">0x20</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SERIALIZATION_MASK = <span class="number">0x1f</span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">encode</span><span class="params">(Channel channel, ChannelBuffer buffer, Object msg)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//Request请求编码</span></span><br><span class="line">        <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> Request) &#123;</span><br><span class="line">            <span class="comment">//channel=NettyChannel buffer=com.alibaba.dubbo.remoting.buffer.ChannelBuffers.dynamicBuffer(1024)动态分配的,此时没内容. msg发送的请求对象Request</span></span><br><span class="line">            encodeRequest(channel, buffer, (Request) msg);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//Response返回结果编码    </span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> Response) &#123;</span><br><span class="line">            encodeResponse(channel, buffer, (Response) msg);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//telnet</span></span><br><span class="line">            <span class="keyword">super</span>.encode(channel, buffer, msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">encodeRequest</span><span class="params">(Channel channel, ChannelBuffer buffer, Request req)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//channel持有URL对象,根据url获取序列化方式 不指定 默认hessian2</span></span><br><span class="line">        Serialization serialization = getSerialization(channel);</span><br><span class="line">        <span class="comment">// header. 开辟消息头大小</span></span><br><span class="line">        <span class="keyword">byte</span>[] header = <span class="keyword">new</span> <span class="keyword">byte</span>[HEADER_LENGTH];</span><br><span class="line">        <span class="comment">// 协议头 魔法值(short) 0xdabb</span></span><br><span class="line">        Bytes.short2bytes(MAGIC, header);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// set request and serialization flag.  hessian2：getContentTypeId=2</span></span><br><span class="line">        header[<span class="number">2</span>] = (<span class="keyword">byte</span>) (FLAG_REQUEST | serialization.getContentTypeId());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (req.isTwoWay()) header[<span class="number">2</span>] |= FLAG_TWOWAY;</span><br><span class="line">        <span class="keyword">if</span> (req.isEvent()) header[<span class="number">2</span>] |= FLAG_EVENT;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// set request id.</span></span><br><span class="line">        Bytes.long2bytes(req.getId(), header, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// encode request data.</span></span><br><span class="line">        <span class="keyword">int</span> savedWriteIndex = buffer.writerIndex();</span><br><span class="line">        buffer.writerIndex(savedWriteIndex + HEADER_LENGTH);</span><br><span class="line">        ChannelBufferOutputStream bos = <span class="keyword">new</span> ChannelBufferOutputStream(buffer);</span><br><span class="line">        <span class="comment">//out=Hessian2ObjectOutput</span></span><br><span class="line">        ObjectOutput out = serialization.serialize(channel.getUrl(), bos);</span><br><span class="line">        <span class="keyword">if</span> (req.isEvent()) &#123;</span><br><span class="line">            <span class="comment">//事件消息</span></span><br><span class="line">            encodeEventData(channel, out, req.getData());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//普通消息</span></span><br><span class="line">            <span class="comment">//-&gt;DubboCodec  消息体写到buffer</span></span><br><span class="line">            encodeRequestData(channel, out, req.getData());</span><br><span class="line">        &#125;</span><br><span class="line">        out.flushBuffer();</span><br><span class="line">        bos.flush();</span><br><span class="line">        bos.close();</span><br><span class="line">        <span class="keyword">int</span> len = bos.writtenBytes();</span><br><span class="line">        <span class="comment">//检测消息大小 默认为8m</span></span><br><span class="line">        checkPayload(channel, len);</span><br><span class="line">        <span class="comment">//设置消息长度</span></span><br><span class="line">        Bytes.int2bytes(len, header, <span class="number">12</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// write</span></span><br><span class="line">        buffer.writerIndex(savedWriteIndex);</span><br><span class="line">        <span class="comment">// 消息头写到buffer</span></span><br><span class="line">        buffer.writeBytes(header); </span><br><span class="line">        <span class="comment">//设置写指针</span></span><br><span class="line">        buffer.writerIndex(savedWriteIndex + HEADER_LENGTH + len);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboCodec</span> <span class="keyword">extends</span> <span class="title">ExchangeCodec</span> <span class="keyword">implements</span> <span class="title">Codec2</span></span>&#123;</span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">encodeRequestData</span><span class="params">(Channel channel, ObjectOutput out, Object data)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        RpcInvocation inv = (RpcInvocation) data;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//dubbo版本 2.0.0</span></span><br><span class="line">        out.writeUTF(inv.getAttachment(Constants.DUBBO_VERSION_KEY, DUBBO_VERSION));</span><br><span class="line">        <span class="comment">//接口 com.alibaba.dubbo.demo.DemoService</span></span><br><span class="line">        out.writeUTF(inv.getAttachment(Constants.PATH_KEY));</span><br><span class="line">        <span class="comment">//接口版本 默认:0.0.0</span></span><br><span class="line">        out.writeUTF(inv.getAttachment(Constants.VERSION_KEY));</span><br><span class="line">        <span class="comment">//方法名</span></span><br><span class="line">        out.writeUTF(inv.getMethodName());</span><br><span class="line">        <span class="comment">//方法参数类型 ILjava/lang/String;</span></span><br><span class="line">        out.writeUTF(ReflectUtils.getDesc(inv.getParameterTypes()));</span><br><span class="line">        <span class="comment">//方法参数</span></span><br><span class="line">        Object[] args = inv.getArguments();</span><br><span class="line">        <span class="keyword">if</span> (args != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">                out.writeObject(encodeInvocationArgument(channel, inv, i));</span><br><span class="line">            &#125;</span><br><span class="line">        out.writeObject(inv.getAttachments());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="服务端消息解码"><a href="#服务端消息解码" class="headerlink" title="服务端消息解码"></a>服务端消息解码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalDecoder</span> <span class="keyword">extends</span> <span class="title">SimpleChannelUpstreamHandler</span> </span>&#123;</span><br><span class="line">        <span class="comment">//用于保存不完整的包</span></span><br><span class="line">        <span class="keyword">private</span> com.alibaba.dubbo.remoting.buffer.ChannelBuffer buffer =</span><br><span class="line">                com.alibaba.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">messageReceived</span><span class="params">(ChannelHandlerContext ctx, MessageEvent event)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Object o = event.getMessage();</span><br><span class="line">            <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> ChannelBuffer)) &#123;</span><br><span class="line">                ctx.sendUpstream(event);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ChannelBuffer input = (ChannelBuffer) o;</span><br><span class="line">            <span class="keyword">int</span> readable = input.readableBytes();</span><br><span class="line">            <span class="keyword">if</span> (readable &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            com.alibaba.dubbo.remoting.buffer.ChannelBuffer message;</span><br><span class="line">            <span class="comment">//之前有存在报文和现在新来的报文拼接，然后进行拆包</span></span><br><span class="line">            <span class="keyword">if</span> (buffer.readable()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (buffer <span class="keyword">instanceof</span> DynamicChannelBuffer) &#123;</span><br><span class="line">                    buffer.writeBytes(input.toByteBuffer());</span><br><span class="line">                    message = buffer;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">int</span> size = buffer.readableBytes() + input.readableBytes();</span><br><span class="line">                    message = com.alibaba.dubbo.remoting.buffer.ChannelBuffers.dynamicBuffer(</span><br><span class="line">                            size &gt; bufferSize ? size : bufferSize);</span><br><span class="line">                    message.writeBytes(buffer, buffer.readableBytes());</span><br><span class="line">                    message.writeBytes(input.toByteBuffer());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//netty的ChannelBuffer转为dubbo自定义的ChannelBuffer 然后进行拆包 tcp无界存在粘包的问题</span></span><br><span class="line">                message = com.alibaba.dubbo.remoting.buffer.ChannelBuffers.wrappedBuffer(</span><br><span class="line">                        input.toByteBuffer());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            NettyChannel channel = NettyChannel.getOrAddChannel(ctx.getChannel(), url, handler);</span><br><span class="line">            Object msg;</span><br><span class="line">            <span class="keyword">int</span> saveReaderIndex;</span><br><span class="line">        </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// decode object.</span></span><br><span class="line">                do &#123;</span><br><span class="line">                    saveReaderIndex = message.readerIndex();</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        <span class="comment">//解码 </span></span><br><span class="line">                        <span class="comment">/**</span><br><span class="line">                        *-&gt;DubboCountCodec 拆包</span><br><span class="line">                        **/</span></span><br><span class="line">                        msg = codec.decode(channel, message); <span class="comment">//1</span></span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                        <span class="comment">//解码异常 丢掉报文</span></span><br><span class="line">                        buffer = com.alibaba.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;</span><br><span class="line">                        <span class="keyword">throw</span> e;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//传给DubboCountCodec 是一个不完整的包 直接结束拆包循环</span></span><br><span class="line">                    <span class="keyword">if</span> (msg == Codec2.DecodeResult.NEED_MORE_INPUT) &#123;</span><br><span class="line">                        <span class="comment">//2</span></span><br><span class="line">                        message.readerIndex(saveReaderIndex);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//相当于和开始解码的读指针一样，没有移动。但是返回结果又不是Codec2.DecodeResult.NEED_MORE_INPUT，抛出异常，不合法</span></span><br><span class="line">                        <span class="keyword">if</span> (saveReaderIndex == message.readerIndex()) &#123;</span><br><span class="line">                            buffer = com.alibaba.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Decode without read data."</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span> (msg != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            <span class="comment">//msg为MultiMessage(保存了Request/Response集合) 或者Request/Response，解码完成后交给netty channel继续处理</span></span><br><span class="line">                            <span class="comment">//3</span></span><br><span class="line">                            Channels.fireMessageReceived(ctx, msg, event.getRemoteAddress());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//判断是否可读 ，如果可读 继续解码 什么时候message.readable() 会返回true： message是由多个完整包+一个不完整包组成 </span></span><br><span class="line">                &#125; <span class="keyword">while</span> (message.readable());<span class="comment">//4</span></span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            </span><br><span class="line">        </span><br><span class="line">                <span class="comment">//这种情况主要是多个完整包+1个不完整包 或者1个不完整包</span></span><br><span class="line">                <span class="keyword">if</span> (message.readable()) &#123;</span><br><span class="line">                    <span class="comment">//5</span></span><br><span class="line">                    message.discardReadBytes(); <span class="comment">//将已经读取的抛弃，还未读取的移到从0开始，读指针设为0</span></span><br><span class="line">                    buffer = message;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//现有buffer已经解码完成 新创建一个buffer 读写指针都为0</span></span><br><span class="line">                    <span class="comment">//6</span></span><br><span class="line">                    buffer = com.alibaba.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;</span><br><span class="line">                &#125;</span><br><span class="line">                NettyChannel.removeChannelIfDisconnected(ctx.getChannel());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exceptionCaught</span><span class="params">(ChannelHandlerContext ctx, ExceptionEvent e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            ctx.sendUpstream(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面解码顺序</p>
+<ul>
+<li>情况1：多个或者单个完整包 1-&gt;3-&gt;4-&gt;6   msg=MultiMessage (多个)、Request/Response(单个)</li>
+<li>情况2：多个或者单个完整包+一个不完整包 1-&gt;3-&gt;4-&gt;1-&gt;2-5   msg=MultiMessage (多个)、Request/Response(单个)和 Codec2.DecodeResult.NEED_MORE_INPUT</li>
+<li>情况3：一个不完整包 1-&gt;2-&gt;5   msg= Codec2.DecodeResult.NEED_MORE_INPUT</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboCountCodec</span> <span class="keyword">implements</span> <span class="title">Codec2</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">decode</span><span class="params">(Channel channel, ChannelBuffer buffer)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//读指针 </span></span><br><span class="line">        <span class="keyword">int</span> save = buffer.readerIndex();</span><br><span class="line">        MultiMessage result = MultiMessage.create();</span><br><span class="line">        <span class="comment">//拆包逻辑</span></span><br><span class="line">        <span class="comment">//可能多个包粘连一起 对多个包循环解码  ，然后放到MultiMessage result</span></span><br><span class="line">        do &#123;</span><br><span class="line">            <span class="comment">//codec =DubboCodec</span></span><br><span class="line">            <span class="comment">/**</span><br><span class="line">            *-&gt;ExchangeCodec</span><br><span class="line">            *--&gt;DubboCodec</span><br><span class="line">            */</span></span><br><span class="line">            Object obj = codec.decode(channel, buffer);</span><br><span class="line">            <span class="comment">//不是完整包 读指针还原到调用codec.decode(channel, buffer);的位置</span></span><br><span class="line">            <span class="keyword">if</span> (Codec2.DecodeResult.NEED_MORE_INPUT == obj) &#123;</span><br><span class="line">                buffer.readerIndex(save);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//正常解码 返回的obj=Request  Request的mData域存储了RpcInvocation(此时为DecodeableRpcInvocation)</span></span><br><span class="line">                result.addMessage(obj);</span><br><span class="line">                <span class="comment">//RpcInvocation设置此次读取的长度到attachments-&gt;key:input val:长度</span></span><br><span class="line">                logMessageLength(obj, buffer.readerIndex() - save);</span><br><span class="line">                <span class="comment">//更新读指针</span></span><br><span class="line">                save = buffer.readerIndex();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">while</span> (<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//此次buffer 没有解码到一个完整的Request,包不完整</span></span><br><span class="line">        <span class="keyword">if</span> (result.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> Codec2.DecodeResult.NEED_MORE_INPUT;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (result.size() == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> result.get(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExchangeCodec</span> <span class="keyword">extends</span> <span class="title">TelnetCodec</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> Object <span class="title">decode</span><span class="params">(Channel channel, ChannelBuffer buffer)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      <span class="comment">//可读字节readable= this.writerIndex - this.readerIndex</span></span><br><span class="line">        <span class="keyword">int</span> readable = buffer.readableBytes();</span><br><span class="line">        <span class="comment">//开辟当前头数组大小Math.min(readable, HEADER_LENGTH)</span></span><br><span class="line">        <span class="keyword">byte</span>[] header = <span class="keyword">new</span> <span class="keyword">byte</span>[Math.min(readable, HEADER_LENGTH)];</span><br><span class="line">        buffer.readBytes(header);</span><br><span class="line">        <span class="keyword">return</span> decode(channel, buffer, readable, header);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">decode</span><span class="params">(Channel channel, ChannelBuffer buffer, <span class="keyword">int</span> readable, <span class="keyword">byte</span>[] header)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// check magic number.</span></span><br><span class="line">        <span class="keyword">if</span> (readable &gt; <span class="number">0</span> &amp;&amp; header[<span class="number">0</span>] != MAGIC_HIGH</span><br><span class="line">                || readable &gt; <span class="number">1</span> &amp;&amp; header[<span class="number">1</span>] != MAGIC_LOW) &#123;</span><br><span class="line">            <span class="keyword">int</span> length = header.length;</span><br><span class="line">            <span class="keyword">if</span> (header.length &lt; readable) &#123;</span><br><span class="line">                header = Bytes.copyOf(header, readable);</span><br><span class="line">                buffer.readBytes(header, length, readable - length);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; header.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (header[i] == MAGIC_HIGH &amp;&amp; header[i + <span class="number">1</span>] == MAGIC_LOW) &#123;</span><br><span class="line">                    buffer.readerIndex(buffer.readerIndex() - header.length + i);</span><br><span class="line">                    header = Bytes.copyOf(header, i);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//TelnetCodec</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.decode(channel, buffer, readable, header);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// check length. 可读字节小于包头长 不是完整包 直接返回 需要继续拼接下一个包</span></span><br><span class="line">        <span class="keyword">if</span> (readable &lt; HEADER_LENGTH) &#123;</span><br><span class="line">            <span class="keyword">return</span> DecodeResult.NEED_MORE_INPUT;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get data length. 包长度</span></span><br><span class="line">        <span class="keyword">int</span> len = Bytes.bytes2int(header, <span class="number">12</span>);</span><br><span class="line">        <span class="comment">//检验包大小 默认8m</span></span><br><span class="line">        checkPayload(channel, len);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> tt = len + HEADER_LENGTH;</span><br><span class="line">        <span class="comment">//包长不足继续下一个包</span></span><br><span class="line">        <span class="keyword">if</span> (readable &lt; tt) &#123;</span><br><span class="line">            <span class="keyword">return</span> DecodeResult.NEED_MORE_INPUT;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// limit input stream.</span></span><br><span class="line">        ChannelBufferInputStream is = <span class="keyword">new</span> ChannelBufferInputStream(buffer, len);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="comment">//-&gt;DubboCodec.decodeBody</span></span><br><span class="line">            <span class="keyword">return</span> decodeBody(channel, is, header);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//buffer是否已经读完 </span></span><br><span class="line">            <span class="keyword">if</span> (is.available() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (logger.isWarnEnabled()) &#123;</span><br><span class="line">                        logger.warn(<span class="string">"Skip input stream "</span> + is.available());</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//未读完直接跳到末尾</span></span><br><span class="line">                    StreamUtils.skipUnusedStream(is);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    logger.warn(e.getMessage(), e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboCodec</span> <span class="keyword">extends</span> <span class="title">ExchangeCodec</span> <span class="keyword">implements</span> <span class="title">Codec2</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">protected</span> Object <span class="title">decodeBody</span><span class="params">(Channel channel, InputStream is, <span class="keyword">byte</span>[] header)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span> flag = header[<span class="number">2</span>], proto = (<span class="keyword">byte</span>) (flag &amp; SERIALIZATION_MASK);</span><br><span class="line">        Serialization s = CodecSupport.getSerialization(channel.getUrl(), proto);</span><br><span class="line">        <span class="comment">// get request id.</span></span><br><span class="line">        <span class="keyword">long</span> id = Bytes.bytes2long(header, <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">if</span> ((flag &amp; FLAG_REQUEST) == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// decode response.</span></span><br><span class="line">            Response res = <span class="keyword">new</span> Response(id);</span><br><span class="line">            <span class="keyword">if</span> ((flag &amp; FLAG_EVENT) != <span class="number">0</span>) &#123;</span><br><span class="line">                res.setEvent(Response.HEARTBEAT_EVENT);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// get status.</span></span><br><span class="line">            <span class="keyword">byte</span> status = header[<span class="number">3</span>];</span><br><span class="line">            res.setStatus(status);</span><br><span class="line">            <span class="keyword">if</span> (status == Response.OK) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Object data;</span><br><span class="line">                    <span class="comment">//心跳</span></span><br><span class="line">                    <span class="keyword">if</span> (res.isHeartbeat()) &#123;</span><br><span class="line">                        data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">//事件    </span></span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (res.isEvent()) &#123;</span><br><span class="line">                        data = decodeEventData(channel, deserialize(s, channel.getUrl(), is));</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">//Request</span></span><br><span class="line">                        DecodeableRpcResult result;</span><br><span class="line">                        <span class="keyword">if</span> (channel.getUrl().getParameter(</span><br><span class="line">                                Constants.DECODE_IN_IO_THREAD_KEY,</span><br><span class="line">                                Constants.DEFAULT_DECODE_IN_IO_THREAD)) &#123;</span><br><span class="line">                            result = <span class="keyword">new</span> DecodeableRpcResult(channel, res, is,</span><br><span class="line">                                    (Invocation) getRequestData(id), proto);</span><br><span class="line">                            result.decode();</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            result = <span class="keyword">new</span> DecodeableRpcResult(channel, res,</span><br><span class="line">                                    <span class="keyword">new</span> UnsafeByteArrayInputStream(readMessageData(is)),</span><br><span class="line">                                    (Invocation) getRequestData(id), proto);</span><br><span class="line">                        &#125;</span><br><span class="line">                        data = result;</span><br><span class="line">                    &#125;</span><br><span class="line">                    res.setResult(data);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (log.isWarnEnabled()) &#123;</span><br><span class="line">                        log.warn(<span class="string">"Decode response failed: "</span> + t.getMessage(), t);</span><br><span class="line">                    &#125;</span><br><span class="line">                    res.setStatus(Response.CLIENT_ERROR);</span><br><span class="line">                    res.setErrorMessage(StringUtils.toString(t));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.setErrorMessage(deserialize(s, channel.getUrl(), is).readUTF());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// decode request. 复原发送的Request</span></span><br><span class="line">            Request req = <span class="keyword">new</span> Request(id);</span><br><span class="line">            req.setVersion(<span class="string">"2.0.0"</span>);</span><br><span class="line">            req.setTwoWay((flag &amp; FLAG_TWOWAY) != <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> ((flag &amp; FLAG_EVENT) != <span class="number">0</span>) &#123;</span><br><span class="line">                req.setEvent(Request.HEARTBEAT_EVENT);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Object data;</span><br><span class="line">                <span class="keyword">if</span> (req.isHeartbeat()) &#123;</span><br><span class="line">                    data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (req.isEvent()) &#123;</span><br><span class="line">                    data = decodeEventData(channel, deserialize(s, channel.getUrl(), is));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    DecodeableRpcInvocation inv;</span><br><span class="line">                    <span class="keyword">if</span> (channel.getUrl().getParameter(</span><br><span class="line">                            Constants.DECODE_IN_IO_THREAD_KEY,</span><br><span class="line">                            Constants.DEFAULT_DECODE_IN_IO_THREAD)) &#123;</span><br><span class="line">                        inv = <span class="keyword">new</span> DecodeableRpcInvocation(channel, req, is, proto);</span><br><span class="line">                        <span class="comment">//真正解码 DecodeableRpcInvocation</span></span><br><span class="line">                        inv.decode();</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        inv = <span class="keyword">new</span> DecodeableRpcInvocation(channel, req,</span><br><span class="line">                                <span class="keyword">new</span> UnsafeByteArrayInputStream(readMessageData(is)), proto);</span><br><span class="line">                    &#125;</span><br><span class="line">                    data = inv;</span><br><span class="line">                &#125;</span><br><span class="line">                req.setData(data);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                <span class="keyword">if</span> (log.isWarnEnabled()) &#123;</span><br><span class="line">                    log.warn(<span class="string">"Decode request failed: "</span> + t.getMessage(), t);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// bad request</span></span><br><span class="line">                req.setBroken(<span class="keyword">true</span>);</span><br><span class="line">                req.setData(t);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> req;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DecodeableRpcInvocation</span> <span class="keyword">extends</span> <span class="title">RpcInvocation</span> <span class="keyword">implements</span> <span class="title">Codec</span>, <span class="title">Decodeable</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">decode</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!hasDecoded &amp;&amp; channel != <span class="keyword">null</span> &amp;&amp; inputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                decode(channel, inputStream);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">                <span class="keyword">if</span> (log.isWarnEnabled()) &#123;</span><br><span class="line">                    log.warn(<span class="string">"Decode rpc invocation failed: "</span> + e.getMessage(), e);</span><br><span class="line">                &#125;</span><br><span class="line">                request.setBroken(<span class="keyword">true</span>);</span><br><span class="line">                request.setData(e);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                hasDecoded = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> Object <span class="title">decode</span><span class="params">(Channel channel, InputStream input)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ObjectInput in = CodecSupport.getSerialization(channel.getUrl(), serializationType)</span><br><span class="line">                .deserialize(channel.getUrl(), input);</span><br><span class="line"></span><br><span class="line">        setAttachment(Constants.DUBBO_VERSION_KEY, in.readUTF());</span><br><span class="line">        setAttachment(Constants.PATH_KEY, in.readUTF());</span><br><span class="line">        setAttachment(Constants.VERSION_KEY, in.readUTF());</span><br><span class="line"></span><br><span class="line">        setMethodName(in.readUTF());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Object[] args;</span><br><span class="line">            Class&lt;?&gt;[] pts;</span><br><span class="line">            String desc = in.readUTF();</span><br><span class="line">            <span class="keyword">if</span> (desc.length() == <span class="number">0</span>) &#123;</span><br><span class="line">                pts = DubboCodec.EMPTY_CLASS_ARRAY;</span><br><span class="line">                args = DubboCodec.EMPTY_OBJECT_ARRAY;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pts = ReflectUtils.desc2classArray(desc);</span><br><span class="line">                args = <span class="keyword">new</span> Object[pts.length];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        args[i] = in.readObject(pts[i]);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (log.isWarnEnabled()) &#123;</span><br><span class="line">                            log.warn(<span class="string">"Decode argument failed: "</span> + e.getMessage(), e);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            setParameterTypes(pts);</span><br><span class="line"></span><br><span class="line">            Map&lt;String, String&gt; map = (Map&lt;String, String&gt;) in.readObject(Map.class);</span><br><span class="line">            <span class="keyword">if</span> (map != <span class="keyword">null</span> &amp;&amp; map.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                Map&lt;String, String&gt; attachment = getAttachments();</span><br><span class="line">                <span class="keyword">if</span> (attachment == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    attachment = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">                &#125;</span><br><span class="line">                attachment.putAll(map);</span><br><span class="line">                setAttachments(attachment);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//decode argument ,may be callback</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">                args[i] = decodeInvocationArgument(channel, <span class="keyword">this</span>, pts, i, args[i]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            setArguments(args);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IOException(StringUtils.toString(<span class="string">"Read invocation data failed."</span>, e));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="服务端解码完成后"><a href="#服务端解码完成后" class="headerlink" title="服务端解码完成后"></a>服务端解码完成后</h3><p>NettyHandler-&gt;<br>@Sharable<br>public class NettyHandler extends SimpleChannelHandler {<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">messageReceived</span><span class="params">(ChannelHandlerContext ctx, MessageEvent e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        NettyChannel channel = NettyChannel.getOrAddChannel(ctx.getChannel(), url, handler);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//handler=NettyServer  e.getMessage()=MultiMessage(保存了Request/Response集合) 或者Request/Response</span></span><br><span class="line">            handler.received(channel, e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            NettyChannel.removeChannelIfDisconnected(ctx.getChannel());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractPeer</span> <span class="keyword">implements</span> <span class="title">Endpoint</span>, <span class="title">ChannelHandler</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel ch, Object msg)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (closed) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//handler=MultiMessageHandler</span></span><br><span class="line">        handler.received(ch, msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiMessageHandler</span> <span class="keyword">extends</span> <span class="title">AbstractChannelHandlerDelegate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MultiMessageHandler</span><span class="params">(ChannelHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(handler);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        <span class="comment">//message为MultiMessage(一次性解码有多个包完整包拆包后的结果) 遍历继续处理</span></span><br><span class="line">        <span class="keyword">if</span> (message <span class="keyword">instanceof</span> MultiMessage) &#123;</span><br><span class="line">            MultiMessage list = (MultiMessage) message;</span><br><span class="line">            <span class="keyword">for</span> (Object obj : list) &#123;</span><br><span class="line">                <span class="comment">//HeartbeatHandler</span></span><br><span class="line">                handler.received(channel, obj);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="comment">//HeartbeatHandler</span></span><br><span class="line">            handler.received(channel, message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartbeatHandler</span> <span class="keyword">extends</span> <span class="title">AbstractChannelHandlerDelegate</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        setReadTimestamp(channel);</span><br><span class="line">        <span class="comment">//心跳 请求 回应请求</span></span><br><span class="line">        <span class="keyword">if</span> (isHeartbeatRequest(message)) &#123;</span><br><span class="line">            Request req = (Request) message;</span><br><span class="line">            <span class="keyword">if</span> (req.isTwoWay()) &#123;</span><br><span class="line">                Response res = <span class="keyword">new</span> Response(req.getId(), req.getVersion());</span><br><span class="line">                res.setEvent(Response.HEARTBEAT_EVENT);</span><br><span class="line">                channel.send(res);</span><br><span class="line">                <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">                    <span class="keyword">int</span> heartbeat = channel.getUrl().getParameter(Constants.HEARTBEAT_KEY, <span class="number">0</span>);</span><br><span class="line">                    <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">                        logger.debug(<span class="string">"Received heartbeat from remote channel "</span> + channel.getRemoteAddress()</span><br><span class="line">                                + <span class="string">", cause: The channel has no data-transmission exceeds a heartbeat period"</span></span><br><span class="line">                                + (heartbeat &gt; <span class="number">0</span> ? <span class="string">": "</span> + heartbeat + <span class="string">"ms"</span> : <span class="string">""</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//回复心跳 不做处理</span></span><br><span class="line">        <span class="keyword">if</span> (isHeartbeatResponse(message)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">                logger.debug(</span><br><span class="line">                        <span class="keyword">new</span> StringBuilder(<span class="number">32</span>)</span><br><span class="line">                                .append(<span class="string">"Receive heartbeat response in thread "</span>)</span><br><span class="line">                                .append(Thread.currentThread().getName())</span><br><span class="line">                                .toString());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//不是心跳继续下一个处理器 AllChannelHandler</span></span><br><span class="line">        handler.received(channel, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AllChannelHandler</span> <span class="keyword">extends</span> <span class="title">WrappedChannelHandler</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        ExecutorService cexecutor = getExecutorService();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//将请求放入线程池处理</span></span><br><span class="line">            cexecutor.execute(<span class="keyword">new</span> ChannelEventRunnable(channel, handler, ChannelState.RECEIVED, message));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            <span class="comment">//TODO 临时解决线程池满后异常信息无法发送到对端的问题。待重构</span></span><br><span class="line">            <span class="comment">//fix 线程池满了拒绝调用不返回，导致消费者一直等待超时</span></span><br><span class="line">        	<span class="keyword">if</span>(message <span class="keyword">instanceof</span> Request &amp;&amp; t <span class="keyword">instanceof</span> RejectedExecutionException)&#123;</span><br><span class="line">        		Request request = (Request)message;</span><br><span class="line">        		<span class="keyword">if</span>(request.isTwoWay())&#123;</span><br><span class="line">        			String msg = <span class="string">"Server side("</span> + url.getIp() + <span class="string">","</span> + url.getPort() + <span class="string">") threadpool is exhausted ,detail msg:"</span> + t.getMessage();</span><br><span class="line">        			Response response = <span class="keyword">new</span> Response(request.getId(), request.getVersion());</span><br><span class="line">        			response.setStatus(Response.SERVER_THREADPOOL_EXHAUSTED_ERROR);</span><br><span class="line">        			response.setErrorMessage(msg);</span><br><span class="line">        			channel.send(response);</span><br><span class="line">        			<span class="keyword">return</span>;</span><br><span class="line">        		&#125;</span><br><span class="line">        	&#125;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ExecutionException(message, channel, getClass() + <span class="string">" error when process received event ."</span>, t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下面主要是多种请求事件进行处理,dubbo用它对多种不同通讯协议归一处理<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChannelEventRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">switch</span> (state) &#123;</span><br><span class="line">                <span class="keyword">case</span> CONNECTED:</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        handler.connected(channel);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        logger.warn(<span class="string">"ChannelEventRunnable handle "</span> + state + <span class="string">" operation error, channel is "</span> + channel, e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> DISCONNECTED:</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        handler.disconnected(channel);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        logger.warn(<span class="string">"ChannelEventRunnable handle "</span> + state + <span class="string">" operation error, channel is "</span> + channel, e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> SENT:</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        handler.sent(channel, message);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        logger.warn(<span class="string">"ChannelEventRunnable handle "</span> + state + <span class="string">" operation error, channel is "</span> + channel</span><br><span class="line">                                + <span class="string">", message is "</span> + message, e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="comment">//收到普通请求处理    </span></span><br><span class="line">                <span class="keyword">case</span> RECEIVED:</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        <span class="comment">//handler=DecodeHandler</span></span><br><span class="line">                        handler.received(channel, message);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        logger.warn(<span class="string">"ChannelEventRunnable handle "</span> + state + <span class="string">" operation error, channel is "</span> + channel</span><br><span class="line">                                + <span class="string">", message is "</span> + message, e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> CAUGHT:</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        handler.caught(channel, exception);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        logger.warn(<span class="string">"ChannelEventRunnable handle "</span> + state + <span class="string">" operation error, channel is "</span> + channel</span><br><span class="line">                                + <span class="string">", message is: "</span> + message + <span class="string">", exception is "</span> + exception, e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    logger.warn(<span class="string">"unknown state: "</span> + state + <span class="string">", message is "</span> + message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DecodeHandler</span> <span class="keyword">extends</span> <span class="title">AbstractChannelHandlerDelegate</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Decodeable) &#123;</span><br><span class="line">            decode(message);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Request) &#123;</span><br><span class="line">            <span class="comment">//进行一次判断是否已经解码 未解码的情况进行解码 感觉冗余了 在DubboCodec已经解码过了</span></span><br><span class="line">            <span class="comment">//((Request) message).getData()=RpcInvocation</span></span><br><span class="line">            decode(((Request) message).getData());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Response) &#123;</span><br><span class="line">            decode(((Response) message).getResult());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//HeaderExchangeHandler</span></span><br><span class="line">        handler.received(channel, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeaderExchangeHandler</span> <span class="keyword">implements</span> <span class="title">ChannelHandlerDelegate</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        channel.setAttribute(KEY_READ_TIMESTAMP, System.currentTimeMillis());</span><br><span class="line">        ExchangeChannel exchangeChannel = HeaderExchangeChannel.getOrAddChannel(channel);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Request) &#123;</span><br><span class="line">                <span class="comment">// handle request.</span></span><br><span class="line">                Request request = (Request) message;</span><br><span class="line">                <span class="keyword">if</span> (request.isEvent()) &#123;</span><br><span class="line">                    handlerEvent(channel, request);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//判断是否双向 需要回复消息  handler=DubboProtocol.requestHandler</span></span><br><span class="line">                    <span class="keyword">if</span> (request.isTwoWay()) &#123;</span><br><span class="line">                        Response response = handleRequest(exchangeChannel, request);</span><br><span class="line">                        channel.send(response);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        handler.received(exchangeChannel, request.getData());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Response) &#123;</span><br><span class="line">                handleResponse(channel, (Response) message);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (message <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                <span class="keyword">if</span> (isClientSide(channel)) &#123;</span><br><span class="line">                    Exception e = <span class="keyword">new</span> Exception(<span class="string">"Dubbo client can not supported string message: "</span> + message + <span class="string">" in channel: "</span> + channel + <span class="string">", url: "</span> + channel.getUrl());</span><br><span class="line">                    logger.error(e.getMessage(), e);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    String echo = handler.telnet(channel, (String) message);</span><br><span class="line">                    <span class="keyword">if</span> (echo != <span class="keyword">null</span> &amp;&amp; echo.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        channel.send(echo);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                handler.received(exchangeChannel, message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            HeaderExchangeChannel.removeChannelIfDisconnected(channel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Response <span class="title">handleRequest</span><span class="params">(ExchangeChannel channel, Request req)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">        Response res = <span class="keyword">new</span> Response(req.getId(), req.getVersion());</span><br><span class="line">        <span class="keyword">if</span> (req.isBroken()) &#123;</span><br><span class="line">            Object data = req.getData();</span><br><span class="line"></span><br><span class="line">            String msg;</span><br><span class="line">            <span class="keyword">if</span> (data == <span class="keyword">null</span>) msg = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (data <span class="keyword">instanceof</span> Throwable) msg = StringUtils.toString((Throwable) data);</span><br><span class="line">            <span class="keyword">else</span> msg = data.toString();</span><br><span class="line">            res.setErrorMessage(<span class="string">"Fail to decode request due to: "</span> + msg);</span><br><span class="line">            res.setStatus(Response.BAD_REQUEST);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// find handler by message class.</span></span><br><span class="line">        Object msg = req.getData();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//发布的ref bean调用</span></span><br><span class="line">            <span class="comment">// handle data.  DubboProtocol.requestHandler.reply </span></span><br><span class="line">            Object result = handler.reply(channel, msg);</span><br><span class="line">            res.setStatus(Response.OK);</span><br><span class="line">            res.setResult(result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            res.setStatus(Response.SERVICE_ERROR);</span><br><span class="line">            res.setErrorMessage(StringUtils.toString(e));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboProtocol</span> <span class="keyword">extends</span> <span class="title">AbstractProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">//在AbstractProtocol里面 protected 子类可以访问</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> Map&lt;String, Exporter&lt;?&gt;&gt; exporterMap = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Exporter&lt;?&gt;&gt;();</span><br><span class="line">    </span><br><span class="line">     <span class="keyword">private</span> ExchangeHandler requestHandler = <span class="keyword">new</span> ExchangeHandlerAdapter() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">reply</span><span class="params">(ExchangeChannel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Invocation) &#123;</span><br><span class="line">                Invocation inv = (Invocation) message;</span><br><span class="line">                <span class="comment">//获取ref bean代理后的Invoker 从缓存exporterMap中获取 发布的所有接口到保存在exporterMap中</span></span><br><span class="line">                Invoker&lt;?&gt; invoker = getInvoker(channel, inv);</span><br><span class="line">                <span class="comment">//如果是callback 需要处理高版本调用低版本的问题</span></span><br><span class="line">                <span class="keyword">if</span> (Boolean.TRUE.toString().equals(inv.getAttachments().get(IS_CALLBACK_SERVICE_INVOKE))) &#123;</span><br><span class="line">                    String methodsStr = invoker.getUrl().getParameters().get(<span class="string">"methods"</span>);</span><br><span class="line">                    <span class="keyword">boolean</span> hasMethod = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">if</span> (methodsStr == <span class="keyword">null</span> || methodsStr.indexOf(<span class="string">","</span>) == -<span class="number">1</span>) &#123;</span><br><span class="line">                        hasMethod = inv.getMethodName().equals(methodsStr);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        String[] methods = methodsStr.split(<span class="string">","</span>);</span><br><span class="line">                        <span class="keyword">for</span> (String method : methods) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (inv.getMethodName().equals(method)) &#123;</span><br><span class="line">                                hasMethod = <span class="keyword">true</span>;</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (!hasMethod) &#123;</span><br><span class="line">                        logger.warn(<span class="keyword">new</span> IllegalStateException(<span class="string">"The methodName "</span> + inv.getMethodName() + <span class="string">" not found in callback service interface ,invoke will be ignored. please update the api interface. url is:"</span> + invoker.getUrl()) + <span class="string">" ,invocation is :"</span> + inv);</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                RpcContext.getContext().setRemoteAddress(channel.getRemoteAddress());</span><br><span class="line">                <span class="keyword">return</span> invoker.invoke(inv);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RemotingException(channel, <span class="string">"Unsupported request: "</span> + message == <span class="keyword">null</span> ? <span class="keyword">null</span> : (message.getClass().getName() + <span class="string">": "</span> + message) + <span class="string">", channel: consumer: "</span> + channel.getRemoteAddress() + <span class="string">" --&gt; provider: "</span> + channel.getLocalAddress());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">received</span><span class="params">(Channel channel, Object message)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (message <span class="keyword">instanceof</span> Invocation) &#123;</span><br><span class="line">                reply((ExchangeChannel) channel, message);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">super</span>.received(channel, message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connected</span><span class="params">(Channel channel)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">            invoke(channel, Constants.ON_CONNECT_KEY);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">disconnected</span><span class="params">(Channel channel)</span> <span class="keyword">throws</span> RemotingException </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">                logger.info(<span class="string">"disconected from "</span> + channel.getRemoteAddress() + <span class="string">",url:"</span> + channel.getUrl());</span><br><span class="line">            &#125;</span><br><span class="line">            invoke(channel, Constants.ON_DISCONNECT_KEY);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">invoke</span><span class="params">(Channel channel, String methodKey)</span> </span>&#123;</span><br><span class="line">            Invocation invocation = createInvocation(channel, channel.getUrl(), methodKey);</span><br><span class="line">            <span class="keyword">if</span> (invocation != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    received(channel, invocation);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                    logger.warn(<span class="string">"Failed to invoke event method "</span> + invocation.getMethodName() + <span class="string">"(), cause: "</span> + t.getMessage(), t);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> Invocation <span class="title">createInvocation</span><span class="params">(Channel channel, URL url, String methodKey)</span> </span>&#123;</span><br><span class="line">            String method = url.getParameter(methodKey);</span><br><span class="line">            <span class="keyword">if</span> (method == <span class="keyword">null</span> || method.length() == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            RpcInvocation invocation = <span class="keyword">new</span> RpcInvocation(method, <span class="keyword">new</span> Class&lt;?&gt;[<span class="number">0</span>], <span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">            invocation.setAttachment(Constants.PATH_KEY, url.getPath());</span><br><span class="line">            invocation.setAttachment(Constants.GROUP_KEY, url.getParameter(Constants.GROUP_KEY));</span><br><span class="line">            invocation.setAttachment(Constants.INTERFACE_KEY, url.getParameter(Constants.INTERFACE_KEY));</span><br><span class="line">            invocation.setAttachment(Constants.VERSION_KEY, url.getParameter(Constants.VERSION_KEY));</span><br><span class="line">            <span class="keyword">if</span> (url.getParameter(Constants.STUB_EVENT_KEY, <span class="keyword">false</span>)) &#123;</span><br><span class="line">                invocation.setAttachment(Constants.STUB_EVENT_KEY, Boolean.TRUE.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> invocation;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"> Invoker&lt;?&gt; getInvoker(Channel channel, Invocation inv) <span class="keyword">throws</span> RemotingException &#123;</span><br><span class="line">        <span class="keyword">boolean</span> isCallBackServiceInvoke = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> isStubServiceInvoke = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> port = channel.getLocalAddress().getPort();</span><br><span class="line">        String path = inv.getAttachments().get(Constants.PATH_KEY);</span><br><span class="line">        <span class="comment">//如果是客户端的回调服务.</span></span><br><span class="line">        isStubServiceInvoke = Boolean.TRUE.toString().equals(inv.getAttachments().get(Constants.STUB_EVENT_KEY));</span><br><span class="line">        <span class="keyword">if</span> (isStubServiceInvoke) &#123;</span><br><span class="line">            port = channel.getRemoteAddress().getPort();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//callback</span></span><br><span class="line">        isCallBackServiceInvoke = isClientSide(channel) &amp;&amp; !isStubServiceInvoke;</span><br><span class="line">        <span class="keyword">if</span> (isCallBackServiceInvoke) &#123;</span><br><span class="line">            path = inv.getAttachments().get(Constants.PATH_KEY) + <span class="string">"."</span> + inv.getAttachments().get(Constants.CALLBACK_SERVICE_KEY);</span><br><span class="line">            inv.getAttachments().put(IS_CALLBACK_SERVICE_INVOKE, Boolean.TRUE.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//serviceKey=com.alibaba.dubbo.demo.DemoService:20883</span></span><br><span class="line">        String serviceKey = serviceKey(port, path, inv.getAttachments().get(Constants.VERSION_KEY), inv.getAttachments().get(Constants.GROUP_KEY));</span><br><span class="line">        <span class="comment">//获取提供者发布缓存的Export</span></span><br><span class="line">        DubboExporter&lt;?&gt; exporter = (DubboExporter&lt;?&gt;) exporterMap.get(serviceKey);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (exporter == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RemotingException(channel, <span class="string">"Not found exported service: "</span> + serviceKey + <span class="string">" in "</span> + exporterMap.keySet() + <span class="string">", may be version or group mismatch "</span> + <span class="string">", channel: consumer: "</span> + channel.getRemoteAddress() + <span class="string">" --&gt; provider: "</span> + channel.getLocalAddress() + <span class="string">", message:"</span> + inv);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> exporter.getInvoker();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获取的invoker:<br><img src="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/911006FEBA324747BAD71B8959941E83/2342" alt="image"><br><img src="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/B803861803C64D84BC5922F1ACF1E5E4/2352" alt="image"></p>
+<p>先到ProtocolFilterWrapper创建的拦截器Filter链，最终到达Wrapper动态生产的代理类,真正开始对发布的接口进行调用。</p>
+<h2 id="提供者编码"><a href="#提供者编码" class="headerlink" title="提供者编码"></a>提供者编码</h2><p>返回Response 待续…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dubbo/" rel="tag">#dubbo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/28/学习dubbo源码-消费者服务调用/" rel="next" title="学习dubbo源码-消费者服务调用">
+                <i class="fa fa-chevron-left"></i> 学习dubbo源码-消费者服务调用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.png"
+               alt="Gude" />
+          <p class="site-author-name" itemprop="name">Gude</p>
+          <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gudegg" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端消息编码"><span class="nav-number">1.</span> <span class="nav-text">客户端消息编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端消息解码"><span class="nav-number">2.</span> <span class="nav-text">服务端消息解码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端解码完成后"><span class="nav-number">2.1.</span> <span class="nav-text">服务端解码完成后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提供者编码"><span class="nav-number">3.</span> <span class="nav-text">提供者编码</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gude
+  
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+  </span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+
+&nbsp;&nbsp;|&nbsp;&nbsp;<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<!--百度自动推送-->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!--360自动推送-->
+<script>
+(function(){
+   var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?dbdef9d20cbbaf907d0c815b70dab453":"https://jspassport.ssl.qhimg.com/11.0.1.js?dbdef9d20cbbaf907d0c815b70dab453";
+   document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+
+</body>
+</html>

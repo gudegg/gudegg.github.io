@@ -235,6 +235,189 @@
             
               
                 
+                <a class="post-title-link" href="/2017/12/16/数据库连接池连接复用原理/" itemprop="url">
+                  数据库连接池连接复用原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-16T14:00:35+08:00" content="2017-12-16">
+              2017-12-16
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>HikariCP的ProxyConnection类有如下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"><span class="comment">//              "Overridden" java.sql.Connection Methods</span></span><br><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** &#123;<span class="doctag">@inheritDoc</span>&#125; */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="comment">// Closing statements can cause connection eviction, so this must run before the conditional below</span></span><br><span class="line">   closeStatements();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (delegate != ClosedConnection.CLOSED_CONNECTION) &#123;</span><br><span class="line">      leakTask.cancel();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (isCommitStateDirty &amp;&amp; !isAutoCommit) &#123;</span><br><span class="line">            delegate.rollback();</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">            LOGGER.debug(<span class="string">"&#123;&#125; - Executed rollback on connection &#123;&#125; due to dirty commit state on close()."</span>, poolEntry.getPoolName(), delegate);</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (dirtyBits != <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="comment">// 重置catalog、schema、sReadOnly、AutoCommit、transactionIsolation、NetworkTimeout这些属性</span></span><br><span class="line">            poolEntry.resetConnectionState(<span class="keyword">this</span>, dirtyBits);</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         delegate.clearWarnings();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">         <span class="comment">// when connections are aborted, exceptions are often thrown that should not reach the application</span></span><br><span class="line">         <span class="keyword">if</span> (!poolEntry.isMarkedEvicted()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> checkException(e);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">finally</span> &#123;</span><br><span class="line">         delegate = ClosedConnection.CLOSED_CONNECTION;</span><br><span class="line">         <span class="comment">//PoolEntry会被设为STATE_NOT_IN_USE,PoolEntry保存了Connection</span></span><br><span class="line">         poolEntry.recycle(lastAccess);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从上代码可知，ProxyConnection重写了Connection的Close方法，在我们结合spring调用完如数据库查询会调用connection.close(),但是ProxyConnection并不会真正去关闭连接，而是重置该连接的状态,使得该连接可以继续被使用。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/12/09/java4种引用/" itemprop="url">
+                  java4种引用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-09T15:47:06+08:00" content="2017-12-09">
+              2017-12-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
+<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>java的默认实现，类似<code>Object obj=new Object()</code>,它会尽可能长时间存在于JVM，当没有任何对象指向它的时候才会被GC回收<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">strongRefTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Object obj=<span class="keyword">new</span> Object();</span><br><span class="line">    Object strongRef=obj;</span><br><span class="line">    obj=<span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    <span class="comment">/***</span><br><span class="line">     * GC后不会被回收</span><br><span class="line">     */</span></span><br><span class="line">    assertNotNull(strongRef);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/09/java4种引用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/03/Datasource和DriverManager获取Connection的区别/" itemprop="url">
                   Datasource和DriverManager获取Connection的区别
                 </a>
@@ -987,190 +1170,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/22/nginx配置静态文件目录404/" itemprop="url">
-                  nginx配置静态文件目录404
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-22T12:24:46+08:00" content="2017-01-22">
-              2017-01-22
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天使用nginx配置静态文件代理时，访问一直是404，罪魁祸首就是我没搞清楚root与alias的区别。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/22/nginx配置静态文件目录404/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/18/爬取百度网盘用户分享/" itemprop="url">
-                  爬取百度网盘用户分享
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-18T20:40:57+08:00" content="2016-09-18">
-              2016-09-18
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>最近在找工作,有点无聊,没事搞,研究了下爬百度网盘的用户分享</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/18/爬取百度网盘用户分享/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1216,7 +1215,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -235,6 +235,205 @@
             
               
                 
+                <a class="post-title-link" href="/2018/05/30/学习dubbo源码-编码与解码/" itemprop="url">
+                  学习dubbo源码-编码与解码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-30T21:49:09+08:00" content="2018-05-30">
+              2018-05-30
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="客户端消息编码"><a href="#客户端消息编码" class="headerlink" title="客户端消息编码"></a>客户端消息编码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyCodecAdapter</span> </span>&#123;</span><br><span class="line">       <span class="meta">@Sharable</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalEncoder</span> <span class="keyword">extends</span> <span class="title">OneToOneEncoder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">encode</span><span class="params">(ChannelHandlerContext ctx, Channel ch, Object msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            com.alibaba.dubbo.remoting.buffer.ChannelBuffer buffer =</span><br><span class="line">                    com.alibaba.dubbo.remoting.buffer.ChannelBuffers.dynamicBuffer(<span class="number">1024</span>);</span><br><span class="line">            NettyChannel channel = NettyChannel.getOrAddChannel(ch, url, handler);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">/**</span><br><span class="line">                *-&gt;DubboCountCodec //编码啥都不干 调用下一个编码器</span><br><span class="line">                *--&gt;ExchangeCodec</span><br><span class="line">                *---&gt;DubboCodec</span><br><span class="line">                **/</span></span><br><span class="line">                codec.encode(channel, buffer, msg);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                NettyChannel.removeChannelIfDisconnected(ch);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ChannelBuffers.wrappedBuffer(buffer.toByteBuffer());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://note.youdao.com/yws/public/resource/8caa2d179926a8de445ffca686e3e316/xmlnote/F732C21C6DF847F7AF350B4C744795E4/1987" alt="image"></p>
+<p>dubbo的消息头是一个定长的 16个字节。</p>
+<ul>
+<li>针对Request:</li>
+</ul>
+<ol>
+<li><p>第1-2个字节：固定魔法值：MAGIC = (short) 0xdabb</p>
+</li>
+<li><p>第3个字节： 5位序列化方式 、1位双向(有去有回) 或单向（有去无回）、1位事件标识、1位请求request还是响应response  </p>
+</li>
+<li><p>第4个字节：状态位，request没设置第四个字节 </p>
+</li>
+<li><p>第5-12个字节：请求id,占用8个字节，全局唯一ID，consumer和provider的来回通信标记。</p>
+</li>
+<li><p>第13-16个字节：消息体的长度占用4字节，消息头+请求数据的长度。\</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/05/30/学习dubbo源码-编码与解码/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/05/28/学习dubbo源码-消费者服务调用/" itemprop="url">
+                  学习dubbo源码-消费者服务调用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-28T20:39:10+08:00" content="2018-05-28">
+              2018-05-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DemoService demoService = (DemoService) context.getBean(<span class="string">"demoService"</span>);</span><br><span class="line">demoService.sayHello(<span class="string">"world"</span>);</span><br></pre></td></tr></table></figure>
+<p>由上一节分析知道调用demoService实际上是返回的proxy0(不一定是0)代理类，由于proxy0源码没有，所以debug会直接进InvokerInvocationHandler</p>
+<p>InvokerInvocationHandler.invoke:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InvokerInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Invoker&lt;?&gt; invoker;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InvokerInvocationHandler</span><span class="params">(Invoker&lt;?&gt; handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.invoker = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//proxy=proxy0 代理类本身 method:调用方法 args:方法参数</span></span><br><span class="line">        String methodName = method.getName();</span><br><span class="line">        Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();</span><br><span class="line">        <span class="keyword">if</span> (method.getDeclaringClass() == Object.class) &#123;</span><br><span class="line">            <span class="keyword">return</span> method.invoke(invoker, args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"toString"</span>.equals(methodName) &amp;&amp; parameterTypes.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"hashCode"</span>.equals(methodName) &amp;&amp; parameterTypes.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.hashCode();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"equals"</span>.equals(methodName) &amp;&amp; parameterTypes.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.equals(args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//invoker=MockClusterInvoker</span></span><br><span class="line">        <span class="keyword">return</span> invoker.invoke(<span class="keyword">new</span> RpcInvocation(method, args)).recreate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/05/28/学习dubbo源码-消费者服务调用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/05/26/学习dubbo源码-服务引用/" itemprop="url">
                   学习dubbo源码-服务引用
                 </a>
@@ -965,189 +1164,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/16/数据库连接池连接复用原理/" itemprop="url">
-                  数据库连接池连接复用原理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-16T14:00:35+08:00" content="2017-12-16">
-              2017-12-16
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>HikariCP的ProxyConnection类有如下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"><span class="comment">//              "Overridden" java.sql.Connection Methods</span></span><br><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** &#123;<span class="doctag">@inheritDoc</span>&#125; */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="comment">// Closing statements can cause connection eviction, so this must run before the conditional below</span></span><br><span class="line">   closeStatements();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (delegate != ClosedConnection.CLOSED_CONNECTION) &#123;</span><br><span class="line">      leakTask.cancel();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (isCommitStateDirty &amp;&amp; !isAutoCommit) &#123;</span><br><span class="line">            delegate.rollback();</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">            LOGGER.debug(<span class="string">"&#123;&#125; - Executed rollback on connection &#123;&#125; due to dirty commit state on close()."</span>, poolEntry.getPoolName(), delegate);</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (dirtyBits != <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="comment">// 重置catalog、schema、sReadOnly、AutoCommit、transactionIsolation、NetworkTimeout这些属性</span></span><br><span class="line">            poolEntry.resetConnectionState(<span class="keyword">this</span>, dirtyBits);</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         delegate.clearWarnings();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">         <span class="comment">// when connections are aborted, exceptions are often thrown that should not reach the application</span></span><br><span class="line">         <span class="keyword">if</span> (!poolEntry.isMarkedEvicted()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> checkException(e);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">finally</span> &#123;</span><br><span class="line">         delegate = ClosedConnection.CLOSED_CONNECTION;</span><br><span class="line">         <span class="comment">//PoolEntry会被设为STATE_NOT_IN_USE,PoolEntry保存了Connection</span></span><br><span class="line">         poolEntry.recycle(lastAccess);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>从上代码可知，ProxyConnection重写了Connection的Close方法，在我们结合spring调用完如数据库查询会调用connection.close(),但是ProxyConnection并不会真正去关闭连接，而是重置该连接的状态,使得该连接可以继续被使用。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/09/java4种引用/" itemprop="url">
-                  java4种引用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-09T15:47:06+08:00" content="2017-12-09">
-              2017-12-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
-<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>java的默认实现，类似<code>Object obj=new Object()</code>,它会尽可能长时间存在于JVM，当没有任何对象指向它的时候才会被GC回收<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">strongRefTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Object obj=<span class="keyword">new</span> Object();</span><br><span class="line">    Object strongRef=obj;</span><br><span class="line">    obj=<span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    <span class="comment">/***</span><br><span class="line">     * GC后不会被回收</span><br><span class="line">     */</span></span><br><span class="line">    assertNotNull(strongRef);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/09/java4种引用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1193,7 +1209,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

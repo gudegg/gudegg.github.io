@@ -235,6 +235,194 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/21/mybatis传入多个参数/" itemprop="url">
+                  mybatis传入多个参数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T21:00:33+08:00" content="2016-04-21">
+              2016-04-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="多参数"><a href="#多参数" class="headerlink" title="多参数"></a>多参数</h4><p>1.普通(按照顺序索引 从0开始)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map selectManyParam(int uId,String content);</span><br><span class="line"></span><br><span class="line">&lt;select id="selectManyParam" resultType="map"&gt;</span><br><span class="line">    select * from blog where uId=#&#123;0&#125; and content=#&#123;1&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/21/mybatis传入多个参数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/17/FastJson快速将String转为实体对象/" itemprop="url">
+                  FastJson快速将String转为实体对象
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-17T09:51:04+08:00" content="2016-04-17">
+              2016-04-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="常用fastjson解析API"><a href="#常用fastjson解析API" class="headerlink" title="常用fastjson解析API"></a>常用fastjson解析API</h4><ol>
+<li><code>Person person = JSON.parseObject(json, Person.class);</code></li>
+<li><code>List&lt;Person&gt; list = JSON.parseArray(json, Person.class);</code></li>
+<li><code>List&lt;Person&gt; list = JSON.parseObject(json, new TypeReference&lt;List&lt;Person&gt;&gt;() {});</code></li>
+<li><code>List&lt;Map&lt;String,Object&gt;&gt; list = JSON.parseObject(json, new TypeReference&lt;List&lt;Map&lt;String,Object&gt;&gt;&gt;() {});</code></li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/17/FastJson快速将String转为实体对象/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/17/全新安装的postgresql无法远程/" itemprop="url">
                   全新安装的postgresql无法远程连接
                 </a>
@@ -962,188 +1150,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/05/spring用druid做连接池一直出现异常/" itemprop="url">
-                  spring用druid做连接池一直出现异常
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T10:22:14+08:00" content="2016-03-05">
-              2016-03-05
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong><a href="https://github.com/alibaba/druid">druid</a></strong>做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/05/spring用druid做连接池一直出现异常/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/03/springmvc可支持的返回类型/" itemprop="url">
-                  springmvc可支持的返回类型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-03T20:51:20+08:00" content="2016-03-03">
-              2016-03-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>SpringMVC可支持的返回类型:</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/03/springmvc可支持的返回类型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1189,7 +1195,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
