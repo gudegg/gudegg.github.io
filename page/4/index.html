@@ -235,6 +235,97 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/29/动态代理/" itemprop="url">
+                  动态代理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-29T10:03:28+08:00" content="2016-06-29">
+              2016-06-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="基于接口动态代理-Proxy"><a href="#基于接口动态代理-Proxy" class="headerlink" title="基于接口动态代理 :Proxy"></a>基于接口动态代理 :Proxy</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/29/动态代理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/26/Base64编码原理/" itemprop="url">
                   Base64编码原理
                 </a>
@@ -1058,106 +1149,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/26/log4j会输出2次Mybatis的sql记录/" itemprop="url">
-                  log4j会输出2次Mybatis的sql记录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T13:09:15+08:00" content="2016-04-26">
-              2016-04-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>log4j作为mybatis日志系统时,控制台会输出2次sql记录</p>
-</blockquote>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p><img src="/images/mybatis.jpg" alt=""></p>
-<ol>
-<li>法1: 如图所示,没有设置输出到哪里,他会默认继承rootLogger,输出到stdout和file,这样也只会输出一次到控制台的log</li>
-<li>法2:<pre><code>log4j.additivity.com.mybatis.dao=false #默认为true,打印信息向上级传递,这里即传递给rootLogger,false就不会传递
-log4j.logger.com.mybatis.dao=debug,stdout #我们自己设置输出到stdout,当然后面也可以加file(即也输出到文件日志),
-                                          #因为我们不传递给rootLogger,这样也就只输出到控制台一次,如果additivity
-                                          #不设置就变成默认true就会控制台输出2次日志
-</code></pre></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1203,7 +1194,7 @@ log4j.logger.com.mybatis.dao=debug,stdout #我们自己设置输出到stdout,当
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1213,7 +1204,7 @@ log4j.logger.com.mybatis.dao=debug,stdout #我们自己设置输出到stdout,当
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
