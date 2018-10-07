@@ -68,7 +68,7 @@
 
 对象优先在Eden区分配大多数情况下。对">
 <meta property="og:image" content="http://zhangguodong.me/images/内存分配老对象.png">
-<meta property="og:updated_time" content="2017-11-28T13:00:21.084Z">
+<meta property="og:updated_time" content="2018-08-05T10:37:41.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存分配和回收策略">
 <meta name="twitter:description" content="对象的内存分配，往大方向上讲，就是在堆上分配（但也可能经过JIT编译后被拆散为标量类型并间接地在栈上分配），对象主要分配在新生代的Eden区上，如果启动了本地线程分配缓冲，将按线程优先在TLAB上分配。少数情况下也可能会直接分配在老年代中，分配的规则并不是百分之百固定的，其细节取决于当前使用的是哪一种垃圾收集器组合，还有虚拟机中与内存相关的参数的设置。
@@ -406,7 +406,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -416,7 +416,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

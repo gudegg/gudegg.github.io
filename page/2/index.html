@@ -235,6 +235,195 @@
             
               
                 
+                <a class="post-title-link" href="/2018/02/19/学习dubbo源码-Compile动态编译/" itemprop="url">
+                  学习dubbo源码-Compile动态编译
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-02-19T20:17:03+08:00" content="2018-02-19">
+              2018-02-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Compiler是一个SPI扩展点，他实现有<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adaptive=com.alibaba.dubbo.common.compiler.support.AdaptiveCompiler</span><br><span class="line">jdk=com.alibaba.dubbo.common.compiler.support.JdkCompiler</span><br><span class="line">javassist=com.alibaba.dubbo.common.compiler.support.JavassistCompiler</span><br></pre></td></tr></table></figure></p>
+<p>默认实现是javassist</p>
+<h4 id="javassist"><a href="#javassist" class="headerlink" title="javassist"></a>javassist</h4><p><a href="https://github.com/jboss-javassist/javassist">Javassist</a>是一个开源的分析、编辑和创建Java字节码的类库,它可以使我们对于字节码的操作变的更加的简单。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/02/19/学习dubbo源码-Compile动态编译/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/02/18/学习dubbo源码-SPI扩展点/" itemprop="url">
+                  学习dubbo源码-SPI扩展点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-02-18T20:54:25+08:00" content="2018-02-18">
+              2018-02-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。</p>
+</blockquote>
+<h3 id="java-SPI"><a href="#java-SPI" class="headerlink" title="java SPI"></a>java SPI</h3><p>全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。<br>当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务接口名的文件，并把具体的实现类写进去。<br>MySql驱动mysql-connector-java中，META-INF/services/文件中就有一个java.sql.Driver文件，内容是:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.mysql.jdbc.Driver</span><br><span class="line">com.mysql.fabric.jdbc.FabricMySQLDriver</span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过如下加载扩展点<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ServiceLoader&lt;接口&gt; serviceLoader=ServiceLoader.load(接口.class); </span><br><span class="line">		</span><br><span class="line"><span class="keyword">for</span>(接口 cmd:serviceLoader)&#123;  </span><br><span class="line">    cmd.method();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html">官方文档</a>对ServiceLoader类的功能介绍<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/02/18/学习dubbo源码-SPI扩展点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/24/jdk常用命令/" itemprop="url">
                   jdk常用命令
                 </a>
@@ -986,196 +1175,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/20/垃圾收集算法/" itemprop="url">
-                  垃圾收集算法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-20T21:10:01+08:00" content="2017-11-20">
-              2017-11-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><blockquote>
-<p>如同它的名字一样，分为<code>标记</code>和<code>清除</code>两个阶段:首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
-</blockquote>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><pre><code>1. 标记和清除两个过程效率不高
-2. 标记清除后会产生大量不连续的空间，空间碎片太多导致以后程序分配较大对象时，无法找到足够大的连续空间而不得不提前触发另一次垃圾收集动作
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/20/垃圾收集算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/19/java运行时数据区域/" itemprop="url">
-                  java虚拟机运行时数据区域
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-19T21:25:33+08:00" content="2017-11-19">
-              2017-11-19
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h3><blockquote>
-<p>java虚拟机所管理的内存将会分为以下几个区域</p>
-</blockquote>
-<p><img src="/images/运行时数据区域.png" alt=""><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/19/java运行时数据区域/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1221,7 +1220,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1231,7 +1230,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
