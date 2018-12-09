@@ -66,7 +66,7 @@
 <meta property="og:description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper
 例子:123public interface Gude &amp;#123;    void setName(String name);    S">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2018/png/176230/1539051201848-3c499118-9d11-4a6b-a7eb-92ed73e3ffe9.png">
-<meta property="og:updated_time" content="2018-11-18T08:18:04.837Z">
+<meta property="og:updated_time" content="2018-12-09T09:58:14.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习dubbo源码-JavassistProxyFactory解析">
 <meta name="twitter:description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper
@@ -279,6 +279,7 @@
       
         <h2 id="JavassistProxyFactory"><a href="#JavassistProxyFactory" class="headerlink" title="JavassistProxyFactory"></a><a name="r6yslk"></a>JavassistProxyFactory</h2><p>dubbo是根据javassist动态生成字节码,核心类<code>com.alibaba.dubbo.common.bytecode.Proxy</code>和<code>com.alibaba.dubbo.common.bytecode.Wrapper</code></p>
 <h4 id="例子"><a href="#例子" class="headerlink" title="例子:"></a><a name="75bsdw"></a>例子:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Gude</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">getName</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="产生代理类"><a href="#产生代理类" class="headerlink" title="产生代理类"></a><a name="9xtgkv"></a>产生代理类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getProxy</span><span class="params">(Invoker&lt;T&gt; invoker, Class&lt;?&gt;[] interfaces)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (T) Proxy.getProxy(interfaces).newInstance(<span class="keyword">new</span> InvokerInvocationHandler(invoker));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>Proxy类的newInstance(InvocationHandler handler)方法是一个抽象方法，所有Proxy.getProxy(interfaces) 要先产生Proxy的代理类，实现newInstance(InvocationHandler handler)方法</li>
