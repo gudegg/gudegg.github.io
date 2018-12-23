@@ -235,6 +235,99 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/14/fastsoso被攻击，限制访问频次/" itemprop="url">
+                  fastsoso被攻击，限制访问频次
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-14T16:32:45+08:00" content="2018-04-14">
+              2018-04-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>fastsoso最近被大量ip攻击，单核的服务器实在承受不起，最近想要给他加个拦截，对于每分钟访问数超过一定阈值的ip，直接进行拦截！</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/14/fastsoso被攻击，限制访问频次/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/07/学习dubbo源码-本地暴露/" itemprop="url">
                   学习dubbo源码-本地暴露
                 </a>
@@ -1061,101 +1154,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/28/内存分配和回收策略/" itemprop="url">
-                  内存分配和回收策略
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-28T19:59:21+08:00" content="2017-11-28">
-              2017-11-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>对象的内存分配，往大方向上讲，就是在堆上分配（但也可能经过JIT编译后被拆散为标量类型并间接地在栈上分配），<strong>对象主要分配在新生代的Eden区</strong>上，如果启动了本地线程分配缓冲，将按线程优先在TLAB上分配。少数情况下也可能会直接分配在老年代中，分配的规则并不是百分之百固定的，其细节取决于当前使用的是哪一种垃圾收集器组合，还有虚拟机中与内存相关的参数的设置。</p>
-</blockquote>
-<h4 id="对象优先在Eden区分配"><a href="#对象优先在Eden区分配" class="headerlink" title="对象优先在Eden区分配"></a>对象优先在Eden区分配</h4><p>大多数情况下。对象在新生代的Eden区分配。当Eden区没有足够的空间进行分配时，虚拟机将发起一次MinorGC</p>
-<h4 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h4><p>大对象指需要连续大量空间的java对象，如很长的字符串以及数组(byte[10*1024*1024]),虚拟机提供-XX:PretenureSizeThreshold参数，另大于这个设置值的对象直接在老年代分配，避免在Eden区及两个Survivor区之间发生大量的内存复制(新生代:<strong>复制算法</strong>)。PretenureSizeThreshold只对Serial和ParNew收集器有效，对Parallel Scavenge收集器无效，它一般不需要这个设置。<br><img src="/images/内存分配老对象.png" alt=""><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/28/内存分配和回收策略/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1201,7 +1199,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
