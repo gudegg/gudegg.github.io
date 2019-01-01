@@ -2,7 +2,6 @@
 Thumbs.db
 db.json
 *.log
-node_modules/
 public/
 .deploy*/
 /.deploy_git
@@ -10,3 +9,4 @@ public/
 yuque-sync.exe
 同步命令.txt
 yuque.json
+/node_modules
