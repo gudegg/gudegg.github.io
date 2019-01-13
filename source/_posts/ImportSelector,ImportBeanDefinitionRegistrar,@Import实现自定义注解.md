@@ -29,7 +29,7 @@ If XML or other non-@Configuration bean definition resources need to be imported
 是一个接口，实现方法用于<span data-type="color" style="color:rgb(61, 70, 77)"><span data-type="background" style="background-color:rgb(255, 255, 255)">返回需要导入的组件的全类名数组，返回结果会被注入容器。spring的事务实现选择`org.springframework.transaction.annotation.TransactionManagementConfigurationSelector`,dubbo的数据绑定选择`org.apache.dubbo.config.spring.context.annotation.DubboConfigConfigurationSelector`</span></span>
 
 # <a name="d3t6kf"></a>ImportBeanDefinitionRegistrar
-自定义bean定义注册到容器
+是一个接口，自定义bean注册到容器
 
 > 一般基于这3个来实现自定义注解的实现，Spring很多功能都是用了这3个，如@EnableXXXX注解。
 
