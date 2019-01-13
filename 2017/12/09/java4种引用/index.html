@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,43 +36,39 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="java虚拟机," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="java虚拟机,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
 
 
 
-<meta name="description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。
-引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
-强引用java的默">
+<meta name="description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。 引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。 强引用java的默">
+<meta name="keywords" content="java虚拟机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java4种引用">
 <meta property="og:url" content="http://zhangguodong.me/2017/12/09/java4种引用/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。
-引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
-强引用java的默">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.560Z">
+<meta property="og:description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。 引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。 强引用java的默">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java4种引用">
-<meta name="twitter:description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。
-引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。
-强引用java的默">
+<meta name="twitter:description" content="今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。 引用类型Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。 强引用java的默">
 
 
 
@@ -93,7 +89,7 @@
   <title> java4种引用 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -133,12 +129,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -165,7 +161,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -175,7 +171,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -185,7 +181,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -195,7 +191,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -228,7 +224,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -280,7 +276,7 @@
       
         <p>今天在看HikariCP源码ConcurrentBag类时，发现它里面使用了WeakReference，第一次看到这个，之前从来没用过，于是查资料去了解下。</p>
 <h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>Java中一共有4中引用，分别为强引用(Strong Reference)、软引用(Soft Reference、弱引用(Weak Reference)、虚引用(Phantom Reference)，强度依次递减。</p>
-<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>java的默认实现，类似<code>Object obj=new Object()</code>,它会尽可能长时间存在于JVM，当没有任何对象指向它的时候才会被GC回收<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">strongRefTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Object obj=<span class="keyword">new</span> Object();</span><br><span class="line">    Object strongRef=obj;</span><br><span class="line">    obj=<span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    <span class="comment">/***</span><br><span class="line">     * GC后不会被回收</span><br><span class="line">     */</span></span><br><span class="line">    assertNotNull(strongRef);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>java的默认实现，类似<code>Object obj=new Object()</code>,它会尽可能长时间存在于JVM，当没有任何对象指向它的时候才会被GC回收<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">strongRefTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Object obj=<span class="keyword">new</span> Object();</span><br><span class="line">    Object strongRef=obj;</span><br><span class="line">    obj=<span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * GC后不会被回收</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    assertNotNull(strongRef);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>    
 <h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p> 当所引用的对象在 JVM 内不再有强引用时，它会尽可能保留引用直到JVM内存不足时才会被回收，如果此次回收还没有足够的内存，就会抛出内存溢出异常。在JDK1.2后提供SoftReference类来实现软引用，这一特性使得它非常适合缓存应用。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-XX:+PrintGCDetails -Xmx10m </span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SoftRefTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">byte</span>[] a = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>];</span><br><span class="line">    SoftReference&lt;<span class="keyword">byte</span>[]&gt; softReference = <span class="keyword">new</span> SoftReference&lt;<span class="keyword">byte</span>[]&gt;(a);</span><br><span class="line">   </span><br><span class="line">    a=<span class="keyword">null</span>;</span><br><span class="line">    map.put(<span class="string">"a"</span>, softReference);</span><br><span class="line">    assertNotNull(((SoftReference)(map.get(<span class="string">"a"</span>))).get());</span><br><span class="line">    <span class="comment">//在这里发生Full GC,对象a、softReference都被回收</span></span><br><span class="line">    <span class="keyword">byte</span>[] c = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>];</span><br><span class="line">    assertNull(((SoftReference)(map.get(<span class="string">"a"</span>))).get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
@@ -290,15 +286,15 @@
 <p>在执行<code>byte[] c = new byte[1024 * 1024 * 5];</code>时会发生GC，[Full GC (Allocation Failure) [PSYoungGen: 0K-&gt;0K(2560K)]<strong>[ParOldGen: 6542K-&gt;1377K(5632K)] 6542K-&gt;1377K(8192K)</strong>, [Metaspace: 4693K-&gt;4693K(1056768K)], 0.0093335 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] ，softReference 被回收。</p>
 <h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p> 当所引用的对象在 JVM 内不再有强引用时, GC 后 weakReference 将会被自动回收。在JDK1.2后提供weakReference类来实现弱引用<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">weakRefTest</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] a = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">5</span>];</span><br><span class="line">    WeakReference&lt;<span class="keyword">byte</span>[]&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;<span class="keyword">byte</span>[]&gt;(a);</span><br><span class="line">    a=<span class="keyword">null</span>;</span><br><span class="line">    assertNotNull(weakReference.get());</span><br><span class="line">    System.gc();</span><br><span class="line">    assertNull(weakReference.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>WeakHashMap 使用 WeakReference 作为 key， 一旦没有指向 key 的强引用, WeakHashMap 在 GC 后将自动删除相关的 entry<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakHashMap</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    Map&lt;Object, Object&gt; weakHashMap = <span class="keyword">new</span> WeakHashMap&lt;Object, Object&gt;();</span><br><span class="line">    Object key = <span class="keyword">new</span> Object();</span><br><span class="line">    Object value = <span class="keyword">new</span> Object();</span><br><span class="line">    weakHashMap.put(key, value);</span><br><span class="line"></span><br><span class="line">    assertTrue(weakHashMap.containsValue(value));</span><br><span class="line"></span><br><span class="line">    key = <span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 等待无效 entries 进入 ReferenceQueue 以便下一次调用 getTable 时被清理 休眠让GC清理掉entry System.gc()不能100%触发GC</span><br><span class="line">     */</span></span><br><span class="line">    Thread.sleep(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 一旦没有指向 key 的强引用, WeakHashMap 在 GC 后将自动删除相关的 entry</span><br><span class="line">     */</span></span><br><span class="line">    assertFalse(weakHashMap.containsValue(value));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>WeakHashMap 使用 WeakReference 作为 key， 一旦没有指向 key 的强引用, WeakHashMap 在 GC 后将自动删除相关的 entry<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakHashMap</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    Map&lt;Object, Object&gt; weakHashMap = <span class="keyword">new</span> WeakHashMap&lt;Object, Object&gt;();</span><br><span class="line">    Object key = <span class="keyword">new</span> Object();</span><br><span class="line">    Object value = <span class="keyword">new</span> Object();</span><br><span class="line">    weakHashMap.put(key, value);</span><br><span class="line"></span><br><span class="line">    assertTrue(weakHashMap.containsValue(value));</span><br><span class="line"></span><br><span class="line">    key = <span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 等待无效 entries 进入 ReferenceQueue 以便下一次调用 getTable 时被清理 休眠让GC清理掉entry System.gc()不能100%触发GC</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Thread.sleep(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一旦没有指向 key 的强引用, WeakHashMap 在 GC 后将自动删除相关的 entry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    assertFalse(weakHashMap.containsValue(value));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p> 也称幽灵引用或者幻影引用，一个对象是否有虚引用的存在，完全不会影响其生存时间构成影响。为对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。在JDK1.2后提供PhantomReference类来实现弱引用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phantomRefTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Object referent = <span class="keyword">new</span> Object();</span><br><span class="line">    PhantomReference&lt;Object&gt; phantomReference = <span class="keyword">new</span> PhantomReference&lt;Object&gt;(referent, <span class="keyword">new</span> ReferenceQueue&lt;Object&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * phantom reference 的 get 方法永远返回 null</span><br><span class="line">     */</span></span><br><span class="line">    assertNull(phantomReference.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phantomRefTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Object referent = <span class="keyword">new</span> Object();</span><br><span class="line">    PhantomReference&lt;Object&gt; phantomReference = <span class="keyword">new</span> PhantomReference&lt;Object&gt;(referent, <span class="keyword">new</span> ReferenceQueue&lt;Object&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * phantom reference 的 get 方法永远返回 null</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    assertNull(phantomReference.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>一个永远返回 null 的 reference 要来何用,  请注意构造 PhantomReference 时的第二个参数 ReferenceQueue(事实上 WeakReference &amp; SoftReference 也可以有这个参数)，PhantomReference 唯一的用处就是跟踪 referent  何时被 enqueue 到 ReferenceQueue 中.</p>
 <h3 id="RererenceQueue"><a href="#RererenceQueue" class="headerlink" title="RererenceQueue"></a>RererenceQueue</h3><blockquote>
 <p>当一个 WeakReference 开始返回 null 时， 它所指向的对象已经准备被回收， 这时可以做一些合适的清理工作.   将一个 ReferenceQueue 传给一个 Reference 的构造函数， 当对象被回收时， 虚拟机会自动将这个对象插入到 ReferenceQueue 中， WeakHashMap 就是利用 ReferenceQueue 来清除 key 已经没有强引用的 entries.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">referenceQueueTest</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    Object referent = <span class="keyword">new</span> Object();</span><br><span class="line">    ReferenceQueue&lt;Object&gt; referenceQueue = <span class="keyword">new</span> ReferenceQueue&lt;Object&gt;();</span><br><span class="line">    WeakReference&lt;Object&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;Object&gt;(referent, referenceQueue);</span><br><span class="line">    <span class="comment">//是否已经加入referenceQueue 没有GC故为false</span></span><br><span class="line">    assertFalse(weakReference.isEnqueued());</span><br><span class="line">    Reference&lt;? extends Object&gt; polled = referenceQueue.poll();</span><br><span class="line">    assertNull(polled);</span><br><span class="line"></span><br><span class="line">    referent = <span class="keyword">null</span>;</span><br><span class="line">    System.gc();</span><br><span class="line">    </span><br><span class="line">    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">    assertTrue(weakReference.isEnqueued());</span><br><span class="line">    Reference&lt;? extends Object&gt; removed = referenceQueue.remove();</span><br><span class="line">    assertNotNull(removed);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p>参考<a href="http://www.iteye.com/topic/401478" target="_blank" rel="external">理解Java的GC与幽灵引用</a>、<a href="http://puretech.iteye.com/blog/2008663" target="_blank" rel="external">不只是给面试加分–Java WeakReference的理</a></p>
+<p>参考<a href="http://www.iteye.com/topic/401478" target="_blank" rel="noopener">理解Java的GC与幽灵引用</a>、<a href="http://puretech.iteye.com/blog/2008663" target="_blank" rel="noopener">不只是给面试加分–Java WeakReference的理</a></p>
 
       
     </div>
@@ -380,7 +376,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -390,10 +386,8 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -472,10 +466,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -505,7 +499,7 @@
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

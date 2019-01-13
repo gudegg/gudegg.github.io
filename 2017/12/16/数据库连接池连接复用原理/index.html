@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,21 +36,21 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="连接池," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="连接池,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
@@ -58,12 +58,14 @@
 
 
 <meta name="description" content="HikariCP的ProxyConnection类有如下方法：123456789101112131415161718192021222324252627282930313233343536373839404142// **********************************************************************//              &quot;Over">
+<meta name="keywords" content="连接池">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库连接池连接复用原理">
 <meta property="og:url" content="http://zhangguodong.me/2017/12/16/数据库连接池连接复用原理/index.html">
 <meta property="og:site_name" content="Gude Blog">
 <meta property="og:description" content="HikariCP的ProxyConnection类有如下方法：123456789101112131415161718192021222324252627282930313233343536373839404142// **********************************************************************//              &quot;Over">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.632Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库连接池连接复用原理">
 <meta name="twitter:description" content="HikariCP的ProxyConnection类有如下方法：123456789101112131415161718192021222324252627282930313233343536373839404142// **********************************************************************//              &quot;Over">
@@ -87,7 +89,7 @@
   <title> 数据库连接池连接复用原理 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -127,12 +129,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -159,7 +161,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -169,7 +171,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -179,7 +181,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -189,7 +191,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -222,7 +224,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -272,7 +274,7 @@
       
 
       
-        <p>HikariCP的ProxyConnection类有如下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"><span class="comment">//              "Overridden" java.sql.Connection Methods</span></span><br><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** &#123;<span class="doctag">@inheritDoc</span>&#125; */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="comment">// Closing statements can cause connection eviction, so this must run before the conditional below</span></span><br><span class="line">   closeStatements();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (delegate != ClosedConnection.CLOSED_CONNECTION) &#123;</span><br><span class="line">      leakTask.cancel();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (isCommitStateDirty &amp;&amp; !isAutoCommit) &#123;</span><br><span class="line">            delegate.rollback();</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">            LOGGER.debug(<span class="string">"&#123;&#125; - Executed rollback on connection &#123;&#125; due to dirty commit state on close()."</span>, poolEntry.getPoolName(), delegate);</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (dirtyBits != <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="comment">// 重置catalog、schema、sReadOnly、AutoCommit、transactionIsolation、NetworkTimeout这些属性</span></span><br><span class="line">            poolEntry.resetConnectionState(<span class="keyword">this</span>, dirtyBits);</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         delegate.clearWarnings();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">         <span class="comment">// when connections are aborted, exceptions are often thrown that should not reach the application</span></span><br><span class="line">         <span class="keyword">if</span> (!poolEntry.isMarkedEvicted()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> checkException(e);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">finally</span> &#123;</span><br><span class="line">         delegate = ClosedConnection.CLOSED_CONNECTION;</span><br><span class="line">         <span class="comment">//PoolEntry会被设为STATE_NOT_IN_USE,PoolEntry保存了Connection</span></span><br><span class="line">         poolEntry.recycle(lastAccess);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>HikariCP的ProxyConnection类有如下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"><span class="comment">//              "Overridden" java.sql.Connection Methods</span></span><br><span class="line"><span class="comment">// **********************************************************************</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** &#123;<span class="doctag">@inheritDoc</span>&#125; */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="comment">// Closing statements can cause connection eviction, so this must run before the conditional below</span></span><br><span class="line">   closeStatements();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (delegate != ClosedConnection.CLOSED_CONNECTION) &#123;</span><br><span class="line">      leakTask.cancel();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (isCommitStateDirty &amp;&amp; !isAutoCommit) &#123;</span><br><span class="line">            delegate.rollback();</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">            LOGGER.debug(<span class="string">"&#123;&#125; - Executed rollback on connection &#123;&#125; due to dirty commit state on close()."</span>, poolEntry.getPoolName(), delegate);</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (dirtyBits != <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="comment">// 重置catalog、schema、sReadOnly、AutoCommit、transactionIsolation、NetworkTimeout这些属性</span></span><br><span class="line">            poolEntry.resetConnectionState(<span class="keyword">this</span>, dirtyBits);</span><br><span class="line">            lastAccess = currentTime();</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         delegate.clearWarnings();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">         <span class="comment">// when connections are aborted, exceptions are often thrown that should not reach the application</span></span><br><span class="line">         <span class="keyword">if</span> (!poolEntry.isMarkedEvicted()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> checkException(e);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">finally</span> &#123;</span><br><span class="line">         delegate = ClosedConnection.CLOSED_CONNECTION;</span><br><span class="line">         <span class="comment">//PoolEntry会被设为STATE_NOT_IN_USE,PoolEntry保存了Connection</span></span><br><span class="line">         poolEntry.recycle(lastAccess);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>从上代码可知，ProxyConnection重写了Connection的Close方法，在我们结合spring调用完如数据库查询会调用connection.close(),但是ProxyConnection并不会真正去关闭连接，而是重置该连接的状态,使得该连接可以继续被使用。</p>
 
       
@@ -355,7 +357,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -365,10 +367,8 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -447,10 +447,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -480,7 +480,7 @@
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

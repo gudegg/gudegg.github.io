@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,41 +36,40 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="dubbo," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="dubbo,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
 
 
 
-<meta name="description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper
-例子:123public interface Gude &amp;#123;    void setName(String name);    S">
+<meta name="description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper 例子:123public interface Gude &amp;#123;    void setName(String name);    S">
+<meta name="keywords" content="dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习dubbo源码-JavassistProxyFactory解析">
 <meta property="og:url" content="http://zhangguodong.me/2018/10/09/学习dubbo源码-JavassistProxyFactory解析/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper
-例子:123public interface Gude &amp;#123;    void setName(String name);    S">
+<meta property="og:description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper 例子:123public interface Gude &amp;#123;    void setName(String name);    S">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2018/png/176230/1539051201848-3c499118-9d11-4a6b-a7eb-92ed73e3ffe9.png">
-<meta property="og:updated_time" content="2018-12-31T13:43:05.052Z">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习dubbo源码-JavassistProxyFactory解析">
-<meta name="twitter:description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper
-例子:123public interface Gude &amp;#123;    void setName(String name);    S">
+<meta name="twitter:description" content="JavassistProxyFactorydubbo是根据javassist动态生成字节码,核心类com.alibaba.dubbo.common.bytecode.Proxy和com.alibaba.dubbo.common.bytecode.Wrapper 例子:123public interface Gude &amp;#123;    void setName(String name);    S">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2018/png/176230/1539051201848-3c499118-9d11-4a6b-a7eb-92ed73e3ffe9.png">
 
 
@@ -92,7 +91,7 @@
   <title> 学习dubbo源码-JavassistProxyFactory解析 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -132,12 +131,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -164,7 +163,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -174,7 +173,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -184,7 +183,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -194,7 +193,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -227,7 +226,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -288,15 +287,15 @@
 </ol>
 <p>2、Gude接口实现类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">proxy0</span> <span class="keyword">implements</span> <span class="title">Gude</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> java.lang.reflect.Method[] methods;<span class="comment">// 在产生实现类的时候会赋值  clazz.getField("methods").set(null, methods.toArray(new Method[0]));</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> java.lang.reflect.InvocationHandler handler;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">proxy0</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//public &lt;init&gt;(java.lang.reflect.InvocationHandler arg0)&#123;handler=$1;&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">proxy0</span><span class="params">(InvocationHandler invokerInvocationHandler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.handler = invokerInvocationHandler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Object[] args = <span class="keyword">new</span> Object[<span class="number">0</span>];</span><br><span class="line">        Object ret = handler.invoke(<span class="keyword">this</span>, methods[<span class="number">0</span>], args);</span><br><span class="line">        <span class="keyword">return</span> (java.lang.String) ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(java.lang.String arg0)</span> </span>&#123;</span><br><span class="line">        Object[] args = <span class="keyword">new</span> Object[<span class="number">1</span>];</span><br><span class="line">       <span class="comment">// args[0] = ($w) $1; javassist动态编译会替换为如下代码</span></span><br><span class="line">        args[<span class="number">0</span>] = (Object) arg0;</span><br><span class="line">        Object ret = handler.invoke(<span class="keyword">this</span>, methods[<span class="number">1</span>], args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最终<code>handler.invoke</code>会去调用getProxy中的参数<code>Invoker&lt;T&gt; invoker</code></p>
-<h3 id="产生Invoker"><a href="#产生Invoker" class="headerlink" title="产生Invoker"></a><a name="20lmqu"></a>产生Invoker</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@param</span> proxy 具体的实现类</span><br><span class="line"> * <span class="doctag">@return</span></span><br><span class="line"> */</span></span><br><span class="line"> <span class="keyword">public</span> &lt;T&gt; <span class="function">Invoker&lt;T&gt; <span class="title">getInvoker</span><span class="params">(T proxy, Class&lt;T&gt; type, URL url)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Wrapper cannot handle this scenario correctly: the classname contains '$'</span></span><br><span class="line">        <span class="keyword">final</span> Wrapper wrapper = Wrapper.getWrapper(proxy.getClass().getName().indexOf(<span class="string">'$'</span>) &lt; <span class="number">0</span> ? proxy.getClass() : type);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AbstractProxyInvoker&lt;T&gt;(proxy, type, url) &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> Object <span class="title">doInvoke</span><span class="params">(T proxy, String methodName,</span><br><span class="line">                                      Class&lt;?&gt;[] parameterTypes,</span><br><span class="line">                                      Object[] arguments)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> wrapper.invokeMethod(proxy, methodName, parameterTypes, arguments);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="产生Invoker"><a href="#产生Invoker" class="headerlink" title="产生Invoker"></a><a name="20lmqu"></a>产生Invoker</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> proxy 具体的实现类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">public</span> &lt;T&gt; <span class="function">Invoker&lt;T&gt; <span class="title">getInvoker</span><span class="params">(T proxy, Class&lt;T&gt; type, URL url)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Wrapper cannot handle this scenario correctly: the classname contains '$'</span></span><br><span class="line">        <span class="keyword">final</span> Wrapper wrapper = Wrapper.getWrapper(proxy.getClass().getName().indexOf(<span class="string">'$'</span>) &lt; <span class="number">0</span> ? proxy.getClass() : type);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AbstractProxyInvoker&lt;T&gt;(proxy, type, url) &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> Object <span class="title">doInvoke</span><span class="params">(T proxy, String methodName,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      Class&lt;?&gt;[] parameterTypes,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      Object[] arguments)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> wrapper.invokeMethod(proxy, methodName, parameterTypes, arguments);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>对proxy进行包装并返回包装类，主要核心就是invokeMethod方法，Wrapper的invokeMethod方法是个抽象方法，需要对此方法进行实现，然后创建AbstractProxyInvoker实例返回</li>
 <li>动态生成包装类(采用javassist生成，第一次才需要生成，之后直接从缓存取)，主要是对invokeMethod抽象方法进行实现</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wrapper</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invokeMethod</span><span class="params">(Object instance, String method, Class&lt;?&gt;[] types, Object[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, InvocationTargetException)</span>&#123;</span><br><span class="line">        com.alibaba.dubbo.demo.provider.DemoServiceImpl w;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            w = ((com.alibaba.dubbo.demo.provider.DemoServiceImpl) $<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">/**</span><br><span class="line">            *调用时对接口方法判断 如果有方法重载，还会对参数类型进行判断</span><br><span class="line">            *if( "hello".equals( $2 )  &amp;&amp;  $3.length == 1 &amp;&amp;  $3[0].getName().equals("java.lang.String") ) </span><br><span class="line">            **/</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"gude"</span>.equals($<span class="number">2</span>) &amp;&amp; $<span class="number">3</span>.length == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ($w) w.gude((java.lang.String) $<span class="number">4</span>[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"sayHello"</span>.equals($<span class="number">2</span>) &amp;&amp; $<span class="number">3</span>.length == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ($w) w.sayHello((java.lang.String) $<span class="number">4</span>[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> java.lang.reflect.InvocationTargetException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> com.alibaba.dubbo.common.bytecode.NoSuchMethodException(<span class="string">"Not found method \""</span> + $<span class="number">2</span> + <span class="string">"\" in class com.alibaba.dubbo.demo.provider.DemoServiceImpl."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wrapper</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invokeMethod</span><span class="params">(Object instance, String method, Class&lt;?&gt;[] types, Object[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, InvocationTargetException)</span>&#123;</span><br><span class="line">        com.alibaba.dubbo.demo.provider.DemoServiceImpl w;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            w = ((com.alibaba.dubbo.demo.provider.DemoServiceImpl) $<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">            *调用时对接口方法判断 如果有方法重载，还会对参数类型进行判断</span></span><br><span class="line"><span class="comment">            *if( "hello".equals( $2 )  &amp;&amp;  $3.length == 1 &amp;&amp;  $3[0].getName().equals("java.lang.String") ) </span></span><br><span class="line"><span class="comment">            **/</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"gude"</span>.equals($<span class="number">2</span>) &amp;&amp; $<span class="number">3</span>.length == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ($w) w.gude((java.lang.String) $<span class="number">4</span>[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"sayHello"</span>.equals($<span class="number">2</span>) &amp;&amp; $<span class="number">3</span>.length == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> ($w) w.sayHello((java.lang.String) $<span class="number">4</span>[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> java.lang.reflect.InvocationTargetException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> com.alibaba.dubbo.common.bytecode.NoSuchMethodException(<span class="string">"Not found method \""</span> + $<span class="number">2</span> + <span class="string">"\" in class com.alibaba.dubbo.demo.provider.DemoServiceImpl."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Javassist中\$w、\$1含义：</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2018/png/176230/1539051201848-3c499118-9d11-4a6b-a7eb-92ed73e3ffe9.png" alt="local5.png | center | 669x445"></p>
-<p><a href="https://www.jianshu.com/p/b9b3ff0e1bf8" target="_blank" rel="external">更多详细信息</a><br><a href="https://github.com/jboss-javassist/javassist/wiki/Tutorial-2" target="_blank" rel="external">javassist官方教程</a></p>
+<p><a href="https://www.jianshu.com/p/b9b3ff0e1bf8" target="_blank" rel="noopener">更多详细信息</a><br><a href="https://github.com/jboss-javassist/javassist/wiki/Tutorial-2" target="_blank" rel="noopener">javassist官方教程</a></p>
 <ul>
 <li>为什么要包装调用方法?<blockquote>
 <p>远程到提供者只会传给调用方法名称，如果不动态生成包装类，只能使用反射进行调用，反射相比直接调用方法，性能较低。</p>
@@ -384,7 +383,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -394,10 +393,8 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -457,7 +454,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavassistProxyFactory"><span class="nav-number">1.</span> <span class="nav-text">JavassistProxyFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">1.0.1.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生代理类"><span class="nav-number">1.1.</span> <span class="nav-text">产生代理类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生Invoker"><span class="nav-number">1.2.</span> <span class="nav-text">产生Invoker</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavassistProxyFactory"><span class="nav-number">1.</span> <span class="nav-text">JavassistProxyFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">1.0.1.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生代理类"><span class="nav-number">1.1.</span> <span class="nav-text">产生代理类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生Invoker"><span class="nav-number">1.2.</span> <span class="nav-text">产生Invoker</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -476,10 +473,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -509,7 +506,7 @@
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

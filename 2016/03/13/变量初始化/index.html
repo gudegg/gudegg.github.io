@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,48 +36,41 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="java基础复习," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="java基础复习,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
 
 
 
-<meta name="description" content="类初始化步骤
-假如一个类还没有被加载或者连接，那就先加载和连接这个类
-假如类存在直接的父类，并且这个父类还没有被初始化，那就先初始化直接的父类
-假如类中存在初始化语句，那就直接按顺序执行这些初始化语句">
+<meta name="description" content="类初始化步骤 假如一个类还没有被加载或者连接，那就先加载和连接这个类 假如类存在直接的父类，并且这个父类还没有被初始化，那就先初始化直接的父类 假如类中存在初始化语句，那就直接按顺序执行这些初始化语句">
+<meta name="keywords" content="java基础复习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="变量初始化">
 <meta property="og:url" content="http://zhangguodong.me/2016/03/13/变量初始化/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="类初始化步骤
-假如一个类还没有被加载或者连接，那就先加载和连接这个类
-假如类存在直接的父类，并且这个父类还没有被初始化，那就先初始化直接的父类
-假如类中存在初始化语句，那就直接按顺序执行这些初始化语句">
+<meta property="og:description" content="类初始化步骤 假如一个类还没有被加载或者连接，那就先加载和连接这个类 假如类存在直接的父类，并且这个父类还没有被初始化，那就先初始化直接的父类 假如类中存在初始化语句，那就直接按顺序执行这些初始化语句">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://zhangguodong.me/images/Child.png">
 <meta property="og:image" content="http://zhangguodong.me/images/father.png">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.574Z">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变量初始化">
-<meta name="twitter:description" content="类初始化步骤
-假如一个类还没有被加载或者连接，那就先加载和连接这个类
-假如类存在直接的父类，并且这个父类还没有被初始化，那就先初始化直接的父类
-假如类中存在初始化语句，那就直接按顺序执行这些初始化语句">
+<meta name="twitter:description" content="类初始化步骤 假如一个类还没有被加载或者连接，那就先加载和连接这个类 假如类存在直接的父类，并且这个父类还没有被初始化，那就先初始化直接的父类 假如类中存在初始化语句，那就直接按顺序执行这些初始化语句">
 <meta name="twitter:image" content="http://zhangguodong.me/images/Child.png">
 
 
@@ -99,7 +92,7 @@
   <title> 变量初始化 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -139,12 +132,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -171,7 +164,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -181,7 +174,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -191,7 +184,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -201,7 +194,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -234,7 +227,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -291,7 +284,7 @@
 </ol>
 <a id="more"></a>
 <h4 id="类的初始化"><a href="#类的初始化" class="headerlink" title="类的初始化"></a>类的初始化</h4><blockquote>
-<p> 在类的生命周期执行完加载和连接之后就开始了类的初始化。在类的初始化阶段，java虚拟机<br>  执行类的初始化语句，为类的<strong>静态变量</strong>赋值，在程序中，类的初始化有两种途径：（1）在变<br>量的声明处赋值。（2）在静态代码处<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">0</span>;  <span class="comment">//(1)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> b ;  </span><br><span class="line">    <span class="keyword">static</span>&#123;  </span><br><span class="line">        b=<span class="number">2</span>; <span class="comment">//(2) </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 在类的生命周期执行完加载和连接之后就开始了类的初始化。在类的初始化阶段，java虚拟机<br>  执行类的初始化语句，为类的<strong>静态变量</strong>赋值，在程序中，类的初始化有两种途径：（1）在变<br>量的声明处赋值。（2）在静态代码处<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>  </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">0</span>;  <span class="comment">//(1)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> b ;  </span><br><span class="line">    <span class="keyword">static</span>&#123;  </span><br><span class="line">        b=<span class="number">2</span>; <span class="comment">//(2) </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <h4 id="Java程序对类的使用方式可分为两种"><a href="#Java程序对类的使用方式可分为两种" class="headerlink" title="Java程序对类的使用方式可分为两种"></a>Java程序对类的使用方式可分为两种</h4><blockquote>
 <p>所有的Java虚拟机实现必须在每个类或接口被Java程序“<strong>首次主动使用</strong>”时才初始化他们 </p>
@@ -327,13 +320,13 @@
 <li>super()；调用Father类的init&lt;&gt;()<ol>
 <li>调用super()也就是Object类的init&lt;&gt;()</li>
 <li>给父类的name赋值</li>
-<li>执行父类的构造方法：执行构造方法是在子类中调用的,此时this是子类，所以tellName、printName方法都在子类中调用,而此时子类还没有被初始化,此时name还是null故输出name为null(ps:可以查看<a href="http://blog.csdn.net/csh624366188/article/details/7945131" target="_blank" rel="external">类的生命周期</a>, 引用类型变量在类未初始化的默认值为null)</li>
+<li>执行父类的构造方法：执行构造方法是在子类中调用的,此时this是子类，所以tellName、printName方法都在子类中调用,而此时子类还没有被初始化,此时name还是null故输出name为null(ps:可以查看<a href="http://blog.csdn.net/csh624366188/article/details/7945131" target="_blank" rel="noopener">类的生命周期</a>, 引用类型变量在类未初始化的默认值为null)</li>
 </ol>
 </li>
 <li>子类的name开始赋值</li>
 <li>执行子类的构造方法</li>
 </ol>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.csdn.net/column/details/jvm123.html" target="_blank" rel="external">深入java虚拟机</a><br><a href="http://blog.csdn.net/cauchyweierstrass/article/details/48943077" target="_blank" rel="external">Java实例变量初始化</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.csdn.net/column/details/jvm123.html" target="_blank" rel="noopener">深入java虚拟机</a><br><a href="http://blog.csdn.net/cauchyweierstrass/article/details/48943077" target="_blank" rel="noopener">Java实例变量初始化</a></p>
 
       
     </div>
@@ -415,7 +408,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -425,10 +418,8 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -507,10 +498,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -540,7 +531,7 @@
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

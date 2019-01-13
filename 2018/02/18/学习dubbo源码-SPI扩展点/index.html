@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,43 +36,39 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="dubbo," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="dubbo,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
 
 
 
-<meta name="description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。
-
-java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+<meta name="description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。  java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+<meta name="keywords" content="dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习dubbo源码-SPI扩展点">
 <meta property="og:url" content="http://zhangguodong.me/2018/02/18/学习dubbo源码-SPI扩展点/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。
-
-java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.626Z">
+<meta property="og:description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。  java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习dubbo源码-SPI扩展点">
-<meta name="twitter:description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。
-
-java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
+<meta name="twitter:description" content="从网上了解到要学习dubbo的源码，必须要从SPI开始，dubbo框架作者从设计之初，就作为一个高可扩的服务框架。  java SPI全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务">
 
 
 
@@ -93,7 +89,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
   <title> 学习dubbo源码-SPI扩展点 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -133,12 +129,12 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -165,7 +161,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -175,7 +171,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -185,7 +181,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -195,7 +191,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -228,7 +224,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -283,7 +279,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
 </blockquote>
 <h3 id="java-SPI"><a href="#java-SPI" class="headerlink" title="java SPI"></a>java SPI</h3><p>全称(Service Provider Interface),主要作用是提供接口，不同厂商对接口可以有自己不同的实现。我们比较熟悉的就是java.sql.Driver接口。<br>当厂商提供实现之后，需要在classpath:META-INF/services/下创建服务接口名的文件，并把具体的实现类写进去。<br>MySql驱动mysql-connector-java中，META-INF/services/文件中就有一个java.sql.Driver文件，内容是:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.mysql.jdbc.Driver</span><br><span class="line">com.mysql.fabric.jdbc.FabricMySQLDriver</span><br></pre></td></tr></table></figure></p>
 <p>我们可以通过如下加载扩展点<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ServiceLoader&lt;接口&gt; serviceLoader=ServiceLoader.load(接口.class); </span><br><span class="line">		</span><br><span class="line"><span class="keyword">for</span>(接口 cmd:serviceLoader)&#123;  </span><br><span class="line">    cmd.method();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="external">官方文档</a>对ServiceLoader类的功能介绍<br><a id="more"></a></p>
+<p><a href="https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">官方文档</a>对ServiceLoader类的功能介绍<br><a id="more"></a></p>
 <h3 id="dubbo不是使用java原生SPI机制"><a href="#dubbo不是使用java原生SPI机制" class="headerlink" title="dubbo不是使用java原生SPI机制"></a>dubbo不是使用java原生SPI机制</h3><h4 id="为什么不使用原生的？"><a href="#为什么不使用原生的？" class="headerlink" title="为什么不使用原生的？"></a>为什么不使用原生的？</h4><ol>
 <li>原生的一次性加载所有扩展点实现，造成资源的浪费</li>
 <li>如果扩展点加载失败，连扩展点的名称都拿不到了。比如：JDK 标准的 ScriptEngine，通过 getName() 获取脚本类型的名称，但如果 RubyScriptEngine 因为所依赖的 jruby.jar 不存在，导致 RubyScriptEngine 类加载失败，这个失败原因被吃掉了，和 ruby 对应不起来，当用户执行 ruby 脚本时，会报不支持 ruby，而不是真正失败的原因。</li>
@@ -333,7 +329,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
 </li>
 </ol>
 <ul>
-<li>compiler.compile(code, classLoader)<br>1.Compiler也是SPI接口，加载<code>CompilerClassLoader classLoader = findClassLoader(); com.alibaba.dubbo.common.compiler.Compiler compiler = ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.common.compiler.Compiler.class)</code>默认采用javassist实现动态类生成<br>2.为什么选用javassist? 可以看下作者博客<a href="http://javatar.iteye.com/blog/814426" target="_blank" rel="external">代理方案性能对比</a></li>
+<li>compiler.compile(code, classLoader)<br>1.Compiler也是SPI接口，加载<code>CompilerClassLoader classLoader = findClassLoader(); com.alibaba.dubbo.common.compiler.Compiler compiler = ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.common.compiler.Compiler.class)</code>默认采用javassist实现动态类生成<br>2.为什么选用javassist? 可以看下作者博客<a href="http://javatar.iteye.com/blog/814426" target="_blank" rel="noopener">代理方案性能对比</a></li>
 <li>injectExtension</li>
 </ul>
 <ol>
@@ -346,21 +342,21 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
 <li>有个不同就是<code>injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance))</code>，当包装类含有当前type的构造函数时，创建此构造函数并进行注入,如果含有包装类，会对包装类进行链式包装(装饰模式),返回最后一个包装类。核心代码如下:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> T <span class="title">createExtension</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = getExtensionClasses().get(name);</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> findException(name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            T instance = (T) EXTENSION_INSTANCES.get(clazz);</span><br><span class="line">            <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                EXTENSION_INSTANCES.putIfAbsent(clazz, (T) clazz.newInstance());</span><br><span class="line">                instance = (T) EXTENSION_INSTANCES.get(clazz);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//set方法依赖注入</span></span><br><span class="line">            injectExtension(instance);</span><br><span class="line">            Set&lt;Class&lt;?&gt;&gt; wrapperClasses = cachedWrapperClasses;</span><br><span class="line">            <span class="keyword">if</span> (wrapperClasses != <span class="keyword">null</span> &amp;&amp; wrapperClasses.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (Class&lt;?&gt; wrapperClass : wrapperClasses) &#123;</span><br><span class="line">                    <span class="comment">//包装类注入 注意这里：会进行链式包装</span></span><br><span class="line">                    instance = injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Extension instance(name: "</span> + name + <span class="string">", class: "</span> +</span><br><span class="line">                    type + <span class="string">")  could not be instantiated: "</span> + t.getMessage(), t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><h4 id="SPI"><a href="#SPI" class="headerlink" title="@SPI"></a>@SPI</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SPI &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 默认扩展点名</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><h4 id="SPI"><a href="#SPI" class="headerlink" title="@SPI"></a>@SPI</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SPI &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 默认扩展点名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>只有在接口打了@SPI注解的接口类才会去查找扩展点实现</li>
 </ol>
-<h4 id="Adaptive"><a href="#Adaptive" class="headerlink" title="@Adaptive"></a>@Adaptive</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Adaptive &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 从&#123;<span class="doctag">@link</span> URL&#125;的Key名，对应的Value作为要Adapt成的Extension名。</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 如果&#123;<span class="doctag">@link</span> URL&#125;这些Key都没有Value，使用 用 缺省的扩展（在接口的&#123;<span class="doctag">@link</span> SPI&#125;中设定的值）。&lt;br&gt;</span><br><span class="line">     * 比如，&lt;code&gt;String[] &#123;"key1", "key2"&#125;&lt;/code&gt;，表示</span><br><span class="line">     * &lt;ol&gt;</span><br><span class="line">     * &lt;li&gt;先在URL上找key1的Value作为要Adapt成的Extension名；</span><br><span class="line">     * &lt;li&gt;key1没有Value，则使用key2的Value作为要Adapt成的Extension名。</span><br><span class="line">     * &lt;li&gt;key2没有Value，使用缺省的扩展。</span><br><span class="line">     * &lt;li&gt;如果没有设定缺省扩展，则方法调用会抛出&#123;<span class="doctag">@link</span> IllegalStateException&#125;。</span><br><span class="line">     * &lt;/ol&gt;</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 如果不设置则缺省使用Extension接口类名的点分隔小写字串。&lt;br&gt;</span><br><span class="line">     * 即对于Extension接口&#123;<span class="doctag">@code</span> com.alibaba.dubbo.xxx.YyyInvokerWrapper&#125;的缺省值为&lt;code&gt;String[] &#123;"yyy.invoker.wrapper"&#125;&lt;/code&gt;</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@see</span> SPI#value()</span><br><span class="line">     */</span></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Adaptive"><a href="#Adaptive" class="headerlink" title="@Adaptive"></a>@Adaptive</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Adaptive &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从&#123;<span class="doctag">@link</span> URL&#125;的Key名，对应的Value作为要Adapt成的Extension名。</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 如果&#123;<span class="doctag">@link</span> URL&#125;这些Key都没有Value，使用 用 缺省的扩展（在接口的&#123;<span class="doctag">@link</span> SPI&#125;中设定的值）。&lt;br&gt;</span></span><br><span class="line"><span class="comment">     * 比如，&lt;code&gt;String[] &#123;"key1", "key2"&#125;&lt;/code&gt;，表示</span></span><br><span class="line"><span class="comment">     * &lt;ol&gt;</span></span><br><span class="line"><span class="comment">     * &lt;li&gt;先在URL上找key1的Value作为要Adapt成的Extension名；</span></span><br><span class="line"><span class="comment">     * &lt;li&gt;key1没有Value，则使用key2的Value作为要Adapt成的Extension名。</span></span><br><span class="line"><span class="comment">     * &lt;li&gt;key2没有Value，使用缺省的扩展。</span></span><br><span class="line"><span class="comment">     * &lt;li&gt;如果没有设定缺省扩展，则方法调用会抛出&#123;<span class="doctag">@link</span> IllegalStateException&#125;。</span></span><br><span class="line"><span class="comment">     * &lt;/ol&gt;</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 如果不设置则缺省使用Extension接口类名的点分隔小写字串。&lt;br&gt;</span></span><br><span class="line"><span class="comment">     * 即对于Extension接口&#123;<span class="doctag">@code</span> com.alibaba.dubbo.xxx.YyyInvokerWrapper&#125;的缺省值为&lt;code&gt;String[] &#123;"yyy.invoker.wrapper"&#125;&lt;/code&gt;</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> SPI#value()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>注解在类上作为一个自适应扩展点</li>
 <li>注解在方法上，用于动态生成代理类</li>
 </ol>
-<h4 id="Activate"><a href="#Activate" class="headerlink" title="@Activate"></a>@Activate</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Activate &#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * Group过滤条件。</span><br><span class="line">     * &lt;br /&gt;</span><br><span class="line">     * 包含&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的group参数给的值，则返回扩展。</span><br><span class="line">     * &lt;br /&gt;</span><br><span class="line">     * 如没有Group设置，则不过滤。</span><br><span class="line">     */</span></span><br><span class="line">    String[] group() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * Key过滤条件。包含&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的URL的参数Key中有，则返回扩展。</span><br><span class="line">     * &lt;p/&gt;</span><br><span class="line">     * 示例：&lt;br/&gt;</span><br><span class="line">     * 注解的值 &lt;code&gt;<span class="doctag">@Activate</span>("cache,validatioin")&lt;/code&gt;，</span><br><span class="line">     * 则&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的URL的参数有&lt;code&gt;cache&lt;/code&gt;Key，或是&lt;code&gt;validatioin&lt;/code&gt;则返回扩展。</span><br><span class="line">     * &lt;br/&gt;</span><br><span class="line">     * 如没有设置，则不过滤。</span><br><span class="line">     */</span></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 排序信息，可以不提供。</span><br><span class="line">     */</span></span><br><span class="line">    String[] before() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 排序信息，可以不提供。</span><br><span class="line">     */</span></span><br><span class="line">    String[] after() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 排序信息，可以不提供。</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">order</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Activate"><a href="#Activate" class="headerlink" title="@Activate"></a>@Activate</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Activate &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Group过滤条件。</span></span><br><span class="line"><span class="comment">     * &lt;br /&gt;</span></span><br><span class="line"><span class="comment">     * 包含&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的group参数给的值，则返回扩展。</span></span><br><span class="line"><span class="comment">     * &lt;br /&gt;</span></span><br><span class="line"><span class="comment">     * 如没有Group设置，则不过滤。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] group() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Key过滤条件。包含&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的URL的参数Key中有，则返回扩展。</span></span><br><span class="line"><span class="comment">     * &lt;p/&gt;</span></span><br><span class="line"><span class="comment">     * 示例：&lt;br/&gt;</span></span><br><span class="line"><span class="comment">     * 注解的值 &lt;code&gt;<span class="doctag">@Activate</span>("cache,validatioin")&lt;/code&gt;，</span></span><br><span class="line"><span class="comment">     * 则&#123;<span class="doctag">@link</span> ExtensionLoader#getActivateExtension&#125;的URL的参数有&lt;code&gt;cache&lt;/code&gt;Key，或是&lt;code&gt;validatioin&lt;/code&gt;则返回扩展。</span></span><br><span class="line"><span class="comment">     * &lt;br/&gt;</span></span><br><span class="line"><span class="comment">     * 如没有设置，则不过滤。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 排序信息，可以不提供。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] before() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 排序信息，可以不提供。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] after() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 排序信息，可以不提供。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">order</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>对于集合类扩展点，比如：Filter, InvokerListener, ExportListener, TelnetHandler, StatusChecker 等，可以同时加载多个实现，此时，可以用自动激活来简化配置</li>
 <li>可以通过getActivateExtension(URL url, String key)获取激活扩展点集合</li>
 </ol>
-<p><a href="http://dubbo.io/books/dubbo-dev-book/SPI.html" target="_blank" rel="external">扩展点加载</a></p>
+<p><a href="http://dubbo.io/books/dubbo-dev-book/SPI.html" target="_blank" rel="noopener">扩展点加载</a></p>
 
       
     </div>
@@ -442,7 +438,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -452,10 +448,8 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -534,10 +528,10 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -567,7 +561,7 @@ java SPI全称(Service Provider Interface),主要作用是提供接口，不同�
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

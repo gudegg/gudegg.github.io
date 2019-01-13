@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,43 +36,39 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="elasticsearch," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="elasticsearch,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
 
 
 
-<meta name="description" content="elasticsearch2.4.4 + 中文分词器ik
-官方仓库 :docker pull gude/elasticsearch-ik 
-腾讯云仓库:docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik">
+<meta name="description" content="elasticsearch2.4.4 + 中文分词器ik 官方仓库 :docker pull gude/elasticsearch-ik  腾讯云仓库:docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik">
+<meta name="keywords" content="elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elasticsearch使用docker集群搭建">
 <meta property="og:url" content="http://zhangguodong.me/2018/07/20/elasticsearch使用docker集群搭建/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="elasticsearch2.4.4 + 中文分词器ik
-官方仓库 :docker pull gude/elasticsearch-ik 
-腾讯云仓库:docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.558Z">
+<meta property="og:description" content="elasticsearch2.4.4 + 中文分词器ik 官方仓库 :docker pull gude/elasticsearch-ik  腾讯云仓库:docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch使用docker集群搭建">
-<meta name="twitter:description" content="elasticsearch2.4.4 + 中文分词器ik
-官方仓库 :docker pull gude/elasticsearch-ik 
-腾讯云仓库:docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik">
+<meta name="twitter:description" content="elasticsearch2.4.4 + 中文分词器ik 官方仓库 :docker pull gude/elasticsearch-ik  腾讯云仓库:docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik">
 
 
 
@@ -93,7 +89,7 @@
   <title> elasticsearch使用docker集群搭建 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -133,12 +129,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -165,7 +161,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -175,7 +171,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -185,7 +181,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -195,7 +191,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -228,7 +224,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -278,15 +274,15 @@
       
 
       
-        <p>elasticsearch2.4.4 + <a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="external">中文分词器ik</a></p>
+        <p>elasticsearch2.4.4 + <a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="noopener">中文分词器ik</a></p>
 <p>官方仓库 :<code>docker pull gude/elasticsearch-ik</code> </p>
 <p>腾讯云仓库:<code>docker pull ccr.ccs.tencentyun.com/gude/elasticsearch-ik</code></p>
 <a id="more"></a>
 <h2 id="docker运行"><a href="#docker运行" class="headerlink" title="docker运行"></a>docker运行</h2><h3 id="单机运行"><a href="#单机运行" class="headerlink" title="单机运行:"></a>单机运行:</h3><p><code>docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 gude/elasticsearch-ik</code></p>
-<h3 id="集群："><a href="#集群：" class="headerlink" title="集群："></a>集群：</h3><h4 id="主节点"><a href="#主节点" class="headerlink" title="主节点"></a>主节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  --name some-elasticsearch-master \</span><br><span class="line">  -p 9200:9200 \</span><br><span class="line">  -p 9300:9300 \</span><br><span class="line">  -d \</span><br><span class="line">  gude/elasticsearch-ik</span><br></pre></td></tr></table></figure>
-<h4 id="从节点"><a href="#从节点" class="headerlink" title="从节点"></a>从节点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  --name some-elasticsearch-slave1 \</span><br><span class="line">  --link some-elasticsearch-master \</span><br><span class="line">  -p 9201:9200 \</span><br><span class="line">  -p 9301:9300 \</span><br><span class="line">  -d \</span><br><span class="line">  gude/elasticsearch-ik \</span><br><span class="line">  --discovery.zen.ping.unicast.hosts=some-elasticsearch-master</span><br></pre></td></tr></table></figure>
+<h3 id="集群："><a href="#集群：" class="headerlink" title="集群："></a>集群：</h3><h4 id="主节点"><a href="#主节点" class="headerlink" title="主节点"></a>主节点</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  --name some-elasticsearch-master \</span><br><span class="line">  -p 9200:9200 \</span><br><span class="line">  -p 9300:9300 \</span><br><span class="line">  -d \</span><br><span class="line">  gude/elasticsearch-ik</span><br></pre></td></tr></table></figure>
+<h4 id="从节点"><a href="#从节点" class="headerlink" title="从节点"></a>从节点</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  --name some-elasticsearch-slave1 \</span><br><span class="line">  --link some-elasticsearch-master \</span><br><span class="line">  -p 9201:9200 \</span><br><span class="line">  -p 9301:9300 \</span><br><span class="line">  -d \</span><br><span class="line">  gude/elasticsearch-ik \</span><br><span class="line">  --discovery.zen.ping.unicast.hosts=some-elasticsearch-master</span><br></pre></td></tr></table></figure>
 <h4 id="集群状态"><a href="#集群状态" class="headerlink" title="集群状态"></a>集群状态</h4><p><code>curl http://localhost:9200/_cat/health?v</code>  or  <code>curl http://localhost:9200/_cluster/health</code></p>
-<h2 id="docker-compose构建集群"><a href="#docker-compose构建集群" class="headerlink" title="docker-compose构建集群"></a>docker-compose构建集群</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;3&apos;</span><br><span class="line">services:</span><br><span class="line">  elasticsearch-master:</span><br><span class="line">    container_name: elasticsearch-master</span><br><span class="line">    image: gude/elasticsearch-ik</span><br><span class="line">    ports:</span><br><span class="line">      - &apos;9200:9200&apos;</span><br><span class="line">      - &apos;9300:9300&apos;</span><br><span class="line">    command:</span><br><span class="line">      - &apos;--network.host=0.0.0.0&apos;</span><br><span class="line">  elasticsearch-slave1:</span><br><span class="line">    container_name: elasticsearch-slave1</span><br><span class="line">    image: gude/elasticsearch-ik</span><br><span class="line">    ports:</span><br><span class="line">      - &apos;9201:9200&apos;</span><br><span class="line">      - &apos;9301:9300&apos;</span><br><span class="line">    command:</span><br><span class="line">      - &apos;--network.host=0.0.0.0&apos;</span><br><span class="line">      - &apos;--discovery.zen.ping.unicast.hosts=elasticsearch-master&apos;</span><br><span class="line">    depends_on:</span><br><span class="line">      - elasticsearch-master</span><br><span class="line">  elasticsearch-slave2:</span><br><span class="line">    container_name: elasticsearch-slave2</span><br><span class="line">    image: gude/elasticsearch-ik</span><br><span class="line">    ports:</span><br><span class="line">     - &apos;9202:9200&apos;</span><br><span class="line">     - &apos;9302:9300&apos;</span><br><span class="line">    command:</span><br><span class="line">     - &apos;--network.host=0.0.0.0&apos;</span><br><span class="line">     - &apos;--discovery.zen.ping.unicast.hosts=elasticsearch-master&apos;</span><br><span class="line">    depends_on:</span><br><span class="line">     - elasticsearch-master</span><br></pre></td></tr></table></figure>
+<h2 id="docker-compose构建集群"><a href="#docker-compose构建集群" class="headerlink" title="docker-compose构建集群"></a>docker-compose构建集群</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">version: '3'</span><br><span class="line">services:</span><br><span class="line">  elasticsearch-master:</span><br><span class="line">    container_name: elasticsearch-master</span><br><span class="line">    image: gude/elasticsearch-ik</span><br><span class="line">    ports:</span><br><span class="line">      - '9200:9200'</span><br><span class="line">      - '9300:9300'</span><br><span class="line">    command:</span><br><span class="line">      - '--network.host=0.0.0.0'</span><br><span class="line">  elasticsearch-slave1:</span><br><span class="line">    container_name: elasticsearch-slave1</span><br><span class="line">    image: gude/elasticsearch-ik</span><br><span class="line">    ports:</span><br><span class="line">      - '9201:9200'</span><br><span class="line">      - '9301:9300'</span><br><span class="line">    command:</span><br><span class="line">      - '--network.host=0.0.0.0'</span><br><span class="line">      - '--discovery.zen.ping.unicast.hosts=elasticsearch-master'</span><br><span class="line">    depends_on:</span><br><span class="line">      - elasticsearch-master</span><br><span class="line">  elasticsearch-slave2:</span><br><span class="line">    container_name: elasticsearch-slave2</span><br><span class="line">    image: gude/elasticsearch-ik</span><br><span class="line">    ports:</span><br><span class="line">     - '9202:9200'</span><br><span class="line">     - '9302:9300'</span><br><span class="line">    command:</span><br><span class="line">     - '--network.host=0.0.0.0'</span><br><span class="line">     - '--discovery.zen.ping.unicast.hosts=elasticsearch-master'</span><br><span class="line">    depends_on:</span><br><span class="line">     - elasticsearch-master</span><br></pre></td></tr></table></figure>
 <h2 id="ik分词器使用"><a href="#ik分词器使用" class="headerlink" title="ik分词器使用"></a>ik分词器使用</h2><ol>
 <li><p>创建索引</p>
 <p><code>curl -XPUT http://localhost:9200/index</code></p>
@@ -299,12 +295,12 @@
 <h3 id="ik分词是否生效"><a href="#ik分词是否生效" class="headerlink" title="ik分词是否生效"></a>ik分词是否生效</h3><p>浏览器直接访问</p>
 <p><code>http://localhost:9200/_analyze?analyzer=ik&amp;pretty=true&amp;text=我是中国人</code></p>
 <p>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET localhost:9200/_analyze -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;ik&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;我是中国人&quot;</span><br><span class="line">&#125;</span><br><span class="line">&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET localhost:9200/_analyze -d'</span><br><span class="line">&#123;</span><br><span class="line">  "analyzer": "ik",</span><br><span class="line">  "text": "我是中国人"</span><br><span class="line">&#125;</span><br><span class="line">'</span><br></pre></td></tr></table></figure>
 <p>ik没生效和话，elasticsearch<em>中文默认</em>(把analyzer=ik去掉)是一个字一个字进行分词。</p>
-<p>更多细节查看<a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="external"><strong>elasticsearch-analysis-ik</strong></a></p>
+<p>更多细节查看<a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="noopener"><strong>elasticsearch-analysis-ik</strong></a></p>
 <hr>
 <p><strong>ps:上面集群搭建直接使用elasticsearch官方镜像也可以，本镜像只是添加了ik中文分词器</strong></p>
-<p>elasticsearch中文分词展示<a href="https://www.fastsoso.cn/" target="_blank" rel="external">fastsoso</a></p>
+<p>elasticsearch中文分词展示<a href="https://www.fastsoso.cn/" target="_blank" rel="noopener">fastsoso</a></p>
 </li>
 </ol>
 
@@ -388,7 +384,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -398,10 +394,8 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -480,10 +474,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -513,7 +507,7 @@
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

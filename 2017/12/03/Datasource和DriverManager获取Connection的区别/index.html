@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,49 +36,39 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="数据库," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="数据库,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
 
 
 
-<meta name="description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。
-Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。
-
-
-接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
+<meta name="description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。 Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。   接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Datasource和DriverManager获取Connection的区别">
 <meta property="og:url" content="http://zhangguodong.me/2017/12/03/Datasource和DriverManager获取Connection的区别/index.html">
 <meta property="og:site_name" content="Gude Blog">
-<meta property="og:description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。
-Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。
-
-
-接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.555Z">
+<meta property="og:description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。 Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。   接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Datasource和DriverManager获取Connection的区别">
-<meta name="twitter:description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。
-Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。
-
-
-接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
+<meta name="twitter:description" content="Datasource是一个接口，DriverManager是具体的类。接口可以很多种实现方式，这正是java多态的特性。 Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。   接下来看HikariCP是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用driver.connec">
 
 
 
@@ -99,7 +89,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
   <title> Datasource和DriverManager获取Connection的区别 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -139,12 +129,12 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -171,7 +161,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -181,7 +171,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -191,7 +181,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -201,7 +191,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -234,7 +224,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -289,7 +279,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
 <li>Datasource会帮我们创建、管理和分配数据库连接，它有多种实现，如：dbcp、Druid、HikariCP等。</li>
 </ul>
 <blockquote>
-<p>接下来看<a href="https://github.com/brettwooldridge/HikariCP" target="_blank" rel="external">HikariCP</a>是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用<code>driver.connect(jdbcUrl, driverProperties);</code>,而DriverManager获取Connection也是调用<code>driver.connect(url, info);</code>。具体的连接由数据库的驱动实现。</p>
+<p>接下来看<a href="https://github.com/brettwooldridge/HikariCP" target="_blank" rel="noopener">HikariCP</a>是如何获取连接的：通过阅读HikariCP的源码，发现它在初始化的时候最终获取Connection是调用<code>driver.connect(jdbcUrl, driverProperties);</code>,而DriverManager获取Connection也是调用<code>driver.connect(url, info);</code>。具体的连接由数据库的驱动实现。</p>
 </blockquote>
 <a id="more"></a>
 <ul>
@@ -297,7 +287,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取注册的驱动进行 如：Class.forName("")注册驱动</span></span><br><span class="line"><span class="keyword">for</span>(DriverInfo aDriver : registeredDrivers) &#123;</span><br><span class="line">            <span class="comment">// If the caller does not have permission to load the driver then</span></span><br><span class="line">            <span class="comment">// skip it.</span></span><br><span class="line">            <span class="keyword">if</span>(isDriverAllowed(aDriver.driver, callerCL)) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    println(<span class="string">"    trying "</span> + aDriver.driver.getClass().getName());</span><br><span class="line">                    Connection con = aDriver.driver.connect(url, info);</span><br><span class="line">                    <span class="keyword">if</span> (con != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// Success!</span></span><br><span class="line">                        println(<span class="string">"getConnection returning "</span> + aDriver.driver.getClass().getName());</span><br><span class="line">                        <span class="keyword">return</span> (con);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (SQLException ex) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (reason == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        reason = ex;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                println(<span class="string">"    skipping: "</span> + aDriver.getClass().getName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>HikariCP初始化会走到DriverDataSource类的getConnection方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> driver.connect(jdbcUrl, driverProperties);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> driver.connect(jdbcUrl, driverProperties);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>Datasource和DriverManager最终获取Connection的方式都是一样的</strong>，都是通过driver.connect()获取，只不过Datasource(指具体的连接池实现)会在初始化的帮我们创建一定数量的连接,这样就不需要每次都去创建Connection，需要使用的时候们只要去池中取未被使用的连接就可以，使用完的连接会被自动释放。而DriverManager需要每次都去创建，这样会耗费内存和时间(除非你只需一个连接就能搞定)。因此，我们在编写项目的时候，都推荐使用了连接池。</p>
@@ -382,7 +372,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -392,10 +382,8 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -474,10 +462,10 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -507,7 +495,7 @@ Datasource会帮我们创建、管理和分配数据库连接，它有多种实�
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>

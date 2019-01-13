@@ -6,19 +6,15 @@
 
 
 <html class="theme-next pisces use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -36,21 +36,21 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="dubbo," />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="dubbo,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0">
 
 
 
@@ -58,12 +58,14 @@
 
 
 <meta name="description" content="Compiler是一个SPI扩展点，他实现有123adaptive=com.alibaba.dubbo.common.compiler.support.AdaptiveCompilerjdk=com.alibaba.dubbo.common.compiler.support.JdkCompilerjavassist=com.alibaba.dubbo.common.compiler.support">
+<meta name="keywords" content="dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习dubbo源码-Compile动态编译">
 <meta property="og:url" content="http://zhangguodong.me/2018/02/19/学习dubbo源码-Compile动态编译/index.html">
 <meta property="og:site_name" content="Gude Blog">
 <meta property="og:description" content="Compiler是一个SPI扩展点，他实现有123adaptive=com.alibaba.dubbo.common.compiler.support.AdaptiveCompilerjdk=com.alibaba.dubbo.common.compiler.support.JdkCompilerjavassist=com.alibaba.dubbo.common.compiler.support">
-<meta property="og:updated_time" content="2018-08-05T10:37:41.626Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-01T06:50:56.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习dubbo源码-Compile动态编译">
 <meta name="twitter:description" content="Compiler是一个SPI扩展点，他实现有123adaptive=com.alibaba.dubbo.common.compiler.support.AdaptiveCompilerjdk=com.alibaba.dubbo.common.compiler.support.JdkCompilerjavassist=com.alibaba.dubbo.common.compiler.support">
@@ -87,7 +89,7 @@
   <title> 学习dubbo源码-Compile动态编译 | Gude Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -127,12 +129,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta custom-logo">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Gude Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -159,7 +161,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             首页
           </a>
@@ -169,7 +171,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             关于
           </a>
@@ -179,7 +181,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             归档
           </a>
@@ -189,7 +191,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             标签
           </a>
@@ -222,7 +224,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -274,7 +276,7 @@
       
         <p>Compiler是一个SPI扩展点，他实现有<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adaptive=com.alibaba.dubbo.common.compiler.support.AdaptiveCompiler</span><br><span class="line">jdk=com.alibaba.dubbo.common.compiler.support.JdkCompiler</span><br><span class="line">javassist=com.alibaba.dubbo.common.compiler.support.JavassistCompiler</span><br></pre></td></tr></table></figure></p>
 <p>默认实现是javassist</p>
-<h4 id="javassist"><a href="#javassist" class="headerlink" title="javassist"></a>javassist</h4><p><a href="https://github.com/jboss-javassist/javassist" target="_blank" rel="external">Javassist</a>是一个开源的分析、编辑和创建Java字节码的类库,它可以使我们对于字节码的操作变的更加的简单。</p>
+<h4 id="javassist"><a href="#javassist" class="headerlink" title="javassist"></a>javassist</h4><p><a href="https://github.com/jboss-javassist/javassist" target="_blank" rel="noopener">Javassist</a>是一个开源的分析、编辑和创建Java字节码的类库,它可以使我们对于字节码的操作变的更加的简单。</p>
 <a id="more"></a>
 <h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavassistDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 1、创建ClassPool：CtClass对象的容器</span></span><br><span class="line">        ClassPool pool = ClassPool.getDefault();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2、通过ClassPool生成一个public新类Hello.java</span></span><br><span class="line">        CtClass ctClass = pool.makeClass(<span class="string">"com.gude.Hello"</span>);</span><br><span class="line">        <span class="comment">//ctClass.setSuperclass(); 父类设置</span></span><br><span class="line">        <span class="comment">//ctClass.setInterfaces(); 接口设置</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3、添加属性</span></span><br><span class="line">        CtField nameField = <span class="keyword">new</span> CtField(pool.getCtClass(<span class="string">"java.lang.String"</span>),</span><br><span class="line">                <span class="string">"name"</span>, ctClass);</span><br><span class="line">        <span class="comment">//设为私有</span></span><br><span class="line">        nameField.setModifiers(Modifier.PRIVATE);</span><br><span class="line">        ctClass.addField(nameField);</span><br><span class="line">        <span class="comment">//4、添加get set</span></span><br><span class="line">        ctClass.addMethod(CtNewMethod.getter(<span class="string">"getName"</span>, nameField));</span><br><span class="line">        ctClass.addMethod(CtNewMethod.setter(<span class="string">"setName"</span>, nameField));</span><br><span class="line">        <span class="comment">//5、添加自定义方法</span></span><br><span class="line">        CtMethod ctMethod = <span class="keyword">new</span> CtMethod(CtClass.voidType, <span class="string">"customMethod"</span>,</span><br><span class="line">                <span class="keyword">new</span> CtClass[]&#123;&#125;, ctClass);</span><br><span class="line">        ctMethod.setModifiers(Modifier.PUBLIC);</span><br><span class="line">        ctMethod.setBody(<span class="string">"System.out.println(\"custome method\");"</span>);</span><br><span class="line">        ctClass.addMethod(ctMethod);</span><br><span class="line">        <span class="comment">//6、添加Hello(String name)有参构造方法</span></span><br><span class="line">        CtConstructor ctConstructor = <span class="keyword">new</span> CtConstructor(<span class="keyword">new</span> CtClass[]&#123;pool.getCtClass(<span class="string">"java.lang.String"</span>)&#125;, ctClass);</span><br><span class="line">        ctConstructor.setBody(<span class="string">"&#123;this.name=name;&#125;"</span>);</span><br><span class="line">        ctClass.addConstructor(ctConstructor);</span><br><span class="line">        <span class="comment">//无参构造</span></span><br><span class="line">        CtConstructor cons = <span class="keyword">new</span> CtConstructor(<span class="keyword">null</span>, ctClass);</span><br><span class="line">        cons.setBody(<span class="string">"&#123;&#125;"</span>);</span><br><span class="line">        ctClass.addConstructor(cons);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//7、生成一个class</span></span><br><span class="line">        Class&lt;?&gt; clazz = ctClass.toClass();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//测试</span></span><br><span class="line">        Object o = clazz.newInstance();</span><br><span class="line">        clazz.getDeclaredMethod(<span class="string">"customMethod"</span>).invoke(o);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -294,7 +296,7 @@
 <li><p>JavassistCompiler 通过正则匹配导入的包、继承、接口、方法、属性，然后使用Javassist来创建字节码，返回成功创建的类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Class&lt;?&gt; doCompile(String name, String source) <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    <span class="keyword">int</span> i = name.lastIndexOf(<span class="string">'.'</span>);</span><br><span class="line">    String className = i &lt; <span class="number">0</span> ? name : name.substring(i + <span class="number">1</span>);</span><br><span class="line">    ClassPool pool = <span class="keyword">new</span> ClassPool(<span class="keyword">true</span>);</span><br><span class="line">    pool.appendClassPath(<span class="keyword">new</span> LoaderClassPath(ClassHelper.getCallerClassLoader(getClass())));</span><br><span class="line">    Matcher matcher = IMPORT_PATTERN.matcher(source);</span><br><span class="line">    List&lt;String&gt; importPackages = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    Map&lt;String, String&gt; fullNames = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">    <span class="keyword">while</span> (matcher.find()) &#123;</span><br><span class="line">        String pkg = matcher.group(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (pkg.endsWith(<span class="string">".*"</span>)) &#123;</span><br><span class="line">            String pkgName = pkg.substring(<span class="number">0</span>, pkg.length() - <span class="number">2</span>);</span><br><span class="line">            pool.importPackage(pkgName);</span><br><span class="line">            importPackages.add(pkgName);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> pi = pkg.lastIndexOf(<span class="string">'.'</span>);</span><br><span class="line">            <span class="keyword">if</span> (pi &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                String pkgName = pkg.substring(<span class="number">0</span>, pi);</span><br><span class="line">                pool.importPackage(pkgName);</span><br><span class="line">                importPackages.add(pkgName);</span><br><span class="line">                fullNames.put(pkg.substring(pi + <span class="number">1</span>), pkg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    String[] packages = importPackages.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);</span><br><span class="line">    matcher = EXTENDS_PATTERN.matcher(source);</span><br><span class="line">    CtClass cls;</span><br><span class="line">    <span class="keyword">if</span> (matcher.find()) &#123;</span><br><span class="line">        String extend = matcher.group(<span class="number">1</span>).trim();</span><br><span class="line">        String extendClass;</span><br><span class="line">        <span class="keyword">if</span> (extend.contains(<span class="string">"."</span>)) &#123;</span><br><span class="line">            extendClass = extend;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fullNames.containsKey(extend)) &#123;</span><br><span class="line">            extendClass = fullNames.get(extend);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            extendClass = ClassUtils.forName(packages, extend).getName();</span><br><span class="line">        &#125;</span><br><span class="line">        cls = pool.makeClass(name, pool.get(extendClass));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cls = pool.makeClass(name);</span><br><span class="line">    &#125;</span><br><span class="line">    matcher = IMPLEMENTS_PATTERN.matcher(source);</span><br><span class="line">    <span class="keyword">if</span> (matcher.find()) &#123;</span><br><span class="line">        String[] ifaces = matcher.group(<span class="number">1</span>).trim().split(<span class="string">"\\,"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String iface : ifaces) &#123;</span><br><span class="line">            iface = iface.trim();</span><br><span class="line">            String ifaceClass;</span><br><span class="line">            <span class="keyword">if</span> (iface.contains(<span class="string">"."</span>)) &#123;</span><br><span class="line">                ifaceClass = iface;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fullNames.containsKey(iface)) &#123;</span><br><span class="line">                ifaceClass = fullNames.get(iface);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ifaceClass = ClassUtils.forName(packages, iface).getName();</span><br><span class="line">            &#125;</span><br><span class="line">            cls.addInterface(pool.get(ifaceClass));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    String body = source.substring(source.indexOf(<span class="string">"&#123;"</span>) + <span class="number">1</span>, source.length() - <span class="number">1</span>);</span><br><span class="line">    String[] methods = METHODS_PATTERN.split(body);</span><br><span class="line">    <span class="keyword">for</span> (String method : methods) &#123;</span><br><span class="line">        method = method.trim();</span><br><span class="line">        <span class="keyword">if</span> (method.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (method.startsWith(className)) &#123;</span><br><span class="line">                cls.addConstructor(CtNewConstructor.make(<span class="string">"public "</span> + method, cls));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (FIELD_PATTERN.matcher(method).matches()) &#123;</span><br><span class="line">                cls.addField(CtField.make(<span class="string">"private "</span> + method, cls));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cls.addMethod(CtNewMethod.make(<span class="string">"public "</span> + method, cls));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cls.toClass(ClassHelper.getCallerClassLoader(getClass()), JavassistCompiler.class.getProtectionDomain());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>JdkCompiler<br>原生的jdk自带的动态编译类库<code>JavaCompiler</code>,从1.6开始提供 <a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/javax/tools/JavaCompiler.html" target="_blank" rel="external">文档</a></p>
+<li><p>JdkCompiler<br>原生的jdk自带的动态编译类库<code>JavaCompiler</code>,从1.6开始提供 <a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/javax/tools/JavaCompiler.html" target="_blank" rel="noopener">文档</a></p>
 </li>
 </ul>
 </li>
@@ -380,7 +382,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -390,10 +392,8 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="Gude" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/head.png" alt="Gude">
           <p class="site-author-name" itemprop="name">Gude</p>
           <p class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish.</p>
         </div>
@@ -472,10 +472,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -505,7 +505,7 @@
 &nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</script>
+
 
 <!--百度自动推送-->
 <script>
