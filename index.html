@@ -236,6 +236,182 @@
             
               
                 
+                <a class="post-title-link" href="/2019/01/13/学习dubbo源码-目录服务/" itemprop="url">
+                  学习dubbo源码-目录服务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-01-13T22:03:40+08:00" content="2019-01-13">
+              2019-01-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/01/13/学习dubbo源码-集群容错/" itemprop="url">
+                  学习dubbo源码-集群容错
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-01-13T22:02:57+08:00" content="2019-01-13">
+              2019-01-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/01/13/学习dubbo源码-负载均衡策略/" itemprop="url">
                   学习dubbo源码-负载均衡策略
                 </a>
@@ -278,9 +454,15 @@
 
       
         
-          
-            
-          
+          <p>Dubbo提供了<strong>随机、轮询、最少活跃数、一致性哈希</strong>4种负载均衡策略，默认为随机。</p>
+<p>负载均衡策略抽象了<code>AbstractLoadBalance</code>,这4种策略都实现都继承它，实现doSelect方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractLoadBalance</span> <span class="keyword">implements</span> <span class="title">LoadBalance</span> </span>&#123;</span><br><span class="line">    <span class="comment">//根据预热时间与程序启动到现在的历时计算权重比例</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculateWarmupWeight</span><span class="params">(<span class="keyword">int</span> uptime, <span class="keyword">int</span> warmup, <span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//(uptime/warmup)*weight</span></span><br><span class="line">        <span class="keyword">int</span> ww = (<span class="keyword">int</span>) ((<span class="keyword">float</span>) uptime / ((<span class="keyword">float</span>) warmup / (<span class="keyword">float</span>) weight));</span><br><span class="line">        <span class="keyword">return</span> ww &lt; <span class="number">1</span> ? <span class="number">1</span> : (ww &gt; weight ? weight : ww);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">Invoker&lt;T&gt; <span class="title">select</span><span class="params">(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (invokers == <span class="keyword">null</span> || invokers.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//只有一个提供者直接返回</span></span><br><span class="line">        <span class="keyword">if</span> (invokers.size() == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invokers.get(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> doSelect(invokers, url, invocation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">abstract</span> &lt;T&gt; <span class="function">Invoker&lt;T&gt; <span class="title">doSelect</span><span class="params">(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 权重随着预热时间不断增大，最后到达设置的权重</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> invoker</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> invocation</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">getWeight</span><span class="params">(Invoker&lt;?&gt; invoker, Invocation invocation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> weight = invoker.getUrl().getMethodParameter(invocation.getMethodName(), Constants.WEIGHT_KEY, Constants.DEFAULT_WEIGHT);</span><br><span class="line">        <span class="keyword">if</span> (weight &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">long</span> timestamp = invoker.getUrl().getParameter(Constants.REMOTE_TIMESTAMP_KEY, <span class="number">0L</span>);</span><br><span class="line">            <span class="keyword">if</span> (timestamp &gt; <span class="number">0L</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> uptime = (<span class="keyword">int</span>) (System.currentTimeMillis() - timestamp);</span><br><span class="line">                <span class="comment">//预热时间，默认10分钟</span></span><br><span class="line">                <span class="keyword">int</span> warmup = invoker.getUrl().getParameter(Constants.WARMUP_KEY, Constants.DEFAULT_WARMUP);</span><br><span class="line">                <span class="keyword">if</span> (uptime &gt; <span class="number">0</span> &amp;&amp; uptime &lt; warmup) &#123;</span><br><span class="line">                    weight = calculateWarmupWeight(uptime, warmup, weight);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> weight;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有个很重要的就是权重会随着jvm运行时间不断增大，直到达到设置的权重。这样的好处是随着程序的运行，jvm会通过JIT(即使编译器)队热点代码做优化，提高代码执行效率。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2019/01/13/学习dubbo源码-负载均衡策略/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -971,195 +1153,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/28/学习dubbo源码-消费者服务调用/" itemprop="url">
-                  学习dubbo源码-消费者服务调用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-05-28T20:39:10+08:00" content="2018-05-28">
-              2018-05-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DemoService demoService = (DemoService) context.getBean(<span class="string">"demoService"</span>);</span><br><span class="line">demoService.sayHello(<span class="string">"world"</span>);</span><br></pre></td></tr></table></figure>
-<p>由上一节分析知道调用demoService实际上是返回的proxy0(不一定是0)代理类，由于proxy0源码没有，所以debug会直接进InvokerInvocationHandler</p>
-<p>InvokerInvocationHandler.invoke:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InvokerInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Invoker&lt;?&gt; invoker;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InvokerInvocationHandler</span><span class="params">(Invoker&lt;?&gt; handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.invoker = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//proxy=proxy0 代理类本身 method:调用方法 args:方法参数</span></span><br><span class="line">        String methodName = method.getName();</span><br><span class="line">        Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();</span><br><span class="line">        <span class="keyword">if</span> (method.getDeclaringClass() == Object.class) &#123;</span><br><span class="line">            <span class="keyword">return</span> method.invoke(invoker, args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"toString"</span>.equals(methodName) &amp;&amp; parameterTypes.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"hashCode"</span>.equals(methodName) &amp;&amp; parameterTypes.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.hashCode();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"equals"</span>.equals(methodName) &amp;&amp; parameterTypes.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> invoker.equals(args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//invoker=MockClusterInvoker</span></span><br><span class="line">        <span class="keyword">return</span> invoker.invoke(<span class="keyword">new</span> RpcInvocation(method, args)).recreate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/05/28/学习dubbo源码-消费者服务调用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/26/学习dubbo源码-服务引用/" itemprop="url">
-                  学习dubbo源码-服务引用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-05-26T15:56:01+08:00" content="2018-05-26">
-              2018-05-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"demoService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.dubbo.demo.DemoService"</span> <span class="attr">timeout</span>=<span class="string">"60000"</span> <span class="attr">version</span>=<span class="string">"10.11.11"</span> <span class="attr">group</span>=<span class="string">"guodong"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h2><p>DubboNamespaceHandler配置了自定义dubbo标签的解析。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboNamespaceHandler</span> <span class="keyword">extends</span> <span class="title">NamespaceHandlerSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		Version.checkDuplicate(DubboNamespaceHandler.class);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	      registerBeanDefinitionParser(<span class="string">"application"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ApplicationConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"module"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ModuleConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"registry"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(RegistryConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"monitor"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(MonitorConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"provider"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ProviderConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"consumer"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ConsumerConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"protocol"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ProtocolConfig.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"service"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ServiceBean.class, <span class="keyword">true</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"reference"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(ReferenceBean.class, <span class="keyword">false</span>));</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"annotation"</span>, <span class="keyword">new</span> DubboBeanDefinitionParser(AnnotationBean.class, <span class="keyword">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>DubboBeanDefinitionParser会对标签进行解析，并把相关参数设置到RootBeanDefinition，并返回它。RootBeanDefinition有个很关键的方法setBeanClass，这里设置的beanClass为ReferenceBean。<br><img src="/images/referenBean关系图.png" alt=""></p>
-<p>ReferenceBean实现了FactoryBean,其返回的Bean对象不是指定类的一个实例，而是该FactoryBean的getObject方法所返回的对象。<br>ReferenceBean的getObject方法会调用ReferenceConfig的get()方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceConfig</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractReferenceConfig</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (destroyed)&#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Already destroyed!"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (ref == <span class="keyword">null</span>) &#123;</span><br><span class="line">                init();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ref;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>核心就是init(),它会对配置进行检测并创建代理 createProxy(map);</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/05/26/学习dubbo源码-服务引用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1203,7 +1196,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
