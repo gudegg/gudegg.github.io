@@ -152,7 +152,7 @@ public class RandomLoadBalance extends AbstractLoadBalance {
 
 在此之前，Dubbo的轮询负载均衡算法**不那么平滑**，假设3个节点a、b、c的权重4、2、1，轮询的结果可能为abcabaa
 
-目前最新版本轮询算法学习了Nginx的轮询负载思想：<br />假设3个节点abc，权重分别为4、2、1,则最终轮询选择的结果为abacaba<br />![image.png](https://cdn.nlark.com/yuque/0/2019/png/176230/1547902739056-df76af69-b022-45ed-9ff4-06edf9a52b9b.png#align=left&display=inline&height=275&linkTarget=_blank&name=image.png&originHeight=275&originWidth=567&size=14607&width=567)<br />主要思路就是选择权重最大的节点(即本次轮询选择的节点)减去所有节点的总权重，接着所有节点在加上原始的权重。如上图所示，经过7(节点权重和)轮选择后，又回到了初始状态。
+目前最新版本轮询算法学习了Nginx的轮询负载思想：<br />假设3个节点abc，权重分别为4、2、1,则最终轮询选择的结果为abacaba<br />![image.png](https://gitee.com/zhangguodong/image/raw/master/null/1547902739056-df76af69-b022-45ed-9ff4-06edf9a52b9b.png)<br />主要思路就是选择权重最大的节点(即本次轮询选择的节点)减去所有节点的总权重，接着所有节点在加上原始的权重。如上图所示，经过7(节点权重和)轮选择后，又回到了初始状态。
 ### LeastActive LoadBalance
 * **最少活跃调用数**，相同活跃数的随机，活跃数指调用前后计数差。
 * 使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。
@@ -295,7 +295,7 @@ public class ConsistentHashLoadBalance extends AbstractLoadBalance {
 一致性hash主要思路首先根据ip或者其他信息为节点生成一个 hash，并将这个 hash 映射到 [0, 2 - 1] 的圆环上。<br />![image.png](https://cdn.nlark.com/yuque/0/2019/png/176230/1547971968758-255442c9-f9cc-4986-92d6-ce4dc0cb1a7d.png#align=left&display=inline&height=289&linkTarget=_blank&name=image.png&originHeight=289&originWidth=377&size=73588&width=377)<br />一致性hash算法做虚节点的主要原因是为了让数据分布更加均匀，避免出现数据倾斜。假设1、2、3三个节点hash后都落在圆环的右侧，那将导致节点1收到过多的流量，不仅造成节点1过大的负载，还会造成数据倾斜。Dubbo目前会将每个真实节点虚拟160个虚拟节点，dubbo虚拟提供者主要是为了均衡各个节点的调用压力。
 * 未虚拟节点
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/176230/1547973995820-8d98a8f4-4c85-455b-999e-b9b2d50c4b73.png#align=left&display=inline&height=302&linkTarget=_blank&name=image.png&originHeight=604&originWidth=678&size=55024&width=339)
+![image.png](https://gitee.com/zhangguodong/image/raw/master/null/1547973995820-8d98a8f4-4c85-455b-999e-b9b2d50c4b73.png)
 * 虚拟节点
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/176230/1547974006573-2438340d-07ab-48ea-8bcc-2456d45538d3.png#align=left&display=inline&height=295&linkTarget=_blank&name=image.png&originHeight=590&originWidth=802&size=84811&width=401)<br /><br /><br />参考<br />[负载均衡](http://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html)
+![image.png](https://gitee.com/zhangguodong/image/raw/master/null/1547974006573-2438340d-07ab-48ea-8bcc-2456d45538d3.png)<br /><br /><br />参考<br />[负载均衡](http://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html)

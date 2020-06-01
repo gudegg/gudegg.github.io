@@ -313,8 +313,8 @@ public interface HelloService {
 
 #### <a name="vzrngz"></a>PojoUtils
 * generalize 泛化调用消费方可能没有包含该返回对象架包，所以将POJO转化成HashMap
- 
 
-![image.png | left | 747x537](https://cdn.nlark.com/yuque/0/2018/png/176230/1545287534084-0039e4f2-5809-4c1b-85d4-24f1e8c910d8.png "")
+
+![image.png | left | 747x537](https://gitee.com/zhangguodong/image/raw/master/null/1545287534084-0039e4f2-5809-4c1b-85d4-24f1e8c910d8.png "")
 
 

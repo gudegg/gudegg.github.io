@@ -8,7 +8,7 @@ tags: [dubbo]
 
 
 
-![image.png | left | 747x508](https://cdn.nlark.com/yuque/0/2018/png/176230/1545740875098-ddee7b85-5216-4338-ae14-746097d42847.png "")
+![image.png | left | 747x508](https://gitee.com/zhangguodong/image/raw/master/null/1545740875098-ddee7b85-5216-4338-ae14-746097d42847.png "")
 
 
 > @Reference实现和@Autowired相似，参考了AutowiredAnnotationBeanPostProcessor
@@ -18,7 +18,7 @@ tags: [dubbo]
 # <a name="biexst"></a>数据绑定
 
 
-![image.png | left | 747x756](https://cdn.nlark.com/yuque/0/2018/png/176230/1545740917019-77d001db-b24c-47cc-905d-fc59bd9c8707.png "")
+![image.png | left | 747x756](https://gitee.com/zhangguodong/image/raw/master/null/1545740917019-77d001db-b24c-47cc-905d-fc59bd9c8707.png "")
 
 # <a name="hqyopi"></a>自定义案例
 ```java

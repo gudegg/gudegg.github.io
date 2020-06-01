@@ -128,7 +128,7 @@ public class Wrapper{
 Javassist中\$w、\$1含义：
 
 
-![local5.png | center | 669x445](https://cdn.nlark.com/yuque/0/2018/png/176230/1539051201848-3c499118-9d11-4a6b-a7eb-92ed73e3ffe9.png "")
+![local5.png | center | 669x445](https://gitee.com/zhangguodong/image/raw/master/null/1539051201848-3c499118-9d11-4a6b-a7eb-92ed73e3ffe9.png "")
 
 [更多详细信息](https://www.jianshu.com/p/b9b3ff0e1bf8)
 [javassist官方教程](https://github.com/jboss-javassist/javassist/wiki/Tutorial-2)
