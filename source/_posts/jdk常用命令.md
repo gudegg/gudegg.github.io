@@ -19,7 +19,7 @@ tags: java虚拟机
 1. `jstat -gc vmid` 监视堆状况
 > 如果是本地虚拟机进程**VMID**与**LVMID**相同，如果是远程虚拟机，VMID格式是：[protocol:][//]vmid[@hostname[:port]/servername] 
 
-![](/images/jstat6.png)
+![jstat6](https://gitee.com/zhangguodong/image/raw/master/picgo/jstat6.png)
 S0C：第一个幸存区的大小
 S1C：第二个幸存区的大小
 S0U：第一个幸存区的使用大小

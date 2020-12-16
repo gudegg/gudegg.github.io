@@ -4,16 +4,15 @@ date: 2018-04-15 12:12:34
 tags: dubbo
 ---
 
-#### 远程暴露
-![](/images/remote1.png)
+#### 远程暴露![remote1](https://gitee.com/zhangguodong/image/raw/master/picgo/remote1.png)
 1 获取Invoker，本地暴露差不多， 然后通过protocol.export(wrapperInvoker)暴露服务
 <!--more-->
-
-![](/images/remote2.png)
+![remote2](https://gitee.com/zhangguodong/image/raw/master/picgo/remote2.png)
 2 根据URL参数配置获取到RegistryProtocol
 
-![](/images/remote3.png)
+![remote3](https://gitee.com/zhangguodong/image/raw/master/picgo/remote3.png)
 3 核心发布是RegistryProtocol中的export方法
+
 ```java
 public <T> Exporter<T> export(final Invoker<T> originInvoker) throws RpcException {
         //根据url获取的协议去暴露服务
@@ -58,22 +57,22 @@ public <T> Exporter<T> export(final Invoker<T> originInvoker) throws RpcExceptio
     }
 ```
 
-![](/images/remote4.png)
+![remote4](https://gitee.com/zhangguodong/image/raw/master/picgo/remote4.png)
 4 双重检测判断是否已经暴露，并通过invoker获取invokerDelegete ，注意此时的protocol变为了dubbo
 
-![](/images/remote5.png)
+![remote5](https://gitee.com/zhangguodong/image/raw/master/picgo/remote5.png)
 5 创建DubboInvoker 并放到exportMap中，注意key和本地暴露的区别 本地暴露没有端口号,openServer 开启服务端监听,
 
-![](/images/remote6.png)
+![remote6](https://gitee.com/zhangguodong/image/raw/master/picgo/remote6.png)
 6 判断是否已经创建服务，未创建的话，创建服务，dubbo为了支持多种服务协议(netty mina等，默认使用netty3)，接下去就是创建服务监听，设置编解码器，不多说了。
 
-![](/images/remote7.png)
+![remote7](https://gitee.com/zhangguodong/image/raw/master/picgo/remote7.png)
 7 获取注册中心,dubbo注册中心有多种实现 这里使用了最常用zookeeper
 
-![](/images/remote8.png)
+![remote8](https://gitee.com/zhangguodong/image/raw/master/picgo/remote8.png)
 7 注册到注册中心
 可以查看到zookeeper多了providers，如下图
-![](/images/remote9.png)
+![remote9](https://gitee.com/zhangguodong/image/raw/master/picgo/remote9.png)
 `dubbo://192.168.213.1:20880/com.alibaba.dubbo.demo.DemoService?anyhost=true&application=demo-provider&dubbo=2.0.0&generic=false&interface=com.alibaba.dubbo.demo.DemoService&loadbalance=roundrobin&methods=sayHello,gude&owner=william&pid=15140&side=provider&timestamp=1523774349763`
 
 8 订阅注册中心服务 比如我现在这里会订阅`/dubbo/com.alibaba.dubbo.demo.DemoService/configurators`,当有配置发生改变时，会收到通知并进行重新暴露

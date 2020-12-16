@@ -2,6 +2,7 @@
 title: 学习dubbo源码-消费者服务调用
 date: 2018-05-28 20:39:10
 tags: dubbo
+typora-root-url: ..
 ---
 
 ```java
@@ -417,7 +418,7 @@ public class DubboInvoker<T> extends AbstractInvoker<T> {
 }
 ```
 此时doInvoke的inv
-![image](/images/rpcInvocation.png)
+![image](https://gitee.com/zhangguodong/image/raw/master/picgo/rpcInvocation.png)
 
 
 HeaderExchangeChannel:

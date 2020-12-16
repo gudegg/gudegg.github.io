@@ -2,6 +2,7 @@
 title: swagger2整合springmvc快速生成rest风格接口文档
 date: 2016-08-06 21:04:21
 tags: spring
+typora-root-url: ..
 ---
 
 > Swagger可以用来快速生成RESTful API文档,使后台开发人员与移动端开发人员更好的对接.
@@ -92,8 +93,8 @@ public class HelloController {
 >更多注解可以查看[官方说明](https://github.com/swagger-api/swagger-core/wiki/Annotations)
 
  打开http://localhost:8080/project_name/swagger-ui.html ,`project_name`表示你启动项目的名称,如果你以根目录启动则没有`project_name`,当你看到如下界面就表示配置成功了
- ![](/images/swagger.png)
+ ![](https://gitee.com/zhangguodong/image/raw/master/picgo/swagger.png)
 
  本次整合[源码](https://github.com/gudegg/swagger.git)
- 
+
  参考[官方文档](https://springfox.github.io/springfox/docs/snapshot/#getting-started)

@@ -2,6 +2,7 @@
 title: 学习dubbo源码-编码与解码
 date: 2018-05-30 20:39:10
 tags: dubbo
+typora-root-url: ..
 ---
 
 ## 客户端消息编码
@@ -33,7 +34,7 @@ final class NettyCodecAdapter {
 ```
 
 
-![image](/images/clipboard.png)
+![image](https://gitee.com/zhangguodong/image/raw/master/picgo/clipboard.png)
 
 dubbo的消息头是一个定长的 16个字节。
 - 针对Request:
@@ -923,8 +924,8 @@ public class DubboProtocol extends AbstractProtocol {
 }
 ```
 获取的invoker:
-![image](/images/clipboard2.png)
-![image](/images/clipboard3.png)
+![image](https://gitee.com/zhangguodong/image/raw/master/picgo/clipboard2.png)
+![image](https://gitee.com/zhangguodong/image/raw/master/picgo/clipboard3.png)
 
 先到ProtocolFilterWrapper创建的拦截器Filter链，最终到达Wrapper动态生产的代理类,真正开始对发布的接口进行调用。
 

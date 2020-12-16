@@ -22,4 +22,4 @@ base64: `00011000` `00010000`=>24 16 查表可知也就是YQ,故a的base64编码
 
 #### 码表
 
-![](/images/Base64.jpg)
+![Base64](https://gitee.com/zhangguodong/image/raw/master/picgo/Base64.jpg)

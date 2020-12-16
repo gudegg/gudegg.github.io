@@ -9,4 +9,4 @@ tags: IDEA
 然后加入自己想要隐藏的文件(ps:我加了`*.iml`)
 <!--more-->
 如图所示:
-![](/images/ignore.png)
+![ignore](https://gitee.com/zhangguodong/image/raw/master/picgo/ignore.png)

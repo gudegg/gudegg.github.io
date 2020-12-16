@@ -21,6 +21,6 @@ tags: spring
 #### `@ContextConfiguration`加载多文件的方式:
 
 1.数组方式
-![](/images/spring_success.jpg)
+![spring_success](https://gitee.com/zhangguodong/image/raw/master/picgo/spring_success.jpg)
 2.正则匹配方式
-![](/images/spring_success2.jpg)
+![spring_success2](https://gitee.com/zhangguodong/image/raw/master/picgo/spring_success2.jpg)

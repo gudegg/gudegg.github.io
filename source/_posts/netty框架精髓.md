@@ -6,8 +6,9 @@ tags: netty
 
 #####  ChannelPipeline, Channel, ChannelHandler和ChannelHandlerContext的关系:
 
-![](https://waylau.gitbooks.io/essential-netty-in-action/content/images/Figure%206.3%20Channel,%20ChannelPipeline,%20ChannelHandler%20and%20ChannelHandlerContext.jpg)
+![image-20200807145609215](https://gitee.com/zhangguodong/image/raw/master/picgo/image-20200807145609215.png)
 <!--more-->
+
 1. Channel 绑定到 ChannelPipeline
 2.   ChannelPipeline 绑定到 包含 ChannelHandler 的 Channel
 3.   ChannelHandler

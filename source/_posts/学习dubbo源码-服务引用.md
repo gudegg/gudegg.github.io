@@ -2,6 +2,7 @@
 title: 学习dubbo源码-服务引用
 date: 2018-05-26 15:56:01
 tags: dubbo
+typora-root-url: ..
 ---
 
 ```xml
@@ -33,7 +34,7 @@ public class DubboNamespaceHandler extends NamespaceHandlerSupport {
 }
 ```
 DubboBeanDefinitionParser会对标签进行解析，并把相关参数设置到RootBeanDefinition，并返回它。RootBeanDefinition有个很关键的方法setBeanClass，这里设置的beanClass为ReferenceBean。
-![](/images/referenBean关系图.png)
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/referenBean%E5%85%B3%E7%B3%BB%E5%9B%BE.png)
 
 ReferenceBean实现了FactoryBean,其返回的Bean对象不是指定类的一个实例，而是该FactoryBean的getObject方法所返回的对象。
 ReferenceBean的getObject方法会调用ReferenceConfig的get()方法。
@@ -389,7 +390,7 @@ public class RegistryProtocol implements Protocol {
 ```
 官方集群容错图：
 
-![](/images/cluster.jpg)
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/cluster.jpg)
 
 [官方文档](http://dubbo.apache.org/books/dubbo-user-book/demos/fault-tolerent-strategy.html)
 
@@ -483,7 +484,7 @@ public void create(String path, boolean ephemeral) {  //path=/dubbo/com.alibaba.
 	}
 ```
 zk创建的节点如下:
-![](/images/zk.png)
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/zk.png)
 
 ##### 订阅服务提供者
 RegistryDirectory( subscribe())->FailbackRegistry(subscribe())->AbstractRegistry (subscribe())->FailbackRegistry->ZookeeperRegistry (doRegister())

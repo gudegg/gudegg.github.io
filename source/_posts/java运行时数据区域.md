@@ -7,7 +7,7 @@ tags: java虚拟机
 ### 运行时数据区域
 > java虚拟机所管理的内存将会分为以下几个区域
 
-![](/images/运行时数据区域.png)
+![运行时数据区域](https://gitee.com/zhangguodong/image/raw/master/picgo/%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F.png)
 <!--more-->
 
 #### 程序计数器

@@ -2,13 +2,14 @@
 title: 学习dubbo源码-服务暴露原理
 date: 2018-04-05 14:50:40
 tags: dubbo
+typora-root-url: ..
 ---
 
 
-![](/images/provide.png)
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/provide.png)
 [服务提供者暴露一个服务的详细过程](http://dubbo.apache.org/books/dubbo-dev-book/implementation.html)
 
-![](/images/provide2.png)
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/provide2.png)
 [暴露服务时序](http://dubbo.apache.org/books/dubbo-dev-book/design.html)
 
 <!--more-->

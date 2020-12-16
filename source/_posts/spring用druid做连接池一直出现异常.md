@@ -2,6 +2,7 @@
 title: spring用druid做连接池一直出现异常
 date: 2016-03-5 10:22:14
 tags: spring
+typora-root-url: ..
 ---
 
 **[druid](https://github.com/alibaba/druid)**做连接池出现异常Caused by: java.sql.SQLException: Access denied for user ‘Gude’@’localhost’ (using password: YES)
@@ -38,10 +39,9 @@ tags: spring
 ```
 > 这种方法导入配置文件不会有上面的问题  从官方文档可以看出他只有3种模式 **默认是FALLBACK(即值为1)**
 
-![](/images/Properties.png)
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/Properties.png)
 
 
 - **3种模式对应的值**
 
-![](/images/Properties_val.png)
- 
+![](https://gitee.com/zhangguodong/image/raw/master/picgo/Properties_val.png)
